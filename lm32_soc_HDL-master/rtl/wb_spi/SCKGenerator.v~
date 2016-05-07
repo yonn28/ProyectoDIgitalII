@@ -1,0 +1,153 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    00:36:06 12/03/2015 
+// Design Name: 
+// Module Name:    SCKGenerator 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module SCKGenerator(
+     input clk,beginer, output reg sclk ,/*stateHIGH,*/ 
+output reg mid,HighEdge
+    );
+
+localparam  DO_NOTHING=3'b000;
+localparam 	LOW_STATE=3'b001;
+localparam  MID_STATE_LOW=3'b010;
+localparam 	HIGH_EDGE=3'b011;
+localparam 	HIGH_STATE=3'b100;
+localparam  MID_STATE_HIGH=3'b101;
+ 
+ 
+
+reg [0:3] counter;
+reg [0:2] state;
+
+initial begin
+	sclk=0;
+	HighEdge=0;
+	counter=0;
+	state=0;
+end
+
+
+	 
+always@(posedge clk)begin
+if(beginer==1'b0)begin
+	state<=DO_NOTHING;
+end else 
+begin
+	counter<=counter+1'b1;
+	case(state)
+		DO_NOTHING:begin
+			if(beginer==1'b1)begin
+					state<=LOW_STATE;
+			end else begin
+					state<=DO_NOTHING;
+			end
+		end//------------
+		
+		LOW_STATE:begin
+			if(counter==4'd9)begin
+				//--counter<=4'd0;
+				state<=HIGH_EDGE;
+			end else  
+			if(counter==4'd4) begin
+					state<=MID_STATE_LOW;
+				end else begin
+					state<=LOW_STATE;
+			end	
+		end//------------------	
+		
+		MID_STATE_LOW:begin
+			state<=LOW_STATE;
+		end//---------------------------------
+		
+		HIGH_EDGE:begin
+				counter<=4'd0;
+				state<=HIGH_STATE;
+		end//----------------------
+		HIGH_STATE:begin
+			if(counter==4'd10)begin
+				counter<=4'd0;
+				state<=LOW_STATE;
+				end else begin
+					//--if(counter==4'd4)begin
+					//--	state<=MID_STATE_HIGH;
+					//--end else begin
+						state<=HIGH_STATE;
+				//--end//----end else mid state high
+			end//end else exterior
+		end//------------------
+		/*
+		MID_STATE_HIGH:begin
+			state<=HIGH_STATE;
+		end//----------------------
+		*/
+		default: begin
+			counter<=4'd0;
+			state<=LOW_STATE;
+		end//--------------------
+	endcase//case
+end//----------------else
+end//end always
+
+always@(*)begin
+case(state)
+	DO_NOTHING:begin
+		sclk=1'b0;
+		mid=1'b0;
+		HighEdge=1'b0;
+	end
+	
+	LOW_STATE:begin
+		sclk=1'b0;
+		mid=1'b0;
+		HighEdge=1'b0;
+	end//------------------
+	
+	MID_STATE_LOW:begin
+		sclk=1'b0;
+		mid=1'b1;
+		HighEdge=1'b0;
+	end//----------------
+	HIGH_EDGE:begin
+		sclk=1'b0;
+		mid=1'b0;
+		HighEdge=1'b1;
+	end
+	HIGH_STATE:begin
+		sclk=1'b1;
+		mid=1'b0;
+		HighEdge=1'b0;
+	end//------------------
+	/*
+	MID_STATE_HIGH:begin
+		sclk=1'b1;
+		mid=1'b1;
+		HighEdge=1'b0;
+	end
+	*/
+	default: begin
+		sclk=1'b0;
+		HighEdge=1'b0;
+		mid=1'b1;
+	end//-----------------
+
+endcase//end case
+end//end always
+
+
+endmodule

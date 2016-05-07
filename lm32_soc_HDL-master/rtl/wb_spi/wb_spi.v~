@@ -1,0 +1,283 @@
+//-----------------------------------------------------------------
+// SPI Master
+//-----------------------------------------------------------------
+
+module wb_spi(
+	input               clk,
+	input               reset,
+	// Wishbone bus
+	input      [31:0]   wb_adr_i,
+	input      [31:0]   wb_dat_i,
+	output reg [31:0]   wb_dat_o,
+	input      [ 3:0]   wb_sel_i,
+	input               wb_cyc_i,
+	input               wb_stb_i,
+	output              wb_ack_o,
+	input               wb_we_i,
+	// SPI 
+	output          sck,
+	output          MOSI,
+	input               MISO,
+	output    reg     CE
+	//output reg   [7:0]  CE
+);
+
+
+	reg  ack;
+	assign wb_ack_o = wb_stb_i & wb_cyc_i & ack;
+
+	wire wb_rd = wb_stb_i & wb_cyc_i & ~ack & ~wb_we_i;
+	wire wb_wr = wb_stb_i & wb_cyc_i & ~ack & wb_we_i;
+
+//-------------------------------------------------------------------------
+//SPI ENGINE
+//------------------------------------------------------------------------------
+
+
+reg Begin=1'b0;
+reg [0:7] divisor=7'd10;
+reg read=1'b0;
+reg Write=1'b0;
+reg [0:7] ByteToWrite;
+reg beginSCK=1'b0;
+
+wire [7:0]  outReaded;
+wire WriteDone;
+wire ReadDone;
+
+spi spi0(
+	.clk(clk),
+	.Begin(Begin),
+	.divisor(divisor),
+	.read(read),
+	.Write(Write),
+	.MISO(MISO),
+	.ByteToWrite(ByteToWrite),
+	.beginSCK(beginSCK),
+	.MOSI(MOSI),
+	.outReaded(outReaded),
+	.sck(sck),
+	.WriteDone(WriteDone),
+	.ReadDone(ReadDone)
+);
+
+
+//----------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------	
+	
+reg [7:0] adressWritte;
+reg [7:0] dataTowritte;
+reg [7:0] adressRead;
+
+reg [2:0] StateWControler;
+
+localparam  WAITING=3'd0;
+localparam  TO_READ_ADRESS=3'd1;
+localparam  WAITING_TO_READ=3'd2;
+localparam  READING=3'd3;
+localparam  TO_WRITE_ADRESS=3'd4;
+localparam  TO_WRITE_DATA=3'd5;
+
+
+reg WriteFlag=1'b0;
+reg ReadFlag=1'b0;
+
+reg [0:4] waiter<=5'd0;
+
+/*
+ Readed
+ statusWritte
+ statusRead
+ adressWritte 
+ byteTowritte
+ adressRead
+ begin
+ divisor
+*/
+
+always @(posedge clk) begin
+		if (reset == 1'b1) begin
+			ack      <= 0;
+			//sck <= 1'b0;
+			//bitcount <= 3'b000;
+			//run <= 1'b0;
+			//prescaler <= 8'h00;
+			divisor <= 8'd10;
+			//CE<=1'b0;
+		end else begin
+			
+			
+			case(StateWControler)	
+				WAITING:begin
+					if(WriteFlag)begin
+						StateWControler<=TO_WRITE_ADRESS;
+						beginSCK<=1'b1;
+						ByteToWrite<=adressWritte;
+					end else begin
+						if(ReadFlag)begin
+							ByteToWrite<=adressRead;
+							StateWControler<=TO_READ_ADRESS;
+							beginSCK<=1'b1;
+						end else begin
+							StateWControler<=WAITING;
+						end
+					end
+				
+				end
+				TO_READ_ADRESS:begin
+					if(WriteDone)begin
+						StateWControler<=WAITING_TO_READ;
+						ByteToWrite<=7'd0;
+						beginSCK<=1'b0;
+						WriteFlag<=1'b0;
+					end else begin
+						StateWControler<=TO_READ_ADRESS;
+					end
+				end
+				WAITING_TO_READ:begin
+					if(waiter==5'd20)begin
+						StateWControler<=READING;
+						beginSCK<=1'b1;
+						waiter<=5'd0;
+					end else begin
+						waiter<=waiter+1'b1;
+						StateWControler<=WAITING_TO_READ;
+					end
+				end
+				READING:begin
+					if(ReadDone)begin
+						ReadFlag<=1'b0;
+						beginSCK<=1'b0;
+						StateWControler<=WAITING;
+					end else begin
+						StateWControler<=READING;
+					end 
+				end
+				//-------------------------------------------------
+				//write core
+				//---------------------------------------------
+
+				TO_WRITE_ADRESS:begin
+					if(WriteDone)begin	
+						StateWControler<=TO_WRITE_DATA;
+						ByteToWrite<=dataTowritte;
+					end else begin
+						StateWControler<=TO_WRITE_ADRESS;
+					end
+
+				end
+				TO_WRITE_DATA:begin
+					if(WriteDone)begin	
+						WriteFlag<=1'b0;
+						beginSCK<=1'b0;
+						ByteToWrite<=7'd0;
+						StateWControler<=WAITING;
+					end else begin
+						StateWControler<=TO_WRITE_DATA;
+					end
+
+				end
+
+				default:begin
+					StateWControler<=WAITING;
+				end					
+			endcase
+
+			
+
+			
+			
+					
+
+
+			ack <= wb_stb_i & wb_cyc_i;
+			
+			if (wb_rd) begin           // read cycle
+				case (wb_adr_i[5:2])
+					4'b0000: begin
+						wb_dat_o <= outReaded;//0
+					end
+					4'b0001:begin
+						 wb_dat_o <= {7'd0 , WriteFlag};//4 
+					end
+					4'b0010: begin 
+						wb_dat_o <= {7'd0 , ReadFlag};//8
+					end
+				endcase
+			end
+			
+			
+			if (wb_wr) begin // write cycle
+				case (wb_adr_i[5:2])
+					4'b0011: begin //12
+						adressWritte <=  wb_dat_i[7:0];	
+						end
+					4'b0100:begin//16
+						dataTowritte<= wb_dat_i[7:0];
+						WriteFlag<=1'b1;
+					end
+					4'b0101:begin//20
+						adressRead<=  wb_dat_i[7:0];	
+						ReadFlag<=1'b1;		
+					end
+					4'b0110:begin //24
+							Begin<=wb_dat_i[0];
+					end
+					
+					4'b0111:begin//26
+						divisor<=wb_dat_i[7:0];
+					end
+					
+				endcase
+			end
+	end
+end
+
+always@(*)begin	
+	case(StateWControler)
+		WAITING:begin
+			CE=1'b0;
+			read=1'b0;
+			Write=1'b0;
+		end
+		//-----------------
+		//read core
+		//------------------------
+		TO_READ_ADRESS:begin
+			CE=1'b1;
+			read=1'b0;
+			Write=1'b1;
+		end
+		WAITING_TO_READ:begin
+			CE=1'b1;
+			read=1'b0;
+			Write=1'b0;
+		end
+		READING:begin
+			CE=1'b1;
+			read=1'b1;
+			Write=1'b0;
+		end
+		//------------------------
+		//write core
+		//-----------------------
+		TO_WRITE_ADRESS:begin
+			CE=1'b1;
+			read=1'b0;
+			Write=1'b1;
+		end
+		TO_WRITE_DATA:begin
+			CE=1'b1;
+			read=1'b0;
+			Write=1'b1;
+		end
+		default:begin
+			CE=1'b0;
+			read=1'b0;
+			Write=1'b0;
+		end
+
+	endcase
+end
+
+endmodule

@@ -1,0 +1,7 @@
+INFILE=/home/yonny/Desktop/testSPI/lm32_soc_HDL-master/build/system-routed.ncd
+OUTFILE=/home/yonny/Desktop/testSPI/lm32_soc_HDL-master/build/system.bit
+FAMILY=Artix7
+PART=xc7a100t-3csg324
+WORKINGDIR=/home/yonny/Desktop/testSPI/lm32_soc_HDL-master/build
+LICENSE=WebPack
+USER_INFO=211160290_0_0_916
