@@ -1,0 +1,282 @@
+`timescale 1ns / 1ps
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date:    19:12:38 04/22/2016 
+// Design Name: 
+// Module Name:    spi 
+// Project Name: 
+// Target Devices: 
+// Tool versions: 
+// Description: 
+//
+// Dependencies: 
+//
+// Revision: 
+// Revision 0.01 - File Created
+// Additional Comments: 
+//
+//////////////////////////////////////////////////////////////////////////////////
+module spi(
+					input clk, 
+					input Begin,
+					input [7:0] divisor,
+					input read,
+					input Write,
+					input MISO,//master input slave output
+				   	input [0:7]	ByteToWrite, //bakcwards in order to write MSB first
+					input beginSCK,
+					output reg MOSI, //master output slave input
+					output reg[7:0] outReaded,
+					output  reg sck, 
+					output reg WriteDone,
+					output reg ReadDone
+    );
+	 
+
+
+//------------------------------------------
+//sck  detector
+//------------------------------------------------
+
+
+localparam   HOLD_ON=4'd0;
+localparam  WAITING_ENABLE=4'd1;
+localparam  GENERATE=4'd2;
+
+reg [7:0] prescaler=7'd0;
+reg [3:0] stateSclk;
+reg [1:0] detect=2'd0;	// data shift detect
+
+reg highEdge=1'b0;
+reg DownEdge=1'b0;
+reg enableRun=1'b1;
+
+reg [5:0] conter=6'b0;
+
+
+always @(negedge clk) begin
+			if(Begin && enableRun)begin
+				enableRun<=1'b0;
+				sck<=1'b1;
+			end else begin
+			   case(stateSclk)
+				HOLD_ON:begin
+					if(beginSCK)begin
+						stateSclk<=WAITING_ENABLE;
+						sck<=1'b0;
+					end else begin
+						stateSclk<=HOLD_ON;
+					end
+				end
+				WAITING_ENABLE:begin
+					if(conter==6'd40)begin
+						stateSclk<=GENERATE;
+						conter<=6'd0;
+					end else begin
+						stateSclk<=WAITING_ENABLE;
+						conter<=conter+1'b1;
+					end
+
+
+				end
+				GENERATE:begin
+					if(~beginSCK)begin
+						stateSclk<=HOLD_ON;
+						sck<=1'b0;
+					end else begin
+					stateSclk<=GENERATE;
+					prescaler <= prescaler+1'b1;
+						if (prescaler==divisor) begin
+							sck <= ~sck;
+							prescaler <= 4'd0;
+						end
+					end
+				end
+				default:begin
+					stateSclk<=HOLD_ON;
+				end
+			   endcase
+			end
+end
+always@(posedge clk)begin
+	detect <= {detect[0],sck};
+end
+
+always@(*)
+begin
+	case(detect)			
+			//downedge
+			2'b10:begin
+					highEdge=1'b0;
+					DownEdge=1'b1;	
+			end
+			//highedge
+			2'b01:begin
+					highEdge=1'b1;
+					DownEdge=1'b0;	
+			
+			end
+			//nothing
+			2'b00:begin
+					highEdge=1'b0;
+					DownEdge=1'b0;	
+			
+			end
+			default:begin
+					highEdge=1'b0;
+					DownEdge=1'b0;	
+			end	
+	endcase
+end
+
+//-------------------------------------------
+//write cicle
+//----------------------------------------------
+
+reg [2:0] stateWritte;
+
+localparam  WRITE_WAITING=4'd3;
+localparam 	WRITTE=4'd4;
+localparam BYPASS_WRITE=4'd5;
+
+
+//write stuff
+reg [8:0] ToWrite=9'd0; // data shift writte
+reg [3:0] bitcountWrite=4'd0; //bitcounter_write
+
+
+always@(negedge clk)begin
+		MOSI<=ToWrite[8];
+	/**///bitcountW<=bitcountWrite;
+		case(stateWritte)
+		WRITE_WAITING:begin
+			if(Write)begin
+				ToWrite<={1'b0,ByteToWrite};//if high sck
+				stateWritte<=WRITTE;
+				if(~sck &&~enableRun)begin//if lower sck
+					bitcountWrite<=4'd1;
+					ToWrite <={ByteToWrite,1'b0};
+				end 
+			end else begin
+				stateWritte<=WRITE_WAITING;
+				ToWrite<=8'd0;
+				
+			end
+		end	
+		WRITTE:begin
+
+			if(DownEdge==1'b1 )begin
+				bitcountWrite<=bitcountWrite+1'b1;
+					if(bitcountWrite==4'd8)begin
+						bitcountWrite<=4'd0;
+						stateWritte<=BYPASS_WRITE;	
+					end else begin
+						ToWrite <={ToWrite[7:0],1'b0};
+						stateWritte<=WRITTE;
+					end
+			end else begin
+						stateWritte<=WRITTE;	
+			end
+		end
+		
+		BYPASS_WRITE:begin
+			stateWritte<=WRITE_WAITING;
+		end
+		
+		default:begin
+			stateWritte<=WRITE_WAITING;
+		end
+		
+	 endcase
+	
+end
+
+always@(*)begin
+	case(stateWritte)
+		WRITE_WAITING:begin
+			WriteDone=1'b0;
+		end
+		WRITTE:begin
+			WriteDone=1'b0;
+		end		
+		BYPASS_WRITE:begin
+			WriteDone=1'b1;
+		end
+		default:begin
+			WriteDone=1'b0;			
+		end	
+	endcase
+	
+end
+// ------------------------------------------------
+// read cycle
+//-------------------------------------------------
+localparam  READ_WAITING=4'd6;
+localparam 	READ=4'd7;
+localparam 	BYPASS_READ_END=4'd8;
+
+//read stuff
+reg [7:0] Toread=8'd0; // data shift read
+reg [3:0] bitcountRead=4'd0; //bitcounter_read
+
+reg [3:0] stateRead;
+
+
+
+always@(negedge clk)begin
+	case(stateRead)
+		READ_WAITING:begin 
+			if(read)begin
+				stateRead<=READ;
+			end else begin
+				stateRead<=READ_WAITING;
+			end
+			
+		end
+		READ:begin
+			if(highEdge)begin 
+				 bitcountRead <= bitcountRead + 1'b1;
+				 Toread<={Toread[6:0],MISO};
+					if(bitcountRead==4'd9)begin
+						bitcountRead<=4'd0;
+						outReaded<=Toread;
+						stateRead<=BYPASS_READ_END;
+					end else begin
+						stateRead<=READ;
+					end
+			end
+		end
+		
+		BYPASS_READ_END:begin
+				stateRead<=READ_WAITING;
+		end
+		
+		default:begin
+			stateRead<=READ_WAITING;
+		end
+
+		endcase
+end
+
+always@(*) begin
+	case(stateRead)
+		READ_WAITING:begin
+			ReadDone=1'b0;
+		end
+		READ:begin
+			ReadDone=1'b0;
+		end
+		BYPASS_READ_END:begin
+			ReadDone=1'b1;
+		end
+		default:begin
+			ReadDone=1'b0;
+		end
+	endcase
+end
+
+
+
+endmodule
