@@ -262,11 +262,8 @@ int main()
 	
 	/*
 	
-	gpio_set_dir1(0xFF);
-	gpio_set_dir2(0xFF);
-	SetDpDisplay(0x04);
-	
 	// timer Interruption
+
 	irq_enable();
 	irq_set_mask(0x02);
 	tic_init(); //works stay there

@@ -282,6 +282,7 @@ int main()
 
 
 	//********************** display decoder Works ************************/
+	/*
 	gpio_set_dir1(0xFF);
 	gpio_set_dir2(0xFF);
 	SetDpDisplay(0x04);
@@ -297,7 +298,8 @@ int main()
 		gpio_set_out1(d);//most significative bit is u1
 		uint32_t value=d + ((uint32_t)c<<8);
 		uint32_t value2= value; 
-
+		
+		
 		SetDisplay(0x01,value2%10);
 		value2 = value2/10;
 		SetDisplay(0x02,value2%10);
@@ -311,7 +313,7 @@ int main()
 		SetDisplay(0x06,value2%10);
 	}//	
 
-
+	*/
 }
 
 
