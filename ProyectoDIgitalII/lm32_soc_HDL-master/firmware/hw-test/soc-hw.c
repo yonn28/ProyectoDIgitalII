@@ -151,45 +151,40 @@ void uart_putstr(char *str)
  GPIO funciones primitivas
 */
 
-char gpio_get_in(){
-	return gpio0->in;
+char gpio_get_in1(){
+	return gpio0->in1;
+}
+
+char gpio_get_in2(){
+	return gpio0->in2;
 }
 
 
-
-char gpio_get_dir(){
-	return gpio0->dir;
-}
-
-
-void gpio_set_out(char temp)
+void gpio_set_out1(char temp1)
 { 
-	gpio0->out=temp;
+	gpio0->out1=temp1;
  }
 
-void gpio_set_dir(char temp)
+void gpio_set_out2(char temp2){
+
+	gpio0->out2=temp2;
+}
+
+void gpio_set_dir1(char temp3)
 {  
-	gpio0->dir=temp;
+	gpio0->dir1=temp3;
+}
+
+void gpio_set_dir2(char temp4){
+
+	gpio0->dir2=temp4;
 }
 
 /**********************************************************
 SPI
 */
 
-/*
-txrx
- statusWritte
- statusRead
- begin
- CE  //toca cambiar
- divisor
- read
-*/
-/*
-spi0->rxtx=a;
 
-rxtx
-*/
 
 void spi_Writte(char adrr,char value){
 	spi0->adressWritte=adrr;
@@ -209,7 +204,40 @@ void spi_setDiv(char f){
 	spi0->divisor=f;
 }
 
+/*********************************************************
+I2C Conversor
+*/
 
+void ReadChanel(char ch){
+	switch(ch){
+	   case 0x00:
+		i2c0->ByteConfigurationOne=0xC3;
+	   break;
+	   case 0x01:
+		i2c0->ByteConfigurationOne=0xD3;
+	   break;
+	   case 0x02:
+		i2c0->ByteConfigurationOne=0xE3;
+	   break;
+	   case 0x03:
+		i2c0->ByteConfigurationOne=0xF3;
+	   break;
+	   default:
+		i2c0->ByteConfigurationOne=0xC3;
+	   break;
+	}
+	i2c0->ByteConfigurationTwo=0X83;//FS 4.096 volts although this is more than electrical especifications,there never be more than 3.6
+	i2c0->Start=0x01;
+	while((i2c0->Busy)==0x01);
+}
+
+char GetByteOne(){
+	return i2c0->ByteReadedOne;
+}
+char GetByteTwo()
+{
+	return i2c0->ByteReadedTwo;
+}
 
 
 

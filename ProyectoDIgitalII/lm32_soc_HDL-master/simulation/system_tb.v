@@ -24,7 +24,7 @@ reg     [7:0]gpio0_io;
 //----------------------------------------------------------------------------
 // UART STUFF (testbench uart, simulating a comm. partner)
 //----------------------------------------------------------------------------
-wire        led;
+//wire        led;
 
 reg         uart_rxd;
 wire        uart_txd;
@@ -59,7 +59,7 @@ system #(
 ) dut  (
 	.clk(          clk    ),
 	// Debug
-	.led( 		led 	),
+	//.led( 		led 	),
 	.rst(         rst    ),
 	
 	// Uart

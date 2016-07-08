@@ -3,36 +3,34 @@ image:     file format elf32-lm32
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000005b0  00000000  00000000  00000054  2**2
+  0 .text         0000086c  00000000  00000000  00000054  2**2
                   CONTENTS, ALLOC, LOAD, CODE
-  1 .rodata       00000020  000005b0  000005b0  00000604  2**2
+  1 .rodata       00000050  0000086c  0000086c  000008c0  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  2 .data         00000014  000005d0  000005d0  00000624  2**2
+  2 .data         00000018  000008bc  000008bc  00000910  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  3 .bss          00000084  000005e4  000005e4  00000638  2**2
+  3 .bss          00000084  000008d4  000008d4  00000928  2**2
                   ALLOC
-  4 .debug_abbrev 0000022d  00000000  00000000  00000638  2**0
+  4 .debug_abbrev 00000268  00000000  00000000  00000928  2**0
                   CONTENTS, READONLY, DEBUGGING
-  5 .debug_info   000006d4  00000000  00000000  00000865  2**0
+  5 .debug_info   0000092b  00000000  00000000  00000b90  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_line   00000451  00000000  00000000  00000f39  2**0
+  6 .debug_line   000006fc  00000000  00000000  000014bb  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_frame  00000180  00000000  00000000  0000138c  2**2
+  7 .debug_frame  000001f0  00000000  00000000  00001bb8  2**2
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_loc    000001a7  00000000  00000000  0000150c  2**0
+  8 .debug_loc    00000221  00000000  00000000  00001da8  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_pubnames 000001b2  00000000  00000000  000016b3  2**0
+  9 .debug_pubnames 00000233  00000000  00000000  00001fc9  2**0
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_pubtypes 00000075  00000000  00000000  00001865  2**0
+ 10 .debug_pubtypes 00000090  00000000  00000000  000021fc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_aranges 00000040  00000000  00000000  000018da  2**0
+ 11 .debug_aranges 00000040  00000000  00000000  0000228c  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_str    00000268  00000000  00000000  0000191a  2**0
+ 12 .debug_str    0000037e  00000000  00000000  000022cc  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .comment      00000011  00000000  00000000  00001b82  2**0
+ 13 .comment      00000011  00000000  00000000  0000264a  2**0
                   CONTENTS, READONLY
- 14 .debug_ranges 00000018  00000000  00000000  00001b93  2**0
-                  CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
 
@@ -100,7 +98,7 @@ Disassembly of section .text:
   c0:	5b 9d 00 00 	sw (sp+0),ra
   c4:	f8 00 00 2b 	calli 170 <_save_all>
   c8:	90 40 08 00 	rcsr r1,IP
-  cc:	f8 00 00 83 	calli 2d8 <irq_handler>
+  cc:	f8 00 00 7e 	calli 2c4 <irq_handler>
   d0:	78 01 ff ff 	mvhi r1,0xffff
   d4:	38 21 ff ff 	ori r1,r1,0xffff
   d8:	d0 41 00 00 	wcsr IP,r1
@@ -120,11 +118,11 @@ Disassembly of section .text:
  100:	78 1c 00 00 	mvhi sp,0x0
  104:	3b 9c 0f fc 	ori sp,sp,0xffc
  108:	78 1a 00 00 	mvhi gp,0x0
- 10c:	3b 5a 05 f0 	ori gp,gp,0x5f0
+ 10c:	3b 5a 08 e0 	ori gp,gp,0x8e0
  110:	78 01 00 00 	mvhi r1,0x0
- 114:	38 21 05 e4 	ori r1,r1,0x5e4
+ 114:	38 21 08 d4 	ori r1,r1,0x8d4
  118:	78 03 00 00 	mvhi r3,0x0
- 11c:	38 63 06 68 	ori r3,r3,0x668
+ 11c:	38 63 09 58 	ori r3,r3,0x958
 
 00000120 <.clearBSS>:
  120:	44 23 00 04 	be r1,r3,130 <.callMain>
@@ -215,600 +213,973 @@ Disassembly of section .text:
 
 int main()
 {
- 208:	37 9c ff e4 	addi sp,sp,-28
- 20c:	5b 8b 00 1c 	sw (sp+28),r11
- 210:	5b 8c 00 18 	sw (sp+24),r12
- 214:	5b 8d 00 14 	sw (sp+20),r13
- 218:	5b 8e 00 10 	sw (sp+16),r14
- 21c:	5b 8f 00 0c 	sw (sp+12),r15
- 220:	5b 90 00 08 	sw (sp+8),r16
- 224:	5b 9d 00 04 	sw (sp+4),ra
+ 208:	37 9c ff f0 	addi sp,sp,-16
+ 20c:	5b 8b 00 10 	sw (sp+16),r11
+ 210:	5b 8c 00 0c 	sw (sp+12),r12
+ 214:	5b 8d 00 08 	sw (sp+8),r13
+ 218:	5b 9d 00 04 	sw (sp+4),ra
+	}//
+*/	
 
-	*/
-	//this spi works temperature
-	
-	
-	gpio_set_dir(0xFF);
- 228:	34 01 00 ff 	mvi r1,255
- 22c:	f8 00 00 b9 	calli 510 <gpio_set_dir>
-	SPI_begin();
- 230:	f8 00 00 d4 	calli 580 <SPI_begin>
-	spi_Writte(0x80,0xE6);
- 234:	34 01 00 80 	mvi r1,128
- 238:	34 02 00 e6 	mvi r2,230
- 23c:	78 10 00 00 	mvhi r16,0x0
- 240:	78 0f 00 00 	mvhi r15,0x0
- 244:	78 0e 00 00 	mvhi r14,0x0
- 248:	78 0d 00 00 	mvhi r13,0x0
- 24c:	f8 00 00 b7 	calli 528 <spi_Writte>
- 250:	3a 10 05 b0 	ori r16,r16,0x5b0
- 254:	39 ef 05 bc 	ori r15,r15,0x5bc
- 258:	39 ce 05 c0 	ori r14,r14,0x5c0
- 25c:	39 ad 05 c8 	ori r13,r13,0x5c8
+
+	//********************** display decoder Works ************************/
+	gpio_set_dir1(0xFF);
+ 21c:	34 01 00 ff 	mvi r1,255
+ 220:	f8 00 00 c7 	calli 53c <gpio_set_dir1>
+	gpio_set_dir2(0xFF);
+ 224:	34 01 00 ff 	mvi r1,255
+ 228:	f8 00 00 cb 	calli 554 <gpio_set_dir2>
+	SetDpDisplay(0x04);
+ 22c:	34 01 00 04 	mvi r1,4
+ 230:	f8 00 01 56 	calli 788 <SetDpDisplay>
+		char d=GetByteTwo();//less significative Bit
+		gpio_set_out1(d);//most significative bit is u1
+		uint32_t value=d + ((uint32_t)c<<8);
+		uint32_t value2= value; 
+
+		SetDisplay(0x01,value2%10);
+ 234:	34 0b 00 0a 	mvi r11,10
+	gpio_set_dir1(0xFF);
+	gpio_set_dir2(0xFF);
+	SetDpDisplay(0x04);
+
 	while(1){
-		char a=spi_read(0x02);// most significative bite
- 260:	34 01 00 02 	mvi r1,2
- 264:	f8 00 00 bc 	calli 554 <spi_read>
- 268:	b8 20 60 00 	mv r12,r1
-		char b=spi_read(0x01);
- 26c:	34 01 00 01 	mvi r1,1
- 270:	f8 00 00 b9 	calli 554 <spi_read>
- 274:	b8 20 58 00 	mv r11,r1
-		gpio_set_out(b);
- 278:	f8 00 00 a0 	calli 4f8 <gpio_set_out>
-		uart_putstr("most sig");
- 27c:	ba 00 08 00 	mv r1,r16
- 280:	f8 00 00 85 	calli 494 <uart_putstr>
-		uart_putchar(" "+a);
- 284:	b5 8f 18 00 	add r3,r12,r15
- 288:	20 61 00 ff 	andi r1,r3,0xff
- 28c:	f8 00 00 79 	calli 470 <uart_putchar>
-		uart_putstr("less sig");
- 290:	b9 c0 08 00 	mv r1,r14
- 294:	f8 00 00 80 	calli 494 <uart_putstr>
-		uart_putchar(""+b);
- 298:	b5 6d 10 00 	add r2,r11,r13
- 29c:	20 41 00 ff 	andi r1,r2,0xff
- 2a0:	f8 00 00 74 	calli 470 <uart_putchar>
- 2a4:	e3 ff ff ef 	bi 260 <main+0x58>
+		ReadChanel(0x00);	
+ 238:	34 01 00 00 	mvi r1,0
+ 23c:	f8 00 00 ee 	calli 5f4 <ReadChanel>
+		char c=GetByteOne();//most significative
+ 240:	f8 00 01 14 	calli 690 <GetByteOne>
+ 244:	b8 20 60 00 	mv r12,r1
+		gpio_set_out2(c);//most significative Bit is V11 pin Give Coherence
+ 248:	f8 00 00 b7 	calli 524 <gpio_set_out2>
 
-000002a8 <isr_null>:
+	
+
+		char d=GetByteTwo();//less significative Bit
+ 24c:	f8 00 01 17 	calli 6a8 <GetByteTwo>
+		gpio_set_out1(d);//most significative bit is u1
+		uint32_t value=d + ((uint32_t)c<<8);
+ 250:	3d 8c 00 08 	sli r12,r12,8
+		char c=GetByteOne();//most significative
+		gpio_set_out2(c);//most significative Bit is V11 pin Give Coherence
+
+	
+
+		char d=GetByteTwo();//less significative Bit
+ 254:	b8 20 68 00 	mv r13,r1
+		gpio_set_out1(d);//most significative bit is u1
+		uint32_t value=d + ((uint32_t)c<<8);
+ 258:	b5 8d 60 00 	add r12,r12,r13
+		gpio_set_out2(c);//most significative Bit is V11 pin Give Coherence
+
+	
+
+		char d=GetByteTwo();//less significative Bit
+		gpio_set_out1(d);//most significative bit is u1
+ 25c:	f8 00 00 ac 	calli 50c <gpio_set_out1>
+		uint32_t value=d + ((uint32_t)c<<8);
+		uint32_t value2= value; 
+
+		SetDisplay(0x01,value2%10);
+ 260:	c5 8b 10 00 	modu r2,r12,r11
+ 264:	34 01 00 01 	mvi r1,1
+ 268:	f8 00 01 16 	calli 6c0 <SetDisplay>
+		value2 = value2/10;
+ 26c:	8d 8b 60 00 	divu r12,r12,r11
+		SetDisplay(0x02,value2%10);
+ 270:	34 01 00 02 	mvi r1,2
+ 274:	c5 8b 10 00 	modu r2,r12,r11
+ 278:	f8 00 01 12 	calli 6c0 <SetDisplay>
+		value2 = value2/10;
+ 27c:	8d 8b 60 00 	divu r12,r12,r11
+		SetDisplay(0x03,value2%10);
+ 280:	34 01 00 03 	mvi r1,3
+ 284:	c5 8b 10 00 	modu r2,r12,r11
+ 288:	f8 00 01 0e 	calli 6c0 <SetDisplay>
+		value2 = value2/10;
+ 28c:	8d 8b 60 00 	divu r12,r12,r11
+		SetDisplay(0x04,value2%10);
+ 290:	34 01 00 04 	mvi r1,4
+ 294:	c5 8b 10 00 	modu r2,r12,r11
+ 298:	f8 00 01 0a 	calli 6c0 <SetDisplay>
+		value2 = value2/10;
+ 29c:	8d 8b 60 00 	divu r12,r12,r11
+		SetDisplay(0x05,value2%10);
+ 2a0:	34 01 00 05 	mvi r1,5
+ 2a4:	c5 8b 10 00 	modu r2,r12,r11
+ 2a8:	f8 00 01 06 	calli 6c0 <SetDisplay>
+		value2 = value2/10;
+ 2ac:	8d 8b 10 00 	divu r2,r12,r11
+		SetDisplay(0x06,value2%10);
+ 2b0:	34 01 00 06 	mvi r1,6
+ 2b4:	c4 4b 10 00 	modu r2,r2,r11
+ 2b8:	f8 00 01 02 	calli 6c0 <SetDisplay>
+ 2bc:	e3 ff ff df 	bi 238 <main+0x30>
+
+000002c0 <isr_null>:
 /***************************************************************************
  * IRQ handling
  */
 void isr_null()
 {
 }
- 2a8:	c3 a0 00 00 	ret
+ 2c0:	c3 a0 00 00 	ret
 
-000002ac <tic_isr>:
+000002c4 <irq_handler>:
 
-uint32_t tic_msec;
-
-void tic_isr()
-{
-	tic_msec++;
- 2ac:	78 01 00 00 	mvhi r1,0x0
- 2b0:	38 21 06 64 	ori r1,r1,0x664
- 2b4:	28 23 00 00 	lw r3,(r1+0)
-	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
- 2b8:	78 02 00 00 	mvhi r2,0x0
- 2bc:	38 42 05 d4 	ori r2,r2,0x5d4
- 2c0:	28 42 00 00 	lw r2,(r2+0)
-
-uint32_t tic_msec;
-
-void tic_isr()
-{
-	tic_msec++;
- 2c4:	34 63 00 01 	addi r3,r3,1
- 2c8:	58 23 00 00 	sw (r1+0),r3
-	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
- 2cc:	34 01 00 0e 	mvi r1,14
- 2d0:	58 41 00 00 	sw (r2+0),r1
-}
- 2d4:	c3 a0 00 00 	ret
-
-000002d8 <irq_handler>:
-void isr_null()
+void irq_handler(uint32_t pending)
+{	
+	timer0->compare0 =50000000000;
+ 2c4:	78 01 00 00 	mvhi r1,0x0
+ 2c8:	78 04 00 00 	mvhi r4,0x0
+ 2cc:	38 21 08 c0 	ori r1,r1,0x8c0
+ 2d0:	38 84 08 6c 	ori r4,r4,0x86c
+ 2d4:	28 23 00 00 	lw r3,(r1+0)
+ 2d8:	28 82 00 00 	lw r2,(r4+0)
+	timer0->counter0 = 0;	
+ 2dc:	78 01 00 00 	mvhi r1,0x0
+ 2e0:	38 21 08 bc 	ori r1,r1,0x8bc
+ 2e4:	28 21 00 00 	lw r1,(r1+0)
 {
 }
 
 void irq_handler(uint32_t pending)
-{
- 2d8:	37 9c ff f0 	addi sp,sp,-16
- 2dc:	5b 8b 00 10 	sw (sp+16),r11
- 2e0:	5b 8c 00 0c 	sw (sp+12),r12
- 2e4:	5b 8d 00 08 	sw (sp+8),r13
- 2e8:	5b 9d 00 04 	sw (sp+4),ra
- 2ec:	78 0b 00 00 	mvhi r11,0x0
- 2f0:	39 6b 05 e4 	ori r11,r11,0x5e4
- 2f4:	b8 20 60 00 	mv r12,r1
- */
-void isr_null()
-{
+{	
+	timer0->compare0 =50000000000;
+ 2e8:	58 62 00 04 	sw (r3+4),r2
+	timer0->counter0 = 0;	
+ 2ec:	58 60 00 08 	sw (r3+8),r0
+	return uart0->rxtx;
 }
 
-void irq_handler(uint32_t pending)
- 2f8:	35 6d 00 80 	addi r13,r11,128
- 2fc:	e0 00 00 04 	bi 30c <irq_handler+0x34>
+void uart_putchar(char c)
 {
-	int i;
-
-	for(i=0; i<32; i++) {
-		if (pending & 0x01) (*isr_table[i])();
- 300:	35 6b 00 04 	addi r11,r11,4
-
-void irq_handler(uint32_t pending)
-{
-	int i;
-
-	for(i=0; i<32; i++) {
- 304:	45 6d 00 08 	be r11,r13,324 <irq_handler+0x4c>
-		if (pending & 0x01) (*isr_table[i])();
-		pending >>= 1;
- 308:	01 8c 00 01 	srui r12,r12,1
-void irq_handler(uint32_t pending)
-{
-	int i;
-
-	for(i=0; i<32; i++) {
-		if (pending & 0x01) (*isr_table[i])();
- 30c:	21 81 00 01 	andi r1,r12,0x1
- 310:	44 20 ff fc 	be r1,r0,300 <irq_handler+0x28>
- 314:	29 61 00 00 	lw r1,(r11+0)
- 318:	35 6b 00 04 	addi r11,r11,4
- 31c:	d8 20 00 00 	call r1
-
-void irq_handler(uint32_t pending)
-{
-	int i;
-
-	for(i=0; i<32; i++) {
- 320:	5d 6d ff fa 	bne r11,r13,308 <irq_handler+0x30>
-		if (pending & 0x01) (*isr_table[i])();
-		pending >>= 1;
-	}
+	while (uart0->ucr & UART_BUSY) ;
+ 2f0:	28 22 00 00 	lw r2,(r1+0)
+ 2f4:	20 42 00 10 	andi r2,r2,0x10
+ 2f8:	5c 40 ff fe 	bne r2,r0,2f0 <irq_handler+0x2c>
+	uart0->rxtx = c;
+ 2fc:	34 02 00 ff 	mvi r2,255
+ 300:	58 22 00 04 	sw (r1+4),r2
+	return uart0->rxtx;
 }
- 324:	2b 9d 00 04 	lw ra,(sp+4)
- 328:	2b 8b 00 10 	lw r11,(sp+16)
- 32c:	2b 8c 00 0c 	lw r12,(sp+12)
- 330:	2b 8d 00 08 	lw r13,(sp+8)
- 334:	37 9c 00 10 	addi sp,sp,16
- 338:	c3 a0 00 00 	ret
 
-0000033c <isr_init>:
+void uart_putchar(char c)
+{
+	while (uart0->ucr & UART_BUSY) ;
+ 304:	28 22 00 00 	lw r2,(r1+0)
+ 308:	20 42 00 10 	andi r2,r2,0x10
+ 30c:	5c 40 ff fe 	bne r2,r0,304 <irq_handler+0x40>
+	uart0->rxtx = c;
+ 310:	34 02 00 aa 	mvi r2,170
+ 314:	58 22 00 04 	sw (r1+4),r2
+	return uart0->rxtx;
+}
+
+void uart_putchar(char c)
+{
+	while (uart0->ucr & UART_BUSY) ;
+ 318:	28 22 00 00 	lw r2,(r1+0)
+ 31c:	20 42 00 10 	andi r2,r2,0x10
+ 320:	5c 40 ff fe 	bne r2,r0,318 <irq_handler+0x54>
+	uart0->rxtx = c;
+ 324:	34 02 00 bb 	mvi r2,187
+ 328:	58 22 00 04 	sw (r1+4),r2
+	timer0->compare0 =50000000000;
+	timer0->counter0 = 0;	
+        uart_putchar(0xFF);
+	uart_putchar(0xAA);
+	uart_putchar(0xBB);
+	timer0->tcr0     = TIMER_EN | TIMER_AR| TIMER_IRQEN ;
+ 32c:	34 01 00 0e 	mvi r1,14
+ 330:	58 61 00 00 	sw (r3+0),r1
+	//irq_disable();
+
+}
+ 334:	c3 a0 00 00 	ret
+
+00000338 <isr_init>:
 
 void isr_init()
 {
- 33c:	78 01 00 00 	mvhi r1,0x0
- 340:	78 02 00 00 	mvhi r2,0x0
- 344:	38 21 05 e4 	ori r1,r1,0x5e4
- 348:	38 42 02 a8 	ori r2,r2,0x2a8
-		if (pending & 0x01) (*isr_table[i])();
-		pending >>= 1;
-	}
+ 338:	78 01 00 00 	mvhi r1,0x0
+ 33c:	78 02 00 00 	mvhi r2,0x0
+ 340:	38 21 08 d4 	ori r1,r1,0x8d4
+ 344:	38 42 02 c0 	ori r2,r2,0x2c0
+	timer0->tcr0     = TIMER_EN | TIMER_AR| TIMER_IRQEN ;
+	//irq_disable();
+
 }
 
 void isr_init()
- 34c:	34 23 00 80 	addi r3,r1,128
+ 348:	34 23 00 80 	addi r3,r1,128
 {
 	int i;
 	for(i=0; i<32; i++)
 		isr_table[i] = &isr_null;
- 350:	58 22 00 00 	sw (r1+0),r2
- 354:	34 21 00 04 	addi r1,r1,4
+ 34c:	58 22 00 00 	sw (r1+0),r2
+ 350:	34 21 00 04 	addi r1,r1,4
 }
 
 void isr_init()
 {
 	int i;
 	for(i=0; i<32; i++)
- 358:	5c 23 ff fe 	bne r1,r3,350 <isr_init+0x14>
+ 354:	5c 23 ff fe 	bne r1,r3,34c <isr_init+0x14>
 		isr_table[i] = &isr_null;
 }
- 35c:	c3 a0 00 00 	ret
+ 358:	c3 a0 00 00 	ret
 
-00000360 <isr_register>:
+0000035c <isr_register>:
 
 void isr_register(int irq, isr_ptr_t isr)
 {
 	isr_table[irq] = isr;
- 360:	78 03 00 00 	mvhi r3,0x0
- 364:	3c 21 00 02 	sli r1,r1,2
- 368:	38 63 05 e4 	ori r3,r3,0x5e4
- 36c:	b4 61 18 00 	add r3,r3,r1
- 370:	58 62 00 00 	sw (r3+0),r2
+ 35c:	78 03 00 00 	mvhi r3,0x0
+ 360:	3c 21 00 02 	sli r1,r1,2
+ 364:	38 63 08 d4 	ori r3,r3,0x8d4
+ 368:	b4 61 18 00 	add r3,r3,r1
+ 36c:	58 62 00 00 	sw (r3+0),r2
 }
- 374:	c3 a0 00 00 	ret
+ 370:	c3 a0 00 00 	ret
 
-00000378 <isr_unregister>:
+00000374 <isr_unregister>:
 
 void isr_unregister(int irq)
 {
 	isr_table[irq] = &isr_null;
- 378:	78 03 00 00 	mvhi r3,0x0
- 37c:	3c 21 00 02 	sli r1,r1,2
- 380:	38 63 05 e4 	ori r3,r3,0x5e4
- 384:	78 02 00 00 	mvhi r2,0x0
- 388:	b4 61 18 00 	add r3,r3,r1
- 38c:	38 42 02 a8 	ori r2,r2,0x2a8
- 390:	58 62 00 00 	sw (r3+0),r2
+ 374:	78 03 00 00 	mvhi r3,0x0
+ 378:	3c 21 00 02 	sli r1,r1,2
+ 37c:	38 63 08 d4 	ori r3,r3,0x8d4
+ 380:	78 02 00 00 	mvhi r2,0x0
+ 384:	b4 61 18 00 	add r3,r3,r1
+ 388:	38 42 02 c0 	ori r2,r2,0x2c0
+ 38c:	58 62 00 00 	sw (r3+0),r2
 }
- 394:	c3 a0 00 00 	ret
+ 390:	c3 a0 00 00 	ret
 
-00000398 <msleep>:
+00000394 <msleep>:
 void msleep(uint32_t msec)
 {
 	uint32_t tcr;
 
 	// Use timer0.1
 	timer0->compare1 = (FCPU/1000)*msec;
- 398:	78 04 00 00 	mvhi r4,0x0
- 39c:	38 84 05 cc 	ori r4,r4,0x5cc
- 3a0:	28 83 00 00 	lw r3,(r4+0)
- 3a4:	78 02 00 00 	mvhi r2,0x0
- 3a8:	38 42 05 d4 	ori r2,r2,0x5d4
- 3ac:	28 42 00 00 	lw r2,(r2+0)
- 3b0:	88 23 08 00 	mul r1,r1,r3
- 3b4:	58 41 00 10 	sw (r2+16),r1
+ 394:	78 04 00 00 	mvhi r4,0x0
+ 398:	38 84 08 70 	ori r4,r4,0x870
+ 39c:	28 83 00 00 	lw r3,(r4+0)
+ 3a0:	78 02 00 00 	mvhi r2,0x0
+ 3a4:	38 42 08 c0 	ori r2,r2,0x8c0
+ 3a8:	28 42 00 00 	lw r2,(r2+0)
+ 3ac:	88 23 08 00 	mul r1,r1,r3
+ 3b0:	58 41 00 10 	sw (r2+16),r1
 	timer0->counter1 = 0;
- 3b8:	58 40 00 14 	sw (r2+20),r0
+ 3b4:	58 40 00 14 	sw (r2+20),r0
 	timer0->tcr1 = TIMER_EN;
- 3bc:	34 01 00 08 	mvi r1,8
- 3c0:	58 41 00 0c 	sw (r2+12),r1
+ 3b8:	34 01 00 08 	mvi r1,8
+ 3bc:	58 41 00 0c 	sw (r2+12),r1
 
 	do {
 		//halt();
  		tcr = timer0->tcr1;
- 3c4:	28 41 00 0c 	lw r1,(r2+12)
+ 3c0:	28 41 00 0c 	lw r1,(r2+12)
  	} while ( ! (tcr & TIMER_TRIG) );
- 3c8:	20 21 00 01 	andi r1,r1,0x1
- 3cc:	44 20 ff fe 	be r1,r0,3c4 <msleep+0x2c>
+ 3c4:	20 21 00 01 	andi r1,r1,0x1
+ 3c8:	44 20 ff fe 	be r1,r0,3c0 <msleep+0x2c>
 }
- 3d0:	c3 a0 00 00 	ret
+ 3cc:	c3 a0 00 00 	ret
 
-000003d4 <nsleep>:
+000003d0 <nsleep>:
 void nsleep(uint32_t nsec)
 {
 	uint32_t tcr;
 
 	// Use timer0.1
 	timer0->compare1 = (FCPU/1000000)*nsec;
- 3d4:	78 02 00 00 	mvhi r2,0x0
- 3d8:	38 42 05 d4 	ori r2,r2,0x5d4
- 3dc:	28 42 00 00 	lw r2,(r2+0)
- 3e0:	08 21 00 64 	muli r1,r1,100
- 3e4:	58 41 00 10 	sw (r2+16),r1
+ 3d0:	78 02 00 00 	mvhi r2,0x0
+ 3d4:	38 42 08 c0 	ori r2,r2,0x8c0
+ 3d8:	28 42 00 00 	lw r2,(r2+0)
+ 3dc:	08 21 00 64 	muli r1,r1,100
+ 3e0:	58 41 00 10 	sw (r2+16),r1
 	timer0->counter1 = 0;
- 3e8:	58 40 00 14 	sw (r2+20),r0
+ 3e4:	58 40 00 14 	sw (r2+20),r0
 	timer0->tcr1 = TIMER_EN;
- 3ec:	34 01 00 08 	mvi r1,8
- 3f0:	58 41 00 0c 	sw (r2+12),r1
+ 3e8:	34 01 00 08 	mvi r1,8
+ 3ec:	58 41 00 0c 	sw (r2+12),r1
 
 	do {
 		//halt();
  		tcr = timer0->tcr1;
- 3f4:	28 41 00 0c 	lw r1,(r2+12)
+ 3f0:	28 41 00 0c 	lw r1,(r2+12)
  	} while ( ! (tcr & TIMER_TRIG) );
- 3f8:	20 21 00 01 	andi r1,r1,0x1
- 3fc:	44 20 ff fe 	be r1,r0,3f4 <nsleep+0x20>
+ 3f4:	20 21 00 01 	andi r1,r1,0x1
+ 3f8:	44 20 ff fe 	be r1,r0,3f0 <nsleep+0x20>
 }
- 400:	c3 a0 00 00 	ret
+ 3fc:	c3 a0 00 00 	ret
 
-00000404 <tic_init>:
+00000400 <tic_isr>:
+
+uint32_t tic_msec;
+
+void tic_isr()
+{
+	tic_msec++;
+ 400:	78 01 00 00 	mvhi r1,0x0
+ 404:	38 21 09 54 	ori r1,r1,0x954
+ 408:	28 23 00 00 	lw r3,(r1+0)
+	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+ 40c:	78 02 00 00 	mvhi r2,0x0
+ 410:	38 42 08 c0 	ori r2,r2,0x8c0
+ 414:	28 42 00 00 	lw r2,(r2+0)
+
+uint32_t tic_msec;
+
+void tic_isr()
+{
+	tic_msec++;
+ 418:	34 63 00 01 	addi r3,r3,1
+ 41c:	58 23 00 00 	sw (r1+0),r3
+	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+ 420:	34 01 00 0e 	mvi r1,14
+ 424:	58 41 00 00 	sw (r2+0),r1
+}
+ 428:	c3 a0 00 00 	ret
+
+0000042c <tic_init>:
 void tic_init()
 {
 	tic_msec = 0;
 
 	// Setup timer0.0
-	timer0->compare0 = (FCPU/10000);
- 404:	78 01 00 00 	mvhi r1,0x0
- 408:	38 21 05 d4 	ori r1,r1,0x5d4
- 40c:	28 23 00 00 	lw r3,(r1+0)
- 410:	34 02 27 10 	mvi r2,10000
-	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
-}
-
-void tic_init()
-{
-	tic_msec = 0;
- 414:	78 01 00 00 	mvhi r1,0x0
-
-	// Setup timer0.0
-	timer0->compare0 = (FCPU/10000);
- 418:	58 62 00 04 	sw (r3+4),r2
-	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
-}
-
-void tic_init()
-{
-	tic_msec = 0;
- 41c:	38 21 06 64 	ori r1,r1,0x664
-
-	// Setup timer0.0
-	timer0->compare0 = (FCPU/10000);
-	timer0->counter0 = 0;
- 420:	58 60 00 08 	sw (r3+8),r0
-	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
-}
-
-void tic_init()
-{
-	tic_msec = 0;
- 424:	58 20 00 00 	sw (r1+0),r0
-		isr_table[i] = &isr_null;
-}
-
-void isr_register(int irq, isr_ptr_t isr)
-{
-	isr_table[irq] = isr;
- 428:	78 02 00 00 	mvhi r2,0x0
+	timer0->compare0 =500;
  42c:	78 01 00 00 	mvhi r1,0x0
+ 430:	38 21 08 c0 	ori r1,r1,0x8c0
+ 434:	28 21 00 00 	lw r1,(r1+0)
+	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+}
+
+void tic_init()
+{
 	tic_msec = 0;
+ 438:	78 02 00 00 	mvhi r2,0x0
 
 	// Setup timer0.0
-	timer0->compare0 = (FCPU/10000);
-	timer0->counter0 = 0;
+	timer0->compare0 =500;
+ 43c:	34 03 01 f4 	mvi r3,500
+ 440:	58 23 00 04 	sw (r1+4),r3
 	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
- 430:	34 04 00 0e 	mvi r4,14
- 434:	58 64 00 00 	sw (r3+0),r4
-		isr_table[i] = &isr_null;
 }
 
-void isr_register(int irq, isr_ptr_t isr)
+void tic_init()
 {
-	isr_table[irq] = isr;
- 438:	38 21 05 e4 	ori r1,r1,0x5e4
- 43c:	38 42 02 ac 	ori r2,r2,0x2ac
- 440:	58 22 00 04 	sw (r1+4),r2
-	timer0->compare0 = (FCPU/10000);
+	tic_msec = 0;
+ 444:	38 42 09 54 	ori r2,r2,0x954
+ 448:	58 40 00 00 	sw (r2+0),r0
+
+	// Setup timer0.0
+	timer0->compare0 =500;
 	timer0->counter0 = 0;
+ 44c:	58 20 00 08 	sw (r1+8),r0
 	timer0->tcr0     = TIMER_EN | TIMER_AR | TIMER_IRQEN;
+ 450:	34 02 00 0e 	mvi r2,14
+ 454:	58 22 00 00 	sw (r1+0),r2
 
-	isr_register(1, &tic_isr);
+	//isr_register(1, &tic_isr);
 }
- 444:	c3 a0 00 00 	ret
+ 458:	c3 a0 00 00 	ret
 
-00000448 <uart_init>:
+0000045c <uart_init>:
 	//uart0->lcr = 0x03;  // Line Control Register:    8N1
 	//uart0->mcr = 0x00;  // Modem Control Register
 
 	// Setup Divisor register (Fclk / Baud)
 	//uart0->div = (FCPU/(57600*16));
 }
- 448:	c3 a0 00 00 	ret
+ 45c:	c3 a0 00 00 	ret
 
-0000044c <uart_getchar>:
+00000460 <uart_getchar>:
 
 char uart_getchar()
 {   
- 44c:	78 01 00 00 	mvhi r1,0x0
- 450:	38 21 05 d0 	ori r1,r1,0x5d0
- 454:	28 22 00 00 	lw r2,(r1+0)
+ 460:	78 01 00 00 	mvhi r1,0x0
+ 464:	38 21 08 bc 	ori r1,r1,0x8bc
+ 468:	28 22 00 00 	lw r2,(r1+0)
 	while (! (uart0->ucr & UART_DR)) ;
- 458:	28 41 00 00 	lw r1,(r2+0)
- 45c:	20 21 00 01 	andi r1,r1,0x1
- 460:	44 20 ff fe 	be r1,r0,458 <uart_getchar+0xc>
+ 46c:	28 41 00 00 	lw r1,(r2+0)
+ 470:	20 21 00 01 	andi r1,r1,0x1
+ 474:	44 20 ff fe 	be r1,r0,46c <uart_getchar+0xc>
 	return uart0->rxtx;
- 464:	28 41 00 04 	lw r1,(r2+4)
+ 478:	28 41 00 04 	lw r1,(r2+4)
 }
- 468:	20 21 00 ff 	andi r1,r1,0xff
- 46c:	c3 a0 00 00 	ret
+ 47c:	20 21 00 ff 	andi r1,r1,0xff
+ 480:	c3 a0 00 00 	ret
 
-00000470 <uart_putchar>:
+00000484 <uart_putchar>:
 
 void uart_putchar(char c)
 {
- 470:	78 02 00 00 	mvhi r2,0x0
- 474:	38 42 05 d0 	ori r2,r2,0x5d0
- 478:	28 43 00 00 	lw r3,(r2+0)
- 47c:	20 21 00 ff 	andi r1,r1,0xff
+ 484:	78 02 00 00 	mvhi r2,0x0
+ 488:	38 42 08 bc 	ori r2,r2,0x8bc
+ 48c:	28 43 00 00 	lw r3,(r2+0)
+ 490:	20 21 00 ff 	andi r1,r1,0xff
 	while (uart0->ucr & UART_BUSY) ;
- 480:	28 62 00 00 	lw r2,(r3+0)
- 484:	20 42 00 10 	andi r2,r2,0x10
- 488:	5c 40 ff fe 	bne r2,r0,480 <uart_putchar+0x10>
+ 494:	28 62 00 00 	lw r2,(r3+0)
+ 498:	20 42 00 10 	andi r2,r2,0x10
+ 49c:	5c 40 ff fe 	bne r2,r0,494 <uart_putchar+0x10>
 	uart0->rxtx = c;
- 48c:	58 61 00 04 	sw (r3+4),r1
+ 4a0:	58 61 00 04 	sw (r3+4),r1
 }
- 490:	c3 a0 00 00 	ret
+ 4a4:	c3 a0 00 00 	ret
 
-00000494 <uart_putstr>:
+000004a8 <uart_putstr>:
 
 void uart_putstr(char *str)
 {
 	char *c = str;
 	while(*c) {
- 494:	40 24 00 00 	lbu r4,(r1+0)
- 498:	44 80 00 0b 	be r4,r0,4c4 <uart_putstr+0x30>
- 49c:	78 02 00 00 	mvhi r2,0x0
- 4a0:	38 42 05 d0 	ori r2,r2,0x5d0
- 4a4:	28 43 00 00 	lw r3,(r2+0)
+ 4a8:	40 24 00 00 	lbu r4,(r1+0)
+ 4ac:	44 80 00 0b 	be r4,r0,4d8 <uart_putstr+0x30>
+ 4b0:	78 02 00 00 	mvhi r2,0x0
+ 4b4:	38 42 08 bc 	ori r2,r2,0x8bc
+ 4b8:	28 43 00 00 	lw r3,(r2+0)
 	return uart0->rxtx;
 }
 
 void uart_putchar(char c)
 {
 	while (uart0->ucr & UART_BUSY) ;
- 4a8:	28 62 00 00 	lw r2,(r3+0)
- 4ac:	20 42 00 10 	andi r2,r2,0x10
- 4b0:	5c 40 ff fe 	bne r2,r0,4a8 <uart_putstr+0x14>
+ 4bc:	28 62 00 00 	lw r2,(r3+0)
+ 4c0:	20 42 00 10 	andi r2,r2,0x10
+ 4c4:	5c 40 ff fe 	bne r2,r0,4bc <uart_putstr+0x14>
 	uart0->rxtx = c;
- 4b4:	58 64 00 04 	sw (r3+4),r4
+ 4c8:	58 64 00 04 	sw (r3+4),r4
 void uart_putstr(char *str)
 {
 	char *c = str;
 	while(*c) {
 		uart_putchar(*c);
 		c++;
- 4b8:	34 21 00 01 	addi r1,r1,1
+ 4cc:	34 21 00 01 	addi r1,r1,1
 }
 
 void uart_putstr(char *str)
 {
 	char *c = str;
 	while(*c) {
- 4bc:	40 24 00 00 	lbu r4,(r1+0)
- 4c0:	5c 82 ff fa 	bne r4,r2,4a8 <uart_putstr+0x14>
- 4c4:	c3 a0 00 00 	ret
+ 4d0:	40 24 00 00 	lbu r4,(r1+0)
+ 4d4:	5c 82 ff fa 	bne r4,r2,4bc <uart_putstr+0x14>
+ 4d8:	c3 a0 00 00 	ret
 
-000004c8 <gpio_get_in>:
+000004dc <gpio_get_in1>:
 /*******************************************************************************
  GPIO funciones primitivas
 */
 
-char gpio_get_in(){
-	return gpio0->in;
- 4c8:	78 01 00 00 	mvhi r1,0x0
- 4cc:	38 21 05 d8 	ori r1,r1,0x5d8
- 4d0:	28 21 00 00 	lw r1,(r1+0)
- 4d4:	28 21 00 00 	lw r1,(r1+0)
-}
- 4d8:	20 21 00 ff 	andi r1,r1,0xff
- 4dc:	c3 a0 00 00 	ret
-
-000004e0 <gpio_get_dir>:
-
-
-
-char gpio_get_dir(){
-	return gpio0->dir;
- 4e0:	78 01 00 00 	mvhi r1,0x0
- 4e4:	38 21 05 d8 	ori r1,r1,0x5d8
+char gpio_get_in1(){
+	return gpio0->in1;
+ 4dc:	78 01 00 00 	mvhi r1,0x0
+ 4e0:	38 21 08 c4 	ori r1,r1,0x8c4
+ 4e4:	28 21 00 00 	lw r1,(r1+0)
  4e8:	28 21 00 00 	lw r1,(r1+0)
- 4ec:	28 21 00 08 	lw r1,(r1+8)
 }
- 4f0:	20 21 00 ff 	andi r1,r1,0xff
- 4f4:	c3 a0 00 00 	ret
+ 4ec:	20 21 00 ff 	andi r1,r1,0xff
+ 4f0:	c3 a0 00 00 	ret
 
-000004f8 <gpio_set_out>:
+000004f4 <gpio_get_in2>:
 
-
-void gpio_set_out(char temp)
-{ 
-	gpio0->out=temp;
- 4f8:	78 02 00 00 	mvhi r2,0x0
- 4fc:	38 42 05 d8 	ori r2,r2,0x5d8
- 500:	28 42 00 00 	lw r2,(r2+0)
-	return gpio0->dir;
+char gpio_get_in2(){
+	return gpio0->in2;
+ 4f4:	78 01 00 00 	mvhi r1,0x0
+ 4f8:	38 21 08 c4 	ori r1,r1,0x8c4
+ 4fc:	28 21 00 00 	lw r1,(r1+0)
+ 500:	28 21 00 04 	lw r1,(r1+4)
 }
-
-
-void gpio_set_out(char temp)
-{ 
  504:	20 21 00 ff 	andi r1,r1,0xff
-	gpio0->out=temp;
- 508:	58 41 00 04 	sw (r2+4),r1
- }
- 50c:	c3 a0 00 00 	ret
+ 508:	c3 a0 00 00 	ret
 
-00000510 <gpio_set_dir>:
+0000050c <gpio_set_out1>:
 
-void gpio_set_dir(char temp)
-{  
-	gpio0->dir=temp;
- 510:	78 02 00 00 	mvhi r2,0x0
- 514:	38 42 05 d8 	ori r2,r2,0x5d8
- 518:	28 42 00 00 	lw r2,(r2+0)
+
+void gpio_set_out1(char temp1)
 { 
-	gpio0->out=temp;
+	gpio0->out1=temp1;
+ 50c:	78 02 00 00 	mvhi r2,0x0
+ 510:	38 42 08 c4 	ori r2,r2,0x8c4
+ 514:	28 42 00 00 	lw r2,(r2+0)
+	return gpio0->in2;
+}
+
+
+void gpio_set_out1(char temp1)
+{ 
+ 518:	20 21 00 ff 	andi r1,r1,0xff
+	gpio0->out1=temp1;
+ 51c:	58 41 00 08 	sw (r2+8),r1
+ }
+ 520:	c3 a0 00 00 	ret
+
+00000524 <gpio_set_out2>:
+
+void gpio_set_out2(char temp2){
+
+	gpio0->out2=temp2;
+ 524:	78 02 00 00 	mvhi r2,0x0
+ 528:	38 42 08 c4 	ori r2,r2,0x8c4
+ 52c:	28 42 00 00 	lw r2,(r2+0)
+void gpio_set_out1(char temp1)
+{ 
+	gpio0->out1=temp1;
  }
 
-void gpio_set_dir(char temp)
-{  
- 51c:	20 21 00 ff 	andi r1,r1,0xff
-	gpio0->dir=temp;
- 520:	58 41 00 08 	sw (r2+8),r1
+void gpio_set_out2(char temp2){
+ 530:	20 21 00 ff 	andi r1,r1,0xff
+
+	gpio0->out2=temp2;
+ 534:	58 41 00 0c 	sw (r2+12),r1
 }
- 524:	c3 a0 00 00 	ret
+ 538:	c3 a0 00 00 	ret
 
-00000528 <spi_Writte>:
+0000053c <gpio_set_dir1>:
 
-rxtx
-*/
+void gpio_set_dir1(char temp3)
+{  
+	gpio0->dir1=temp3;
+ 53c:	78 02 00 00 	mvhi r2,0x0
+ 540:	38 42 08 c4 	ori r2,r2,0x8c4
+ 544:	28 42 00 00 	lw r2,(r2+0)
 
-void spi_Writte(char adrr,char value){
-	spi0->adressWritte=adrr;
- 528:	78 03 00 00 	mvhi r3,0x0
- 52c:	38 63 05 dc 	ori r3,r3,0x5dc
- 530:	28 63 00 00 	lw r3,(r3+0)
-spi0->rxtx=a;
+	gpio0->out2=temp2;
+}
 
-rxtx
-*/
-
-void spi_Writte(char adrr,char value){
- 534:	20 21 00 ff 	andi r1,r1,0xff
- 538:	20 42 00 ff 	andi r2,r2,0xff
-	spi0->adressWritte=adrr;
- 53c:	58 61 00 0c 	sw (r3+12),r1
-	spi0->byteTowritte=value;
- 540:	58 62 00 10 	sw (r3+16),r2
-	while((spi0->statusWritte)==0x01);
- 544:	34 02 00 01 	mvi r2,1
- 548:	28 61 00 04 	lw r1,(r3+4)
- 54c:	44 22 ff ff 	be r1,r2,548 <spi_Writte+0x20>
+void gpio_set_dir1(char temp3)
+{  
+ 548:	20 21 00 ff 	andi r1,r1,0xff
+	gpio0->dir1=temp3;
+ 54c:	58 41 00 10 	sw (r2+16),r1
 }
  550:	c3 a0 00 00 	ret
 
-00000554 <spi_read>:
+00000554 <gpio_set_dir2>:
+
+void gpio_set_dir2(char temp4){
+
+	gpio0->dir2=temp4;
+ 554:	78 02 00 00 	mvhi r2,0x0
+ 558:	38 42 08 c4 	ori r2,r2,0x8c4
+ 55c:	28 42 00 00 	lw r2,(r2+0)
+void gpio_set_dir1(char temp3)
+{  
+	gpio0->dir1=temp3;
+}
+
+void gpio_set_dir2(char temp4){
+ 560:	20 21 00 ff 	andi r1,r1,0xff
+
+	gpio0->dir2=temp4;
+ 564:	58 41 00 14 	sw (r2+20),r1
+}
+ 568:	c3 a0 00 00 	ret
+
+0000056c <spi_Writte>:
+*/
+
+
+
+void spi_Writte(char adrr,char value){
+	spi0->adressWritte=adrr;
+ 56c:	78 03 00 00 	mvhi r3,0x0
+ 570:	38 63 08 c8 	ori r3,r3,0x8c8
+ 574:	28 63 00 00 	lw r3,(r3+0)
+SPI
+*/
+
+
+
+void spi_Writte(char adrr,char value){
+ 578:	20 21 00 ff 	andi r1,r1,0xff
+ 57c:	20 42 00 ff 	andi r2,r2,0xff
+	spi0->adressWritte=adrr;
+ 580:	58 61 00 0c 	sw (r3+12),r1
+	spi0->byteTowritte=value;
+ 584:	58 62 00 10 	sw (r3+16),r2
+	while((spi0->statusWritte)==0x01);
+ 588:	34 02 00 01 	mvi r2,1
+ 58c:	28 61 00 04 	lw r1,(r3+4)
+ 590:	44 22 ff ff 	be r1,r2,58c <spi_Writte+0x20>
+}
+ 594:	c3 a0 00 00 	ret
+
+00000598 <spi_read>:
 char spi_read(char Addr){
 	spi0->adressRead=Addr;
- 554:	78 02 00 00 	mvhi r2,0x0
- 558:	38 42 05 dc 	ori r2,r2,0x5dc
- 55c:	28 42 00 00 	lw r2,(r2+0)
+ 598:	78 02 00 00 	mvhi r2,0x0
+ 59c:	38 42 08 c8 	ori r2,r2,0x8c8
+ 5a0:	28 42 00 00 	lw r2,(r2+0)
 void spi_Writte(char adrr,char value){
 	spi0->adressWritte=adrr;
 	spi0->byteTowritte=value;
 	while((spi0->statusWritte)==0x01);
 }
 char spi_read(char Addr){
- 560:	20 21 00 ff 	andi r1,r1,0xff
+ 5a4:	20 21 00 ff 	andi r1,r1,0xff
 	spi0->adressRead=Addr;
 	while((spi0->statusRead)==0x01);
- 564:	34 03 00 01 	mvi r3,1
+ 5a8:	34 03 00 01 	mvi r3,1
 	spi0->adressWritte=adrr;
 	spi0->byteTowritte=value;
 	while((spi0->statusWritte)==0x01);
 }
 char spi_read(char Addr){
 	spi0->adressRead=Addr;
- 568:	58 41 00 14 	sw (r2+20),r1
+ 5ac:	58 41 00 14 	sw (r2+20),r1
 	while((spi0->statusRead)==0x01);
- 56c:	28 41 00 08 	lw r1,(r2+8)
- 570:	44 23 ff ff 	be r1,r3,56c <spi_read+0x18>
+ 5b0:	28 41 00 08 	lw r1,(r2+8)
+ 5b4:	44 23 ff ff 	be r1,r3,5b0 <spi_read+0x18>
 	return spi0->Readed;
- 574:	28 41 00 00 	lw r1,(r2+0)
+ 5b8:	28 41 00 00 	lw r1,(r2+0)
 }
- 578:	20 21 00 ff 	andi r1,r1,0xff
- 57c:	c3 a0 00 00 	ret
+ 5bc:	20 21 00 ff 	andi r1,r1,0xff
+ 5c0:	c3 a0 00 00 	ret
 
-00000580 <SPI_begin>:
+000005c4 <SPI_begin>:
 void SPI_begin(){
 	spi0->begin=0x01;
- 580:	78 01 00 00 	mvhi r1,0x0
- 584:	38 21 05 dc 	ori r1,r1,0x5dc
- 588:	28 21 00 00 	lw r1,(r1+0)
- 58c:	34 02 00 01 	mvi r2,1
- 590:	58 22 00 18 	sw (r1+24),r2
+ 5c4:	78 01 00 00 	mvhi r1,0x0
+ 5c8:	38 21 08 c8 	ori r1,r1,0x8c8
+ 5cc:	28 21 00 00 	lw r1,(r1+0)
+ 5d0:	34 02 00 01 	mvi r2,1
+ 5d4:	58 22 00 18 	sw (r1+24),r2
 }
- 594:	c3 a0 00 00 	ret
+ 5d8:	c3 a0 00 00 	ret
 
-00000598 <spi_setDiv>:
+000005dc <spi_setDiv>:
 
 void spi_setDiv(char f){
 	spi0->divisor=f;
- 598:	78 02 00 00 	mvhi r2,0x0
- 59c:	38 42 05 dc 	ori r2,r2,0x5dc
- 5a0:	28 42 00 00 	lw r2,(r2+0)
+ 5dc:	78 02 00 00 	mvhi r2,0x0
+ 5e0:	38 42 08 c8 	ori r2,r2,0x8c8
+ 5e4:	28 42 00 00 	lw r2,(r2+0)
 }
 void SPI_begin(){
 	spi0->begin=0x01;
 }
 
 void spi_setDiv(char f){
- 5a4:	20 21 00 ff 	andi r1,r1,0xff
+ 5e8:	20 21 00 ff 	andi r1,r1,0xff
 	spi0->divisor=f;
- 5a8:	58 41 00 1c 	sw (r2+28),r1
+ 5ec:	58 41 00 1c 	sw (r2+28),r1
 }
- 5ac:	c3 a0 00 00 	ret
+ 5f0:	c3 a0 00 00 	ret
+
+000005f4 <ReadChanel>:
+
+/*********************************************************
+I2C Conversor
+*/
+
+void ReadChanel(char ch){
+ 5f4:	20 21 00 ff 	andi r1,r1,0xff
+	switch(ch){
+ 5f8:	34 02 00 01 	mvi r2,1
+ 5fc:	44 22 00 1f 	be r1,r2,678 <ReadChanel+0x84>
+ 600:	5c 20 00 0e 	bne r1,r0,638 <ReadChanel+0x44>
+	   break;
+	   case 0x03:
+		i2c0->ByteConfigurationOne=0xF3;
+	   break;
+	   default:
+		i2c0->ByteConfigurationOne=0xC3;
+ 604:	78 01 00 00 	mvhi r1,0x0
+ 608:	38 21 08 cc 	ori r1,r1,0x8cc
+ 60c:	28 21 00 00 	lw r1,(r1+0)
+ 610:	34 02 00 c3 	mvi r2,195
+ 614:	58 22 00 0c 	sw (r1+12),r2
+	   break;
+	}
+	i2c0->ByteConfigurationTwo=0X83;//FS 4.096 volts although this is more than electrical especifications,there never be more than 3.6
+ 618:	34 02 00 83 	mvi r2,131
+ 61c:	58 22 00 10 	sw (r1+16),r2
+	i2c0->Start=0x01;
+ 620:	34 02 00 01 	mvi r2,1
+ 624:	58 22 00 14 	sw (r1+20),r2
+	while((i2c0->Busy)==0x01);
+ 628:	34 03 00 01 	mvi r3,1
+ 62c:	28 22 00 00 	lw r2,(r1+0)
+ 630:	44 43 ff ff 	be r2,r3,62c <ReadChanel+0x38>
+}
+ 634:	c3 a0 00 00 	ret
+/*********************************************************
+I2C Conversor
+*/
+
+void ReadChanel(char ch){
+	switch(ch){
+ 638:	34 02 00 02 	mvi r2,2
+ 63c:	44 22 00 09 	be r1,r2,660 <ReadChanel+0x6c>
+ 640:	34 02 00 03 	mvi r2,3
+ 644:	5c 22 ff f0 	bne r1,r2,604 <ReadChanel+0x10>
+	   break;
+	   case 0x02:
+		i2c0->ByteConfigurationOne=0xE3;
+	   break;
+	   case 0x03:
+		i2c0->ByteConfigurationOne=0xF3;
+ 648:	78 01 00 00 	mvhi r1,0x0
+ 64c:	38 21 08 cc 	ori r1,r1,0x8cc
+ 650:	28 21 00 00 	lw r1,(r1+0)
+ 654:	34 02 00 f3 	mvi r2,243
+ 658:	58 22 00 0c 	sw (r1+12),r2
+	   break;
+ 65c:	e3 ff ff ef 	bi 618 <ReadChanel+0x24>
+	   break;
+	   case 0x01:
+		i2c0->ByteConfigurationOne=0xD3;
+	   break;
+	   case 0x02:
+		i2c0->ByteConfigurationOne=0xE3;
+ 660:	78 01 00 00 	mvhi r1,0x0
+ 664:	38 21 08 cc 	ori r1,r1,0x8cc
+ 668:	28 21 00 00 	lw r1,(r1+0)
+ 66c:	34 02 00 e3 	mvi r2,227
+ 670:	58 22 00 0c 	sw (r1+12),r2
+	   break;
+ 674:	e3 ff ff e9 	bi 618 <ReadChanel+0x24>
+	switch(ch){
+	   case 0x00:
+		i2c0->ByteConfigurationOne=0xC3;
+	   break;
+	   case 0x01:
+		i2c0->ByteConfigurationOne=0xD3;
+ 678:	78 01 00 00 	mvhi r1,0x0
+ 67c:	38 21 08 cc 	ori r1,r1,0x8cc
+ 680:	28 21 00 00 	lw r1,(r1+0)
+ 684:	34 02 00 d3 	mvi r2,211
+ 688:	58 22 00 0c 	sw (r1+12),r2
+	   break;
+ 68c:	e3 ff ff e3 	bi 618 <ReadChanel+0x24>
+
+00000690 <GetByteOne>:
+	i2c0->Start=0x01;
+	while((i2c0->Busy)==0x01);
+}
+
+char GetByteOne(){
+	return i2c0->ByteReadedOne;
+ 690:	78 01 00 00 	mvhi r1,0x0
+ 694:	38 21 08 cc 	ori r1,r1,0x8cc
+ 698:	28 21 00 00 	lw r1,(r1+0)
+ 69c:	28 21 00 04 	lw r1,(r1+4)
+}
+ 6a0:	20 21 00 ff 	andi r1,r1,0xff
+ 6a4:	c3 a0 00 00 	ret
+
+000006a8 <GetByteTwo>:
+char GetByteTwo()
+{
+	return i2c0->ByteReadedTwo;
+ 6a8:	78 01 00 00 	mvhi r1,0x0
+ 6ac:	38 21 08 cc 	ori r1,r1,0x8cc
+ 6b0:	28 21 00 00 	lw r1,(r1+0)
+ 6b4:	28 21 00 08 	lw r1,(r1+8)
+}
+ 6b8:	20 21 00 ff 	andi r1,r1,0xff
+ 6bc:	c3 a0 00 00 	ret
+
+000006c0 <SetDisplay>:
+/****************************************************************************
+Display 
+*/
+
+
+void SetDisplay(char Display,char value){
+ 6c0:	20 21 00 ff 	andi r1,r1,0xff
+	switch(Display){
+ 6c4:	34 03 00 08 	mvi r3,8
+/****************************************************************************
+Display 
+*/
+
+
+void SetDisplay(char Display,char value){
+ 6c8:	20 42 00 ff 	andi r2,r2,0xff
+	switch(Display){
+ 6cc:	54 23 00 07 	bgu r1,r3,6e8 <SetDisplay+0x28>
+ 6d0:	3c 21 00 02 	sli r1,r1,2
+ 6d4:	78 03 00 00 	mvhi r3,0x0
+ 6d8:	38 63 08 74 	ori r3,r3,0x874
+ 6dc:	b4 61 18 00 	add r3,r3,r1
+ 6e0:	28 61 00 00 	lw r1,(r3+0)
+ 6e4:	c0 20 00 00 	b r1
+	   break;
+	   case 0x08:
+		Display0->bcd8=value;
+	   break;
+	   default:
+		Display0->bcd1=value;
+ 6e8:	78 01 00 00 	mvhi r1,0x0
+ 6ec:	38 21 08 d0 	ori r1,r1,0x8d0
+ 6f0:	28 21 00 00 	lw r1,(r1+0)
+ 6f4:	58 22 00 00 	sw (r1+0),r2
+ 6f8:	c3 a0 00 00 	ret
+	   break;
+	   case 0x06:
+		Display0->bcd6=value;
+	   break;
+	   case 0x07:
+		Display0->bcd7=value;
+ 6fc:	78 01 00 00 	mvhi r1,0x0
+ 700:	38 21 08 d0 	ori r1,r1,0x8d0
+ 704:	28 21 00 00 	lw r1,(r1+0)
+ 708:	58 22 00 18 	sw (r1+24),r2
+	   break;
+ 70c:	c3 a0 00 00 	ret
+	   case 0x08:
+		Display0->bcd8=value;
+ 710:	78 01 00 00 	mvhi r1,0x0
+ 714:	38 21 08 d0 	ori r1,r1,0x8d0
+ 718:	28 21 00 00 	lw r1,(r1+0)
+ 71c:	58 22 00 1c 	sw (r1+28),r2
+	   break;
+ 720:	c3 a0 00 00 	ret
+	switch(Display){
+	   case 0x01:
+		Display0->bcd1=value;
+	   break;
+	   case 0x02:
+		Display0->bcd2=value;;
+ 724:	78 01 00 00 	mvhi r1,0x0
+ 728:	38 21 08 d0 	ori r1,r1,0x8d0
+ 72c:	28 21 00 00 	lw r1,(r1+0)
+ 730:	58 22 00 04 	sw (r1+4),r2
+	   break;
+ 734:	c3 a0 00 00 	ret
+	   case 0x03:
+		Display0->bcd3=value;
+ 738:	78 01 00 00 	mvhi r1,0x0
+ 73c:	38 21 08 d0 	ori r1,r1,0x8d0
+ 740:	28 21 00 00 	lw r1,(r1+0)
+ 744:	58 22 00 08 	sw (r1+8),r2
+	   break;
+ 748:	c3 a0 00 00 	ret
+	   case 0x04:
+		Display0->bcd4=value;
+ 74c:	78 01 00 00 	mvhi r1,0x0
+ 750:	38 21 08 d0 	ori r1,r1,0x8d0
+ 754:	28 21 00 00 	lw r1,(r1+0)
+ 758:	58 22 00 0c 	sw (r1+12),r2
+	   break;
+ 75c:	c3 a0 00 00 	ret
+	   case 0x05:
+		Display0->bcd5=value;
+ 760:	78 01 00 00 	mvhi r1,0x0
+ 764:	38 21 08 d0 	ori r1,r1,0x8d0
+ 768:	28 21 00 00 	lw r1,(r1+0)
+ 76c:	58 22 00 10 	sw (r1+16),r2
+	   break;
+ 770:	c3 a0 00 00 	ret
+	   case 0x06:
+		Display0->bcd6=value;
+ 774:	78 01 00 00 	mvhi r1,0x0
+ 778:	38 21 08 d0 	ori r1,r1,0x8d0
+ 77c:	28 21 00 00 	lw r1,(r1+0)
+ 780:	58 22 00 14 	sw (r1+20),r2
+	   break;
+ 784:	c3 a0 00 00 	ret
+
+00000788 <SetDpDisplay>:
+	   break;
+	}
+
+}
+
+void SetDpDisplay(char display){
+ 788:	20 21 00 ff 	andi r1,r1,0xff
+
+	switch(display){
+ 78c:	34 02 00 08 	mvi r2,8
+ 790:	54 22 00 0c 	bgu r1,r2,7c0 <SetDpDisplay+0x38>
+ 794:	3c 21 00 02 	sli r1,r1,2
+ 798:	78 02 00 00 	mvhi r2,0x0
+ 79c:	38 42 08 98 	ori r2,r2,0x898
+ 7a0:	b4 41 10 00 	add r2,r2,r1
+ 7a4:	28 41 00 00 	lw r1,(r2+0)
+ 7a8:	c0 20 00 00 	b r1
+	   break;
+	   case 0x07:
+		Display0->point=0xFD;
+	   break;
+	   case 0x08:
+		Display0->point=0xFE;
+ 7ac:	78 01 00 00 	mvhi r1,0x0
+ 7b0:	38 21 08 d0 	ori r1,r1,0x8d0
+ 7b4:	28 21 00 00 	lw r1,(r1+0)
+ 7b8:	34 02 00 fe 	mvi r2,254
+ 7bc:	58 22 00 20 	sw (r1+32),r2
+ 7c0:	c3 a0 00 00 	ret
+
+void SetDpDisplay(char display){
+
+	switch(display){
+	   case 0x01:
+		Display0->point=0x7F;
+ 7c4:	78 01 00 00 	mvhi r1,0x0
+ 7c8:	38 21 08 d0 	ori r1,r1,0x8d0
+ 7cc:	28 21 00 00 	lw r1,(r1+0)
+ 7d0:	34 02 00 7f 	mvi r2,127
+ 7d4:	58 22 00 20 	sw (r1+32),r2
+	   break;
+ 7d8:	c3 a0 00 00 	ret
+	   case 0x02:
+		Display0->point=0xBF;
+ 7dc:	78 01 00 00 	mvhi r1,0x0
+ 7e0:	38 21 08 d0 	ori r1,r1,0x8d0
+ 7e4:	28 21 00 00 	lw r1,(r1+0)
+ 7e8:	34 02 00 bf 	mvi r2,191
+ 7ec:	58 22 00 20 	sw (r1+32),r2
+	   break;
+ 7f0:	c3 a0 00 00 	ret
+	   case 0x03:
+		Display0->point=0xDF;
+ 7f4:	78 01 00 00 	mvhi r1,0x0
+ 7f8:	38 21 08 d0 	ori r1,r1,0x8d0
+ 7fc:	28 21 00 00 	lw r1,(r1+0)
+ 800:	34 02 00 df 	mvi r2,223
+ 804:	58 22 00 20 	sw (r1+32),r2
+	   break;
+ 808:	c3 a0 00 00 	ret
+	   case 0x04:
+		Display0->point=0xEF;
+ 80c:	78 01 00 00 	mvhi r1,0x0
+ 810:	38 21 08 d0 	ori r1,r1,0x8d0
+ 814:	28 21 00 00 	lw r1,(r1+0)
+ 818:	34 02 00 ef 	mvi r2,239
+ 81c:	58 22 00 20 	sw (r1+32),r2
+	   break;
+ 820:	c3 a0 00 00 	ret
+	   case 0x05:
+		Display0->point=0xF7;
+ 824:	78 01 00 00 	mvhi r1,0x0
+ 828:	38 21 08 d0 	ori r1,r1,0x8d0
+ 82c:	28 21 00 00 	lw r1,(r1+0)
+ 830:	34 02 00 f7 	mvi r2,247
+ 834:	58 22 00 20 	sw (r1+32),r2
+	   break;
+ 838:	c3 a0 00 00 	ret
+	   case 0x06:
+		Display0->point=0xFB;
+ 83c:	78 01 00 00 	mvhi r1,0x0
+ 840:	38 21 08 d0 	ori r1,r1,0x8d0
+ 844:	28 21 00 00 	lw r1,(r1+0)
+ 848:	34 02 00 fb 	mvi r2,251
+ 84c:	58 22 00 20 	sw (r1+32),r2
+	   break;
+ 850:	c3 a0 00 00 	ret
+	   case 0x07:
+		Display0->point=0xFD;
+ 854:	78 01 00 00 	mvhi r1,0x0
+ 858:	38 21 08 d0 	ori r1,r1,0x8d0
+ 85c:	28 21 00 00 	lw r1,(r1+0)
+ 860:	34 02 00 fd 	mvi r2,253
+ 864:	58 22 00 20 	sw (r1+32),r2
+	   break;
+ 868:	c3 a0 00 00 	ret

@@ -17,12 +17,6 @@ lm0/Mram_registers38/SPO</arg>
 To see the details of these <arg fmt="%s" index="4">info</arg> messages, please use the -detail switch.
 </msg>
 
-<msg type="warning" file="MapLib" num="701" delta="new" >Signal <arg fmt="%s" index="1">i2c_sda</arg> connected to top level port <arg fmt="%s" index="2">i2c_sda</arg> has been removed.
-</msg>
-
-<msg type="warning" file="MapLib" num="701" delta="new" >Signal <arg fmt="%s" index="1">i2c_scl</arg> connected to top level port <arg fmt="%s" index="2">i2c_scl</arg> has been removed.
-</msg>
-
 <msg type="info" file="LIT" num="244" delta="new" >All of the single ended outputs in this design are using slew rate limited output drivers. The delay on speed critical single ended outputs can be dramatically reduced by designating them as fast outputs.
 </msg>
 

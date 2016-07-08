@@ -130,19 +130,109 @@ int main()
 	*/
 	//this spi works temperature
 	
-	
-	gpio_set_dir(0xFF);
+	/************************///works keep it going
+	/*
+	gpio_set_dir1(0xFF);
+	gpio_set_dir2(0xFF);
 	SPI_begin();
 	spi_Writte(0x80,0xE6);
 	while(1){
 		char a=spi_read(0x02);// most significative bite
+		gpio_set_out1(a);
 		char b=spi_read(0x01);
-		gpio_set_out(b);
-		uart_putstr("most sig");
-		uart_putchar(" "+a);
-		uart_putstr("less sig");
-		uart_putchar(""+b);
+		gpio_set_out2(b);
 	}
+	*/
+//-----------------------------------------------------------
+//analog converter test
+	/*Works */
+	
+	gpio_set_dir1(0xFF);
+	gpio_set_dir2(0xFF);
+	while(1){
+		ReadChanel(0x00);	
+		char c=GetByteOne();//most significative
+		gpio_set_out2(c);//most significative Bit is V11 pin Give Coherence
+		char d=GetByteTwo();//less significative Bit
+		gpio_set_out1(d);//most significative bit is u16
+
+	}//
+	
+
+//********************************************************************/
+
+	//test with UART
+	/*
+	gpio_set_dir1(0xFF);
+	gpio_set_dir2(0xFF);
+	*/
+			/*
+		ReadChanel(0x00);	
+		char c=GetByteOne();
+		gpio_set_out2(c);
+		char d=GetByteTwo();
+		gpio_set_out1(d);
+		*/	
+	/*
+	int increaser=35;
+
+	
+	while(1){
+
+		uart_putchar(0x30);//UART SIMBOL 0
+		uart_putchar(0x31);//UART SIMBOL 1
+		uart_putchar(0x32);//UART SIMBOL 2
+		uart_putchar(0x33);//UART SIMBOL 3
+		uart_putchar(0x34);//UART SIMBOL 4
+		uart_putchar(0x35);//UART SIMBOL 5
+		uart_putchar(0x36);//UART SIMBOL 6
+		uart_putchar(0x37);//UART SIMBOL 7
+		uart_putchar(0x38);//UART SIMBOL 8
+		uart_putchar(0x39);//UART SIMBOL 9
+		//uart_putchar(0x2B);//salto hacia arriba
+		
+		//uart_putchar(0x0B);//simbolo +
+		//uart_putchar(0x10);
+		
+
+		uart_putchar(0x41);//UART A
+		uart_putchar(0x42);//UART B
+		uart_putchar(0x43);//UART C
+		uart_putchar(0x44);//UART D
+		uart_putchar(0x45);//UART E
+		uart_putchar(0x46);//UART F
+		uart_putchar(0x47);//UART G
+		uart_putchar(0x48);//UART H
+		uart_putchar(0x49);//UART I
+		uart_putchar(0x4A);//UART J
+		uart_putchar(0x4B);//UART K
+		uart_putchar(0x4C);//UART L
+		uart_putchar(0x4D);//UART M
+		uart_putchar(0x4E);//UART N
+		uart_putchar(0x4F);//UART O
+		uart_putchar(0x50);//UART P
+		uart_putchar(0x51);//UART Q	
+		uart_putchar(0x52);//UART R
+		uart_putchar(0x53);//UART S
+		uart_putchar(0x54);//UART T
+		uart_putchar(0x55);//UART U
+		uart_putchar(0x56);//UART V
+		uart_putchar(0x57);//UART W
+		uart_putchar(0x58);//UART X
+		uart_putchar(0x59);//UART Y
+		uart_putchar(0x5A);//UART Z	
+
+		uart_putchar(0x0A);//supouse skip line
+		int i;
+		while(i<increaser){
+			i=i+1;
+			uart_putchar(0x08);//retroceso
+		}
+		i=0;
+		increaser=increaser+1;
+		
+	}
+	*/
 
 }
 

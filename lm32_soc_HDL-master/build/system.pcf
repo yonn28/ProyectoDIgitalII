@@ -1,36 +1,158 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Fri May 06 20:26:15 2016
+// Written by: Map P.20131013 on Wed Jul 06 18:06:38 2016
 //! **************************************************************************
 
 SCHEMATIC START;
 COMP "spi_mosi" LOCATE = SITE "H4" LEVEL 1;
 COMP "rst" LOCATE = SITE "V10" LEVEL 1;
 COMP "spi_miso" LOCATE = SITE "H1" LEVEL 1;
+COMP "dp" LOCATE = SITE "H15" LEVEL 1;
 COMP "gpio0_io<0>" LOCATE = SITE "H17" LEVEL 1;
 COMP "gpio0_io<3>" LOCATE = SITE "N14" LEVEL 1;
 COMP "gpio0_io<4>" LOCATE = SITE "R18" LEVEL 1;
 COMP "gpio0_io<1>" LOCATE = SITE "K15" LEVEL 1;
 COMP "gpio0_io<2>" LOCATE = SITE "J13" LEVEL 1;
 COMP "gpio0_io<7>" LOCATE = SITE "U16" LEVEL 1;
+COMP "gpio0_io<8>" LOCATE = SITE "V16" LEVEL 1;
 COMP "gpio0_io<5>" LOCATE = SITE "V17" LEVEL 1;
 COMP "gpio0_io<6>" LOCATE = SITE "U17" LEVEL 1;
+COMP "gpio0_io<9>" LOCATE = SITE "T15" LEVEL 1;
 COMP "spi_CE" LOCATE = SITE "G2" LEVEL 1;
+COMP "gpio0_io<13>" LOCATE = SITE "V14" LEVEL 1;
+COMP "gpio0_io<14>" LOCATE = SITE "V12" LEVEL 1;
+COMP "gpio0_io<11>" LOCATE = SITE "T16" LEVEL 1;
+COMP "gpio0_io<12>" LOCATE = SITE "V15" LEVEL 1;
+COMP "gpio0_io<10>" LOCATE = SITE "U14" LEVEL 1;
+COMP "gpio0_io<15>" LOCATE = SITE "V11" LEVEL 1;
+COMP "i2c_sda" LOCATE = SITE "H14" LEVEL 1;
+COMP "i2c_scl" LOCATE = SITE "D14" LEVEL 1;
 COMP "uart_txd" LOCATE = SITE "D4" LEVEL 1;
 COMP "clk" LOCATE = SITE "E3" LEVEL 1;
 COMP "spi_clk" LOCATE = SITE "F3" LEVEL 1;
+COMP "anodo<5>" LOCATE = SITE "T9" LEVEL 1;
+COMP "anodo<6>" LOCATE = SITE "J18" LEVEL 1;
+COMP "anodo<7>" LOCATE = SITE "J17" LEVEL 1;
 COMP "uart_rxd" LOCATE = SITE "C4" LEVEL 1;
-COMP "led" LOCATE = SITE "V12" LEVEL 1;
+COMP "anodo<0>" LOCATE = SITE "U13" LEVEL 1;
+COMP "anodo<1>" LOCATE = SITE "K2" LEVEL 1;
+COMP "anodo<2>" LOCATE = SITE "T14" LEVEL 1;
+COMP "anodo<3>" LOCATE = SITE "P14" LEVEL 1;
+COMP "anodo<4>" LOCATE = SITE "J14" LEVEL 1;
+COMP "segmentos<5>" LOCATE = SITE "T11" LEVEL 1;
+COMP "segmentos<6>" LOCATE = SITE "L18" LEVEL 1;
+COMP "segmentos<1>" LOCATE = SITE "R10" LEVEL 1;
+COMP "segmentos<2>" LOCATE = SITE "K16" LEVEL 1;
+COMP "segmentos<3>" LOCATE = SITE "K13" LEVEL 1;
+COMP "segmentos<4>" LOCATE = SITE "P15" LEVEL 1;
+COMP "segmentos<0>" LOCATE = SITE "T10" LEVEL 1;
+PIN Display0/selector/Mram_anodo_pins<32> = BEL "Display0/selector/Mram_anodo"
+        PINNAME CLKARDCLK;
+PIN i2c0/I2C/control/Mram__n0153_pins<32> = BEL "i2c0/I2C/control/Mram__n0153"
+        PINNAME CLKARDCLK;
 PIN spi0/Mram__n0339_pins<32> = BEL "spi0/Mram__n0339" PINNAME CLKARDCLK;
-PIN spi0/spi0/Mram__n0223_pins<32> = BEL "spi0/spi0/Mram__n0223" PINNAME
+PIN spi0/spi0/Mram__n0220_pins<32> = BEL "spi0/spi0/Mram__n0220" PINNAME
         CLKARDCLK;
 PIN bram0/Mram_ram_pins<63> = BEL "bram0/Mram_ram" PINNAME CLKARDCLKU;
 PIN bram0/Mram_ram_pins<62> = BEL "bram0/Mram_ram" PINNAME CLKARDCLKL;
 TIMEGRP sys_clk_pin = BEL "i2c0/wb_dat_o_7" BEL "i2c0/wb_dat_o_6" BEL
         "i2c0/wb_dat_o_5" BEL "i2c0/wb_dat_o_4" BEL "i2c0/wb_dat_o_3" BEL
         "i2c0/wb_dat_o_2" BEL "i2c0/wb_dat_o_1" BEL "i2c0/wb_dat_o_0" BEL
-        "gpio0/gpio_dir_7" BEL "gpio0/gpio_dir_6" BEL "gpio0/gpio_dir_5" BEL
-        "gpio0/gpio_dir_4" BEL "gpio0/gpio_dir_3" BEL "gpio0/gpio_dir_2" BEL
-        "gpio0/gpio_dir_1" BEL "gpio0/gpio_dir_0" BEL
+        "i2c0/ByteconfigurationTwo_7" BEL "i2c0/ByteconfigurationTwo_6" BEL
+        "i2c0/ByteconfigurationTwo_5" BEL "i2c0/ByteconfigurationTwo_4" BEL
+        "i2c0/ByteconfigurationTwo_3" BEL "i2c0/ByteconfigurationTwo_2" BEL
+        "i2c0/ByteconfigurationTwo_1" BEL "i2c0/ByteconfigurationTwo_0" BEL
+        "i2c0/ByteconfigurationOne_7" BEL "i2c0/ByteconfigurationOne_6" BEL
+        "i2c0/ByteconfigurationOne_5" BEL "i2c0/ByteconfigurationOne_4" BEL
+        "i2c0/ByteconfigurationOne_3" BEL "i2c0/ByteconfigurationOne_2" BEL
+        "i2c0/ByteconfigurationOne_1" BEL "i2c0/ByteconfigurationOne_0" BEL
+        "i2c0/ack" BEL "i2c0/I2C/Core/counterBusFree_18" BEL
+        "i2c0/I2C/Core/counterBusFree_17" BEL
+        "i2c0/I2C/Core/counterBusFree_16" BEL
+        "i2c0/I2C/Core/counterBusFree_15" BEL
+        "i2c0/I2C/Core/counterBusFree_14" BEL
+        "i2c0/I2C/Core/counterBusFree_13" BEL
+        "i2c0/I2C/Core/counterBusFree_12" BEL
+        "i2c0/I2C/Core/counterBusFree_11" BEL
+        "i2c0/I2C/Core/counterBusFree_10" BEL "i2c0/I2C/Core/counterBusFree_9"
+        BEL "i2c0/I2C/Core/counterBusFree_8" BEL
+        "i2c0/I2C/Core/counterBusFree_7" BEL "i2c0/I2C/Core/counterBusFree_6"
+        BEL "i2c0/I2C/Core/counterBusFree_5" BEL
+        "i2c0/I2C/Core/counterBusFree_4" BEL "i2c0/I2C/Core/counterBusFree_3"
+        BEL "i2c0/I2C/Core/counterBusFree_2" BEL
+        "i2c0/I2C/Core/counterBusFree_1" BEL "i2c0/I2C/Core/counterBusFree_0"
+        BEL "i2c0/I2C/Core/sincronicer_2" BEL "i2c0/I2C/Core/sincronicer_1"
+        BEL "i2c0/I2C/Core/sincronicer_0" BEL "i2c0/I2C/Core/state_FSM_FFd1"
+        BEL "i2c0/I2C/Core/state_FSM_FFd5" BEL "i2c0/I2C/Core/state_FSM_FFd12"
+        BEL "i2c0/I2C/Core/state_FSM_FFd16" BEL
+        "i2c0/I2C/Core/couterBitsReading_3" BEL
+        "i2c0/I2C/Core/couterBitsReading_2" BEL
+        "i2c0/I2C/Core/couterBitsReading_1" BEL
+        "i2c0/I2C/Core/couterBitsReading_0" BEL
+        "i2c0/I2C/Core/counterStart_16" BEL "i2c0/I2C/Core/counterStart_15"
+        BEL "i2c0/I2C/Core/counterStart_14" BEL
+        "i2c0/I2C/Core/counterStart_13" BEL "i2c0/I2C/Core/counterStart_12"
+        BEL "i2c0/I2C/Core/counterStart_11" BEL
+        "i2c0/I2C/Core/counterStart_10" BEL "i2c0/I2C/Core/counterStart_9" BEL
+        "i2c0/I2C/Core/counterStart_8" BEL "i2c0/I2C/Core/counterStart_7" BEL
+        "i2c0/I2C/Core/counterStart_6" BEL "i2c0/I2C/Core/counterStart_5" BEL
+        "i2c0/I2C/Core/counterStart_4" BEL "i2c0/I2C/Core/counterStart_3" BEL
+        "i2c0/I2C/Core/counterStart_2" BEL "i2c0/I2C/Core/counterStart_1" BEL
+        "i2c0/I2C/Core/counterStart_0" BEL
+        "i2c0/I2C/Core/counterBitsWriting_3" BEL
+        "i2c0/I2C/Core/counterBitsWriting_2" BEL
+        "i2c0/I2C/Core/counterBitsWriting_1" BEL
+        "i2c0/I2C/Core/counterBitsWriting_0" BEL
+        "i2c0/I2C/Core/state_FSM_FFd3" BEL "i2c0/I2C/Core/state_FSM_FFd4" BEL
+        "i2c0/I2C/Core/state_FSM_FFd2" BEL "i2c0/I2C/Core/state_FSM_FFd6" BEL
+        "i2c0/I2C/Core/state_FSM_FFd7" BEL "i2c0/I2C/Core/state_FSM_FFd11" BEL
+        "i2c0/I2C/Core/state_FSM_FFd14" BEL "i2c0/I2C/Core/state_FSM_FFd15"
+        BEL "i2c0/I2C/Core/state_FSM_FFd18" BEL
+        "i2c0/I2C/Core/state_FSM_FFd19" BEL "i2c0/I2C/Core/state_FSM_FFd23"
+        BEL "i2c0/I2C/Core/ByteR_7" BEL "i2c0/I2C/Core/ByteR_6" BEL
+        "i2c0/I2C/Core/ByteR_5" BEL "i2c0/I2C/Core/ByteR_4" BEL
+        "i2c0/I2C/Core/ByteR_3" BEL "i2c0/I2C/Core/ByteR_2" BEL
+        "i2c0/I2C/Core/ByteR_1" BEL "i2c0/I2C/Core/ByteR_0" BEL
+        "i2c0/I2C/Core/tempReaded_7" BEL "i2c0/I2C/Core/tempReaded_6" BEL
+        "i2c0/I2C/Core/tempReaded_5" BEL "i2c0/I2C/Core/tempReaded_4" BEL
+        "i2c0/I2C/Core/tempReaded_3" BEL "i2c0/I2C/Core/tempReaded_2" BEL
+        "i2c0/I2C/Core/tempReaded_1" BEL "i2c0/I2C/Core/tempReaded_0" BEL
+        "i2c0/I2C/Core/WriteTemp_8" BEL "i2c0/I2C/Core/WriteTemp_7" BEL
+        "i2c0/I2C/Core/WriteTemp_6" BEL "i2c0/I2C/Core/WriteTemp_5" BEL
+        "i2c0/I2C/Core/WriteTemp_4" BEL "i2c0/I2C/Core/WriteTemp_3" BEL
+        "i2c0/I2C/Core/WriteTemp_2" BEL "i2c0/I2C/Core/WriteTemp_1" BEL
+        "i2c0/I2C/Core/WriteTemp_0" BEL "i2c0/I2C/Core/ReadDone" BEL
+        "i2c0/I2C/Core/WriteDone" BEL "i2c0/I2C/Core/Sda" BEL
+        "i2c0/I2C/Core/StartDone" BEL "i2c0/I2C/Core/StopDone" BEL
+        "i2c0/I2C/clock/WaiterSincronice_2" BEL
+        "i2c0/I2C/clock/WaiterSincronice_1" BEL
+        "i2c0/I2C/clock/WaiterSincronice_0" BEL
+        "i2c0/I2C/clock/State_FSM_FFd2" BEL "i2c0/I2C/clock/State_FSM_FFd3"
+        BEL "i2c0/I2C/clock/State_FSM_FFd1" BEL
+        "i2c0/I2C/clock/counterHigh_15" BEL "i2c0/I2C/clock/counterHigh_14"
+        BEL "i2c0/I2C/clock/counterHigh_13" BEL
+        "i2c0/I2C/clock/counterHigh_12" BEL "i2c0/I2C/clock/counterHigh_11"
+        BEL "i2c0/I2C/clock/counterHigh_10" BEL "i2c0/I2C/clock/counterHigh_9"
+        BEL "i2c0/I2C/clock/counterHigh_8" BEL "i2c0/I2C/clock/counterHigh_7"
+        BEL "i2c0/I2C/clock/counterHigh_6" BEL "i2c0/I2C/clock/counterHigh_5"
+        BEL "i2c0/I2C/clock/counterHigh_4" BEL "i2c0/I2C/clock/counterHigh_3"
+        BEL "i2c0/I2C/clock/counterHigh_2" BEL "i2c0/I2C/clock/counterHigh_1"
+        BEL "i2c0/I2C/clock/counterHigh_0" BEL "i2c0/I2C/clock/couterLow_15"
+        BEL "i2c0/I2C/clock/couterLow_14" BEL "i2c0/I2C/clock/couterLow_13"
+        BEL "i2c0/I2C/clock/couterLow_12" BEL "i2c0/I2C/clock/couterLow_11"
+        BEL "i2c0/I2C/clock/couterLow_10" BEL "i2c0/I2C/clock/couterLow_9" BEL
+        "i2c0/I2C/clock/couterLow_8" BEL "i2c0/I2C/clock/couterLow_7" BEL
+        "i2c0/I2C/clock/couterLow_6" BEL "i2c0/I2C/clock/couterLow_5" BEL
+        "i2c0/I2C/clock/couterLow_4" BEL "i2c0/I2C/clock/couterLow_3" BEL
+        "i2c0/I2C/clock/couterLow_2" BEL "i2c0/I2C/clock/couterLow_1" BEL
+        "i2c0/I2C/clock/couterLow_0" BEL "gpio0/wb_dat_o_7" BEL
+        "gpio0/wb_dat_o_6" BEL "gpio0/wb_dat_o_5" BEL "gpio0/wb_dat_o_4" BEL
+        "gpio0/wb_dat_o_3" BEL "gpio0/wb_dat_o_2" BEL "gpio0/wb_dat_o_1" BEL
+        "gpio0/wb_dat_o_0" BEL "gpio0/gpio_dir_15" BEL "gpio0/gpio_dir_14" BEL
+        "gpio0/gpio_dir_13" BEL "gpio0/gpio_dir_12" BEL "gpio0/gpio_dir_11"
+        BEL "gpio0/gpio_dir_10" BEL "gpio0/gpio_dir_9" BEL "gpio0/gpio_dir_8"
+        BEL "gpio0/gpio_dir_7" BEL "gpio0/gpio_dir_6" BEL "gpio0/gpio_dir_5"
+        BEL "gpio0/gpio_dir_4" BEL "gpio0/gpio_dir_3" BEL "gpio0/gpio_dir_2"
+        BEL "gpio0/gpio_dir_1" BEL "gpio0/gpio_dir_0" BEL
         "conbus0/conbus_arb/state_FSM_FFd3" BEL "lm0/write_enable_w" BEL
         "lm0/write_enable_m" BEL "lm0/store_m" BEL "lm0/load_m" BEL
         "lm0/m_bypass_enable_m" BEL "lm0/branch_m" BEL
@@ -588,7 +710,7 @@ TIMEGRP sys_clk_pin = BEL "i2c0/wb_dat_o_7" BEL "i2c0/wb_dat_o_6" BEL
         "spi0/adressWritte_7" BEL "spi0/adressWritte_6" BEL
         "spi0/adressWritte_5" BEL "spi0/adressWritte_4" BEL
         "spi0/adressWritte_3" BEL "spi0/adressWritte_2" BEL
-        "spi0/adressWritte_1" BEL "spi0/adressWritte_0" BEL
+        "spi0/adressWritte_1" BEL "spi0/adressWritte_0" BEL "spi0/ack" BEL
         "spi0/spi0/prescaler_7" BEL "spi0/spi0/prescaler_6" BEL
         "spi0/spi0/prescaler_5" BEL "spi0/spi0/prescaler_4" BEL
         "spi0/spi0/prescaler_3" BEL "spi0/spi0/prescaler_2" BEL
@@ -610,6 +732,57 @@ TIMEGRP sys_clk_pin = BEL "i2c0/wb_dat_o_7" BEL "i2c0/wb_dat_o_6" BEL
         "spi0/spi0/stateRead_3" BEL "spi0/spi0/stateRead_1" BEL
         "spi0/spi0/stateRead_0" BEL "spi0/spi0/stateWritte_2" BEL
         "spi0/spi0/stateWritte_1" BEL "spi0/spi0/stateWritte_0" BEL
+        "i2c0/I2C/control/waiterFree_15" BEL "i2c0/I2C/control/waiterFree_14"
+        BEL "i2c0/I2C/control/waiterFree_13" BEL
+        "i2c0/I2C/control/waiterFree_12" BEL "i2c0/I2C/control/waiterFree_11"
+        BEL "i2c0/I2C/control/waiterFree_10" BEL
+        "i2c0/I2C/control/waiterFree_9" BEL "i2c0/I2C/control/waiterFree_8"
+        BEL "i2c0/I2C/control/waiterFree_7" BEL
+        "i2c0/I2C/control/waiterFree_6" BEL "i2c0/I2C/control/waiterFree_5"
+        BEL "i2c0/I2C/control/waiterFree_4" BEL
+        "i2c0/I2C/control/waiterFree_3" BEL "i2c0/I2C/control/waiterFree_2"
+        BEL "i2c0/I2C/control/waiterFree_1" BEL
+        "i2c0/I2C/control/waiterFree_0" BEL
+        "i2c0/I2C/control/WaiterForSincronice_3" BEL
+        "i2c0/I2C/control/WaiterForSincronice_2" BEL
+        "i2c0/I2C/control/WaiterForSincronice_1" BEL
+        "i2c0/I2C/control/WaiterForSincronice_0" BEL
+        "i2c0/I2C/control/stateC_4" BEL "i2c0/I2C/control/stateC_3" BEL
+        "i2c0/I2C/control/stateC_2" BEL "i2c0/I2C/control/stateC_1" BEL
+        "i2c0/I2C/control/stateC_0" BEL "i2c0/I2C/control/byteOne_7" BEL
+        "i2c0/I2C/control/byteOne_6" BEL "i2c0/I2C/control/byteOne_5" BEL
+        "i2c0/I2C/control/byteOne_4" BEL "i2c0/I2C/control/byteOne_3" BEL
+        "i2c0/I2C/control/byteOne_2" BEL "i2c0/I2C/control/byteOne_1" BEL
+        "i2c0/I2C/control/byteOne_0" BEL "i2c0/I2C/control/bytetwo_7" BEL
+        "i2c0/I2C/control/bytetwo_6" BEL "i2c0/I2C/control/bytetwo_5" BEL
+        "i2c0/I2C/control/bytetwo_4" BEL "i2c0/I2C/control/bytetwo_3" BEL
+        "i2c0/I2C/control/bytetwo_2" BEL "i2c0/I2C/control/bytetwo_1" BEL
+        "i2c0/I2C/control/bytetwo_0" BEL "Display0/wb_dat_o_7" BEL
+        "Display0/wb_dat_o_6" BEL "Display0/wb_dat_o_5" BEL
+        "Display0/wb_dat_o_4" BEL "Display0/wb_dat_o_3" BEL
+        "Display0/wb_dat_o_2" BEL "Display0/wb_dat_o_1" BEL
+        "Display0/wb_dat_o_0" BEL "Display0/bcd1_0" BEL "Display0/bcd1_1" BEL
+        "Display0/bcd1_2" BEL "Display0/bcd1_3" BEL "Display0/bcd2_0" BEL
+        "Display0/bcd2_1" BEL "Display0/bcd2_2" BEL "Display0/bcd2_3" BEL
+        "Display0/bcd3_0" BEL "Display0/bcd3_1" BEL "Display0/bcd3_2" BEL
+        "Display0/bcd3_3" BEL "Display0/bcd5_0" BEL "Display0/bcd5_1" BEL
+        "Display0/bcd5_2" BEL "Display0/bcd5_3" BEL "Display0/bcd6_0" BEL
+        "Display0/bcd6_1" BEL "Display0/bcd6_2" BEL "Display0/bcd6_3" BEL
+        "Display0/bcd4_0" BEL "Display0/bcd4_1" BEL "Display0/bcd4_2" BEL
+        "Display0/bcd4_3" BEL "Display0/bcd8_0" BEL "Display0/bcd8_1" BEL
+        "Display0/bcd8_2" BEL "Display0/bcd8_3" BEL "Display0/point_0" BEL
+        "Display0/point_1" BEL "Display0/point_2" BEL "Display0/point_3" BEL
+        "Display0/point_4" BEL "Display0/point_5" BEL "Display0/point_6" BEL
+        "Display0/point_7" BEL "Display0/bcd7_0" BEL "Display0/bcd7_1" BEL
+        "Display0/bcd7_2" BEL "Display0/bcd7_3" BEL "Display0/ack" BEL
+        "Display0/selector/select_0" BEL "Display0/selector/select_1" BEL
+        "Display0/selector/select_2" BEL "Display0/selector/select_3" BEL
+        "Display0/selector/select_4" BEL "Display0/selector/select_5" BEL
+        "Display0/selector/select_6" BEL "Display0/selector/select_7" BEL
+        "Display0/selector/select_8" BEL "Display0/selector/select_9" BEL
+        "Display0/selector/select_10" BEL "Display0/selector/select_11" BEL
+        "Display0/selector/select_12" BEL "Display0/selector/state_0" BEL
+        "Display0/selector/state_1" BEL "Display0/selector/state_2" BEL
         "timer0/wb_dat_o_31" BEL "timer0/wb_dat_o_30" BEL "timer0/wb_dat_o_29"
         BEL "timer0/wb_dat_o_28" BEL "timer0/wb_dat_o_27" BEL
         "timer0/wb_dat_o_26" BEL "timer0/wb_dat_o_25" BEL "timer0/wb_dat_o_24"
@@ -683,34 +856,55 @@ TIMEGRP sys_clk_pin = BEL "i2c0/wb_dat_o_7" BEL "i2c0/wb_dat_o_6" BEL
         BEL "lm0/load_store_unit/wb_load_complete" BEL
         "lm0/load_store_unit/d_stb_o" BEL "uart0/uart0/rx_error" BEL
         "timer0/en0" BEL "timer0/en1" BEL "timer0/trig1" BEL "timer0/trig0"
-        BEL "timer0/ar1" BEL "timer0/ar0" BEL "bram0/ack" BEL "i2c0/wb_ack_o"
+        BEL "timer0/ar1" BEL "timer0/ar0" BEL "bram0/ack" BEL
+        "i2c0/I2C/Core/state_FSM_FFd9" BEL "i2c0/I2C/Core/state_FSM_FFd10" BEL
+        "i2c0/I2C/Core/state_FSM_FFd13" BEL "i2c0/I2C/Core/state_FSM_FFd17"
         BEL "uart0/rx_ack" BEL "uart0/tx_wr" BEL "spi0/beginSCK" BEL
-        "spi0/Begin" BEL "spi0/ack" BEL "timer0/irqen1" BEL "timer0/irqen0"
-        BEL "uart0/uart0/uart_txd" BEL "uart0/uart0/rx_count16_3" BEL
-        "spi0/ReadFlag" BEL "spi0/WriteFlag" BEL
-        "lm0/Mcompar_cmp_zero_cy<10>_FRB" BEL "spi0/spi0/bitcountWrite_1_BRB0"
-        BEL "spi0/spi0/bitcountWrite_1_BRB1" BEL
-        "spi0/spi0/bitcountWrite_1_BRB4" BEL "spi0/spi0/bitcountWrite_3_BRB0"
-        BEL "spi0/spi0/bitcountWrite_3_BRB1" BEL
-        "spi0/spi0/bitcountWrite_3_BRB2" BEL "spi0/spi0/bitcountWrite_3_BRB3"
-        BEL "spi0/spi0/bitcountWrite_3_BRB4" BEL
-        "spi0/spi0/bitcountWrite_3_BRB5" BEL "spi0/spi0/bitcountWrite_2_BRB0"
-        BEL "spi0/spi0/bitcountWrite_2_BRB1" BEL
-        "spi0/spi0/bitcountWrite_0_BRB0" BEL "spi0/spi0/bitcountWrite_0_BRB1"
-        BEL "spi0/spi0/bitcountWrite_0_BRB2" BEL
-        "spi0/spi0/bitcountWrite_0_BRB4" BEL "spi0/spi0/bitcountWrite_0_BRB5"
-        BEL "spi0/spi0/ToWrite_8_BRB0" BEL "spi0/spi0/ToWrite_8_BRB2" BEL
-        "spi0/spi0/ToWrite_8_BRB4" BEL "spi0/spi0/ToWrite_7_BRB0" BEL
-        "spi0/spi0/ToWrite_7_BRB1" BEL "spi0/spi0/ToWrite_7_BRB4" BEL
-        "spi0/spi0/ToWrite_7_BRB5" BEL "spi0/spi0/ToWrite_6_BRB1" BEL
-        "spi0/spi0/ToWrite_6_BRB5" BEL "spi0/spi0/ToWrite_5_BRB1" BEL
-        "spi0/spi0/ToWrite_5_BRB5" BEL "spi0/spi0/ToWrite_4_BRB1" BEL
-        "spi0/spi0/ToWrite_4_BRB5" BEL "spi0/spi0/ToWrite_3_BRB1" BEL
-        "spi0/spi0/ToWrite_3_BRB5" BEL "spi0/spi0/ToWrite_2_BRB1" BEL
-        "spi0/spi0/ToWrite_2_BRB5" BEL "spi0/spi0/ToWrite_1_BRB5" BEL
-        "spi0/spi0/ToWrite_0_BRB1" BEL "spi0/spi0/ToWrite_0_BRB2" BEL
+        "spi0/Begin" BEL "timer0/irqen1" BEL "timer0/irqen0" BEL
+        "uart0/uart0/uart_txd" BEL "i2c0/Busy" BEL "uart0/uart0/rx_count16_3"
+        BEL "spi0/ReadFlag" BEL "spi0/WriteFlag" BEL
+        "lm0/Mcompar_cmp_zero_cy<10>_FRB" BEL
+        "i2c0/I2C/Core/state_FSM_FFd8_BRB0" BEL
+        "i2c0/I2C/Core/state_FSM_FFd8_BRB1" BEL
+        "i2c0/I2C/Core/state_FSM_FFd21_BRB0" BEL
+        "i2c0/I2C/Core/state_FSM_FFd21_BRB1" BEL
+        "i2c0/I2C/Core/state_FSM_FFd21_BRB2" BEL
+        "i2c0/I2C/Core/state_FSM_FFd21_BRB3" BEL
+        "i2c0/I2C/Core/state_FSM_FFd21_BRB4" BEL
+        "spi0/spi0/bitcountWrite_1_BRB0" BEL "spi0/spi0/bitcountWrite_1_BRB1"
+        BEL "spi0/spi0/bitcountWrite_1_BRB4" BEL
+        "i2c0/I2C/Core/state_FSM_FFd20_BRB0" BEL
+        "i2c0/I2C/Core/state_FSM_FFd20_BRB1" BEL
+        "i2c0/I2C/Core/state_FSM_FFd20_BRB2" BEL
+        "i2c0/I2C/Core/state_FSM_FFd20_BRB3" BEL
+        "i2c0/I2C/Core/state_FSM_FFd20_BRB4" BEL
+        "i2c0/I2C/Core/state_FSM_FFd20_BRB5" BEL
+        "i2c0/I2C/Core/state_FSM_FFd22_BRB0" BEL
+        "i2c0/I2C/Core/state_FSM_FFd22_BRB1" BEL
+        "i2c0/I2C/Core/state_FSM_FFd22_BRB2" BEL
+        "i2c0/I2C/Core/SclkEnable_BRB3" BEL "i2c0/I2C/Core/SclkEnable_BRB4"
+        BEL "i2c0/I2C/Core/SclkEnable_BRB5" BEL
+        "spi0/spi0/bitcountWrite_3_BRB0" BEL "spi0/spi0/bitcountWrite_3_BRB1"
+        BEL "spi0/spi0/bitcountWrite_3_BRB2" BEL
+        "spi0/spi0/bitcountWrite_3_BRB3" BEL "spi0/spi0/bitcountWrite_3_BRB4"
+        BEL "spi0/spi0/bitcountWrite_3_BRB5" BEL
+        "spi0/spi0/bitcountWrite_2_BRB0" BEL "spi0/spi0/bitcountWrite_2_BRB1"
+        BEL "spi0/spi0/bitcountWrite_0_BRB0" BEL
+        "spi0/spi0/bitcountWrite_0_BRB1" BEL "spi0/spi0/bitcountWrite_0_BRB2"
+        BEL "spi0/spi0/bitcountWrite_0_BRB4" BEL
+        "spi0/spi0/bitcountWrite_0_BRB5" BEL "spi0/spi0/ToWrite_8_BRB0" BEL
+        "spi0/spi0/ToWrite_8_BRB2" BEL "spi0/spi0/ToWrite_8_BRB4" BEL
+        "spi0/spi0/ToWrite_7_BRB0" BEL "spi0/spi0/ToWrite_7_BRB1" BEL
+        "spi0/spi0/ToWrite_7_BRB4" BEL "spi0/spi0/ToWrite_7_BRB5" BEL
+        "spi0/spi0/ToWrite_6_BRB1" BEL "spi0/spi0/ToWrite_6_BRB5" BEL
+        "spi0/spi0/ToWrite_5_BRB1" BEL "spi0/spi0/ToWrite_5_BRB5" BEL
+        "spi0/spi0/ToWrite_4_BRB1" BEL "spi0/spi0/ToWrite_4_BRB5" BEL
+        "spi0/spi0/ToWrite_3_BRB1" BEL "spi0/spi0/ToWrite_3_BRB5" BEL
+        "spi0/spi0/ToWrite_2_BRB1" BEL "spi0/spi0/ToWrite_2_BRB5" BEL
+        "spi0/spi0/ToWrite_1_BRB5" BEL "spi0/spi0/ToWrite_0_BRB0" BEL
         "spi0/spi0/ToWrite_0_BRB3" BEL "spi0/spi0/ToWrite_0_BRB4" BEL
-        "lm0/w_result_sel_mul_m_BRB0" BEL "lm0/w_result_sel_mul_m_BRB1" BEL
+        "spi0/spi0/ToWrite_0_BRB5" BEL "lm0/w_result_sel_mul_m_BRB0" BEL
+        "lm0/w_result_sel_mul_m_BRB1" BEL "lm0/w_result_sel_load_m_BRB1" BEL
         "lm0/load_store_unit/store_data_m_15_BRB2" BEL
         "lm0/load_store_unit/store_data_m_14_BRB2" BEL
         "lm0/load_store_unit/store_data_m_13_BRB2" BEL
@@ -740,17 +934,20 @@ TIMEGRP sys_clk_pin = BEL "i2c0/wb_dat_o_7" BEL "i2c0/wb_dat_o_6" BEL
         "lm0/load_store_unit/store_data_m_24_BRB3" BEL "lm0/branch_x_BRB0" BEL
         "lm0/branch_x_BRB1" BEL "lm0/branch_x_BRB2" BEL "lm0/branch_x_BRB3"
         BEL "lm0/branch_x_BRB4" BEL "lm0/branch_x_BRB5" BEL "lm0/store_x_BRB0"
-        BEL "lm0/store_x_BRB5" BEL "gpio0/wb_dat_o_0" BEL "gpio0/gpio_o_0" BEL
-        "gpio0/wb_dat_o_1" BEL "gpio0/gpio_o_1" BEL "gpio0/wb_dat_o_2" BEL
-        "gpio0/gpio_o_2" BEL "gpio0/wb_dat_o_3" BEL "gpio0/gpio_o_3" BEL
-        "gpio0/wb_dat_o_4" BEL "gpio0/gpio_o_4" BEL "gpio0/wb_dat_o_5" BEL
-        "gpio0/gpio_o_5" BEL "gpio0/wb_dat_o_6" BEL "gpio0/gpio_o_6" BEL
-        "gpio0/wb_dat_o_7" BEL "gpio0/gpio_o_7" BEL "clk_BUFGP/BUFG" BEL
+        BEL "lm0/store_x_BRB5" BEL "clk_BUFGP/BUFG" BEL "gpio0/gpio_o_15" BEL
+        "gpio0/gpio_o_14" BEL "gpio0/gpio_o_13" BEL "gpio0/gpio_o_12" BEL
+        "gpio0/gpio_o_11" BEL "gpio0/gpio_o_10" BEL "gpio0/gpio_o_9" BEL
+        "gpio0/gpio_o_8" BEL "gpio0/gpio_o_7" BEL "gpio0/gpio_o_6" BEL
+        "gpio0/gpio_o_5" BEL "gpio0/gpio_o_4" BEL "gpio0/gpio_o_3" BEL
+        "gpio0/gpio_o_2" BEL "gpio0/gpio_o_1" BEL "gpio0/gpio_o_0" BEL
+        "gpio0/gpio_o_15_1" BEL "gpio0/gpio_o_14_1" BEL "gpio0/gpio_o_13_1"
+        BEL "gpio0/gpio_o_12_1" BEL "gpio0/gpio_o_11_1" BEL
+        "gpio0/gpio_o_10_1" BEL "gpio0/gpio_o_9_1" BEL "gpio0/gpio_o_8_1" BEL
         "gpio0/gpio_o_7_1" BEL "gpio0/gpio_o_6_1" BEL "gpio0/gpio_o_5_1" BEL
         "gpio0/gpio_o_4_1" BEL "gpio0/gpio_o_3_1" BEL "gpio0/gpio_o_2_1" BEL
         "gpio0/gpio_o_1_1" BEL "gpio0/gpio_o_0_1" BEL "uart0/uart0/uart_txd_1"
-        BEL "spi0/spi0/MOSI_1" BEL "spi0/spi0/sck_1" BEL
-        "lm0/Mram_registers40/SP" BEL "lm0/Mram_registers40/DP" BEL
+        BEL "spi0/spi0/MOSI_1" BEL "spi0/spi0/sck_1" BEL "i2c0/I2C/Core/Sda_1"
+        BEL "lm0/Mram_registers40/SP" BEL "lm0/Mram_registers40/DP" BEL
         "lm0/Mram_registers39/SP" BEL "lm0/Mram_registers39/DP" BEL
         "lm0/Mram_registers41/SP" BEL "lm0/Mram_registers41/DP" BEL
         "lm0/Mram_registers37/SP" BEL "lm0/Mram_registers37/DP" BEL
@@ -814,7 +1011,9 @@ TIMEGRP sys_clk_pin = BEL "i2c0/wb_dat_o_7" BEL "i2c0/wb_dat_o_6" BEL
         "lm0/Mram_registers15/SP" BEL "lm0/Mram_registers15/DP" BEL
         "lm0/Mram_registers12/SP" BEL "lm0/Mram_registers12/DP" BEL
         "lm0/Mram_registers11/SP" BEL "lm0/Mram_registers11/DP" PIN
-        "spi0/Mram__n0339_pins<32>" PIN "spi0/spi0/Mram__n0223_pins<32>" PIN
+        "Display0/selector/Mram_anodo_pins<32>" PIN
+        "i2c0/I2C/control/Mram__n0153_pins<32>" PIN
+        "spi0/Mram__n0339_pins<32>" PIN "spi0/spi0/Mram__n0220_pins<32>" PIN
         "bram0/Mram_ram_pins<63>" PIN "bram0/Mram_ram_pins<62>";
 TS_sys_clk = PERIOD TIMEGRP "sys_clk_pin" 100 MHz HIGH 50%;
 SCHEMATIC END;

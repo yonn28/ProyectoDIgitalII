@@ -239,7 +239,7 @@ always@(negedge clk)begin
 			if(highEdge)begin 
 				 bitcountRead <= bitcountRead + 1'b1;
 				 Toread<={Toread[6:0],MISO};
-					if(bitcountRead==4'd8)begin
+					if(bitcountRead==4'd9)begin
 						bitcountRead<=4'd0;
 						outReaded<=Toread;
 						stateRead<=BYPASS_READ_END;

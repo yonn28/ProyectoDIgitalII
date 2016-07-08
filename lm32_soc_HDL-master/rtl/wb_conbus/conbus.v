@@ -33,7 +33,8 @@ module conbus #(
 	parameter s2_addr = 3'h2,
 	parameter s3_addr = 3'h3,
 	parameter s4_addr = 3'h4,
-	parameter s5_addr = 3'h5
+	parameter s5_addr = 3'h5,
+	parameter s6_addr = 3'h6//this
 ) (
 	input sys_clk,
 	input sys_rst,
@@ -125,14 +126,27 @@ module conbus #(
 	output		s5_we_o,
 	output		s5_cyc_o,
 	output		s5_stb_o,
-	input		s5_ack_i
+	input		s5_ack_i,
+
+	
+	// Slave 6 Interface //change this
+	input	[31:0]	s6_dat_i,
+	output	[31:0]	s6_dat_o,
+	output	[31:0]	s6_adr_o,
+	output	[2:0]	s6_cti_o,
+	output	[3:0]	s6_sel_o,
+	output		s6_we_o,
+	output		s6_cyc_o,
+	output		s6_stb_o,
+	input		s6_ack_i
+		
 );
 
 // address + CTI + data + byte select
 // + cyc + we + stb
 `define mbusw_ls  32 + 3 + 32 + 4 + 3
 
-wire [5:0] slave_sel;
+wire [6:0] slave_sel;
 wire [6:0] gnt;
 wire [`mbusw_ls -1:0] i_bus_m;	// internal shared bus, master data and control to slave
 wire [31:0] i_dat_s;		// internal shared bus, slave data to master
@@ -140,14 +154,14 @@ wire i_bus_ack;			// internal shared bus, ack signal
 
 // master 0
 assign m0_dat_o = i_dat_s;
-assign m0_ack_o = i_bus_ack & gnt[0];
+assign m0_ack_o = i_bus_ack & gnt[0];//this come from the master 1
 
 // master 1
 assign m1_dat_o = i_dat_s;
-assign m1_ack_o = i_bus_ack & gnt[1];
+assign m1_ack_o = i_bus_ack & gnt[1];//this come from the master 2
 
 
-assign i_bus_ack = s0_ack_i | s1_ack_i | s2_ack_i | s3_ack_i | s4_ack_i | s5_ack_i;
+assign i_bus_ack = s0_ack_i | s1_ack_i | s2_ack_i | s3_ack_i | s4_ack_i | s5_ack_i | s6_ack_i;//this s6_ack..
 
 // slave 0
 assign {s0_adr_o, s0_cti_o, s0_sel_o, s0_dat_o, s0_we_o, s0_cyc_o, s0_stb_o} 
@@ -174,13 +188,13 @@ assign {s5_adr_o, s5_cti_o, s5_sel_o, s5_dat_o, s5_we_o, s5_cyc_o, s5_stb_o}
 	= {i_bus_m[`mbusw_ls -1:2], i_bus_m[1] & slave_sel[5], i_bus_m[0]};
 
 // slave 6
-//assign {s6_adr_o, s6_cti_o, s6_sel_o, s6_dat_o, s6_we_o, s6_cyc_o, s6_stb_o} 
-//	= {i_bus_m[`mbusw_ls -1:2], i_bus_m[1] & slave_sel[4], i_bus_m[0]};
+assign {s6_adr_o, s6_cti_o, s6_sel_o, s6_dat_o, s6_we_o, s6_cyc_o, s6_stb_o} 
+	= {i_bus_m[`mbusw_ls -1:2], i_bus_m[1] & slave_sel[6], i_bus_m[0]};//this including the number
 
 
 assign i_bus_m =
 	 ({`mbusw_ls{gnt[0]}} & {m0_adr_i, m0_cti_i, m0_sel_i, m0_dat_i, m0_we_i, m0_cyc_i, m0_stb_i})
-	|({`mbusw_ls{gnt[1]}} & {m1_adr_i, m1_cti_i, m1_sel_i, m1_dat_i, m1_we_i, m1_cyc_i, m1_stb_i});
+	|({`mbusw_ls{gnt[1]}} & {m1_adr_i, m1_cti_i, m1_sel_i, m1_dat_i, m1_we_i, m1_cyc_i, m1_stb_i});//master
 
 assign i_dat_s =
 		 ({32{slave_sel[ 0]}} & s0_dat_i)
@@ -188,9 +202,10 @@ assign i_dat_s =
 		|({32{slave_sel[ 2]}} & s2_dat_i)
 		|({32{slave_sel[ 3]}} & s3_dat_i)
 		|({32{slave_sel[ 4]}} & s4_dat_i)
-		|({32{slave_sel[ 5]}} & s5_dat_i);
+		|({32{slave_sel[ 5]}} & s5_dat_i)
+		|({32{slave_sel[ 6]}} & s6_dat_i);//this
 
-wire [6:0] req = {m1_cyc_i, m0_cyc_i};
+wire [6:0] req = {m1_cyc_i, m0_cyc_i};//master
 
 conbus_arb conbus_arb(
 	.sys_clk(sys_clk),
@@ -205,5 +220,6 @@ assign slave_sel[2] = (i_bus_m[`mbusw_ls-2 : `mbusw_ls-s_addr_w-1] == s2_addr);
 assign slave_sel[3] = (i_bus_m[`mbusw_ls-2 : `mbusw_ls-s_addr_w-1] == s3_addr);
 assign slave_sel[4] = (i_bus_m[`mbusw_ls-2 : `mbusw_ls-s_addr_w-1] == s4_addr);
 assign slave_sel[5] = (i_bus_m[`mbusw_ls-2 : `mbusw_ls-s_addr_w-1] == s5_addr);
+assign slave_sel[6] = (i_bus_m[`mbusw_ls-2 : `mbusw_ls-s_addr_w-1] == s6_addr);//this
 
 endmodule

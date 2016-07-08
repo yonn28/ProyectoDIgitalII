@@ -79,16 +79,24 @@ void tic_init();
 
 
 typedef struct {
-	volatile uint32_t in;
-	volatile uint32_t out;
-	volatile uint32_t dir;
+	volatile uint32_t in1;
+	volatile uint32_t in2;
+	volatile uint32_t out1;
+	volatile uint32_t out2;
+	volatile uint32_t dir1;
+	volatile uint32_t dir2;
 	
 } gpio_t;
 
-char gpio_get_in();
-char gpio_get_dir();
-void gpio_set_out(char temp);
-void gpio_set_dir(char temp);
+char gpio_get_in1();
+char gpio_get_in2();
+char gpio_get_dir1();
+char gpio_get_dir2();
+void gpio_set_out1(char temp1);
+void gpio_set_out2(char temp2);
+void gpio_set_dir1(char temp3);
+void gpio_set_dir2(char temp4);
+
 
 
 
@@ -114,38 +122,6 @@ char uart_getchar();
  */
 
 
-/*
-//first test works
-typedef struct {
-   volatile uint32_t rxtx;//00000
-   volatile uint32_t statusWritte;// 00100 //16 8 4 2 1//4
-   volatile uint32_t statusRead; // 01000 //16 8 4 2 1 //8
-   volatile uint32_t begin; // 01100 //16 8 4 2 1 //12
-   volatile uint32_t CE; 
-   volatile uint32_t divisor;
-   volatile uint32_t read;
-
-
-} spi_t;
-
-void spi_Writte(char adrr,char value);
-char spi_read(char Addr);
-void SPI_begin();
-void spi_setDiv(char f);
-*/
-
-/*
- Readed
- statusWritte
- statusRead
- adressWritte 
- byteTowritte
- adressRead
- begin
- 
-*/
-
-
 typedef struct {
    volatile uint32_t Readed;//00000
    volatile uint32_t statusWritte;// 00100 //16 8 4 2 1//4
@@ -167,12 +143,27 @@ void spi_setDiv(char f);
  * I2C0
  */
 
+/*
+Busy
+ByteReadedOne
+ByteReadedTwo
+ByteConfigurationOne
+ByteConfigurationTwo
+Start
+*/
+
 typedef struct {
-   volatile uint32_t rxtx;
-   volatile uint32_t divisor;
+   volatile uint32_t Busy;
+   volatile uint32_t ByteReadedOne;
+   volatile uint32_t ByteReadedTwo;
+   volatile uint32_t ByteConfigurationOne;
+   volatile uint32_t ByteConfigurationTwo;
+   volatile uint32_t Start;
 } i2c_t;
 
-
+void ReadChanel(char ch);
+char GetByteOne();
+char GetByteTwo();
 
 /***************************************************************************
  * Pointer to actual components

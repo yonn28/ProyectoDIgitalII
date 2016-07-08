@@ -15,7 +15,7 @@ module system
 ) (
 	input             clk,
 	// Debug 
-	output            led,
+	//output            led,
 	input             rst,
 
 	// UART
@@ -26,14 +26,19 @@ module system
 	output            spi_mosi,
 	output            spi_clk,
 	output 		  spi_CE,
-	// 12c
+	// I2C
 	inout             i2c_sda, 
-	inout             i2c_scl,
+	output             i2c_scl,
 	
 	// GPIO
 	
-	inout [7:0] gpio0_io
-	
+	inout [15:0] gpio0_io,
+
+	//7 seg Display
+
+	output[0:6] segmentos,
+	output [0:7]anodo,
+	output dp
 
 );
 
@@ -56,6 +61,7 @@ wire [31:0]  lm32i_adr,
              uart0_adr,
              spi0_adr,
              i2c0_adr,
+	     display0_adr,
              timer0_adr,
              gpio0_adr,
              ddr0_adr,
@@ -73,6 +79,8 @@ wire [31:0]  lm32i_dat_r,
              spi0_dat_w,
              i2c0_dat_r,
              i2c0_dat_w,
+	     display0_dat_r,
+	     display0_dat_w,
              timer0_dat_r,
              timer0_dat_w,
              gpio0_dat_r,
@@ -89,6 +97,7 @@ wire [3:0]   lm32i_sel,
              uart0_sel,
              spi0_sel,
              i2c0_sel,
+	     display0_sel,
              timer0_sel,
              gpio0_sel,
              bram0_sel,
@@ -100,6 +109,7 @@ wire         lm32i_we,
              uart0_we,
              spi0_we,
              i2c0_we,
+	     display0_we,
              timer0_we,
              gpio0_we,
              bram0_we,
@@ -112,6 +122,7 @@ wire         lm32i_cyc,
              uart0_cyc,
              spi0_cyc,
              i2c0_cyc,
+	     display0_cyc,
              timer0_cyc,
              gpio0_cyc,
              bram0_cyc,
@@ -124,6 +135,7 @@ wire         lm32i_stb,
              uart0_stb,
              spi0_stb,
              i2c0_stb,
+	     display0_stb,
              timer0_stb,
              gpio0_stb,
              bram0_stb,
@@ -135,6 +147,7 @@ wire         lm32i_ack,
              uart0_ack,
              spi0_ack,
              i2c0_ack,
+	     display0_ack,
              timer0_ack,
              gpio0_ack,
              bram0_ack,
@@ -177,7 +190,8 @@ conbus #(
 	.s2_addr(3'b011),	// timer    0x30000000 
 	.s3_addr(3'b100),   // gpio     0x40000000 
 	.s4_addr(3'b101),	// spi      0x50000000 
-	.s5_addr(3'b110)	// i2c      0x60000000 
+	.s5_addr(3'b110),	// i2c      0x60000000 
+	.s6_addr(3'b111)	// Display  0x70000000
 ) conbus0(
 	.sys_clk( clk ),
 	.sys_rst( ~rst ),
@@ -254,7 +268,16 @@ conbus #(
 	.s5_we_o(   i2c0_we    ),
 	.s5_cyc_o(  i2c0_cyc   ),
 	.s5_stb_o(  i2c0_stb   ),
-	.s5_ack_i(  i2c0_ack   )
+	.s5_ack_i(  i2c0_ack   ),
+	//Slave 6	
+	.s6_dat_i(  display0_dat_r ),
+	.s6_dat_o(  display0_dat_w ),
+	.s6_adr_o(  display0_adr  ),
+	.s6_sel_o(  display0_sel  ),
+	.s6_we_o(   display0_we   ),
+	.s6_cyc_o(  display0_cyc  ),
+	.s6_stb_o(  display0_stb  ),
+	.s6_ack_i(  display0_ack   )
 	
 );
 
@@ -356,7 +379,6 @@ wire spi0_CE;
 wb_spi  spi0 (
 	.clk( clk ),
 	.reset( ~rst ),
-	//
 	.wb_adr_i( spi0_adr ),
 	.wb_dat_i( spi0_dat_w ),
 	.wb_dat_o( spi0_dat_r ),
@@ -378,19 +400,51 @@ wb_spi  spi0 (
 
 // TODO : interruption and asynchronous reset
  i2c_master_wb_top  i2c0 (
- 	.wb_clk_i( clk ),
-	.wb_rst_i( ~rst ),
-	//
+ 	.clk( clk ),
+	.reset( ~rst ),
+	// Wishbone
 	.wb_adr_i( i2c0_adr ),
 	.wb_dat_i( i2c0_dat_w ),
 	.wb_dat_o( i2c0_dat_r ),
 	.wb_stb_i( i2c0_stb ),
 	.wb_cyc_i( i2c0_cyc ),
 	.wb_we_i(  i2c0_we ),
+	.wb_sel_i( i2c0_sel ),
 	.wb_ack_o( i2c0_ack ), 
+	//outputs
 	.scl(i2c0_scl),
 	.sda( i2c0_sda )
 );
+
+
+
+//---------------------------------------------------
+//7 segment Display 
+//--------------------------------------------------
+wire [0:6] segmentos_Out;
+wire [0:7] anodo_Out;
+wire dp_Out;
+
+
+wb_display Display0(
+	.clk(      clk          ),
+	.reset(    ~rst          ),
+	//
+	.wb_adr_i( display0_adr ),
+	.wb_dat_i( display0_dat_w ),
+	.wb_dat_o( display0_dat_r ),
+	.wb_stb_i( display0_stb ),
+	.wb_cyc_i( display0_cyc ),
+	.wb_we_i( display0_we ),
+	.wb_sel_i( display0_sel ),
+	.wb_ack_o(display0_ack),
+	//Display
+	.segmentos(segmentos_Out),
+	.dp(dp_Out),
+	.anodo(anodo_Out)
+);
+
+
 
 //---------------------------------------------------------------------------
 // timer0
@@ -416,7 +470,7 @@ wb_timer #(
 // General Purpose IO
 //---------------------------------------------------------------------------
 
-wire [7:0] gpio0_io;
+wire [15:0] gpio0_io;
 wire        gpio0_irq;
 
 wb_gpio gpio0 (
@@ -434,9 +488,15 @@ wb_gpio gpio0 (
 	.gpio_io(gpio0_io)
 );
 
+
+
 //----------------------------------------------------------------------------
 // Mux UART wires according to sw[0]
 //----------------------------------------------------------------------------
+assign segmentos=segmentos_Out;
+assign dp=dp_Out;
+assign anodo=anodo_Out;
+
 assign uart_txd  = uart0_txd;
 assign uart0_rxd = uart_rxd;
 assign led       = ~uart_txd;
@@ -445,7 +505,7 @@ assign led       = ~uart_txd;
 assign spi_mosi = spi0_mosi ;
 assign spi0_miso = spi_miso;
 assign spi_clk = spi0_sck;
-assign spi_CE = s pi0_CE;
+assign spi_CE = spi0_CE;
 
 assign i2c_sda = i2c0_sda;
 assign i2c_scl = i2c0_scl;

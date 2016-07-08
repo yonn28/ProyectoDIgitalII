@@ -38,7 +38,7 @@ module wb_gpio(
 	    gpio_io);
 
 
-   parameter gpio_io_width = 8;
+   parameter gpio_io_width = 16;
 
    parameter gpio_dir_reset_val = 0;
    parameter gpio_o_reset_val = 0;
@@ -117,20 +117,26 @@ module wb_gpio(
         ack<=0;
         if (wb_rd & ~ack) begin             //Read cycle
          ack<=1;
-         case(wb_adr_i[3:2])
-          2'b00:begin  
+         case(wb_adr_i[4:2])
+          3'b000:begin  
             wb_dat_o[31:8]<=0;
-            wb_dat_o[7:0] <= gpio_i;
+            wb_dat_o[7:0] <= gpio_i[7:0];
           end
+	  3'b001:begin 
+		wb_dat_o[31:8]<=0;
+            	wb_dat_o[7:0] <= gpio_i[15:8];
+	  end
           default: wb_dat_o <= 32'b0; 
          endcase
         end
 
         else if (wb_wr & ~ack ) begin  
             ack <= 1;                          //Write cycle
-            case(wb_adr_i[3:2])
-             2'b01: gpio_o   <= wb_dat_i[7:0];
-             2'b10: gpio_dir <= wb_dat_i[7:0];
+            case(wb_adr_i[4:2])
+             3'b010: gpio_o[7:0]  <= wb_dat_i[7:0];
+             3'b011: gpio_o[15:8]  <= wb_dat_i[7:0];
+             3'b100: gpio_dir[7:0]  <= wb_dat_i[7:0];
+	     3'b101: gpio_dir[15:8]  <= wb_dat_i[7:0];
             endcase
         end
      end        

@@ -64,30 +64,30 @@ reg [3:0] rx_bitcount;
 reg [7:0] rxd_reg;
 
 always @ (posedge clk)
-begin
-	if (reset) begin
+begin//-
+	if (reset) begin//--
 		rx_busy     <= 0;
 		rx_count16  <= 0;
 		rx_bitcount <= 0;
 		rx_avail    <= 0;
 		rx_error    <= 0;
-	end else begin 
+	end else begin //--
 		if (rx_ack) begin
 			rx_avail <= 0;
 			rx_error <= 0;
 		end
 
-		if (enable16) begin
-			if (!rx_busy) begin           // look for start bit
+		if (enable16) begin//---
+			if (!rx_busy) begin //4    // look for start bit
 				if (!uart_rxd2) begin     //     start bit found
 					rx_busy     <= 1;
 					rx_count16  <= 7;
 					rx_bitcount <= 0;
 				end
-			end else begin
+			end else begin//4
 				rx_count16 <= rx_count16 + 1;
 
-				if (rx_count16 == 0) begin      // sample 
+				if (rx_count16 == 0) begin //5     // sample 
 					rx_bitcount <= rx_bitcount + 1;
 
 					if (rx_bitcount == 0) begin          // verify startbit
@@ -106,11 +106,11 @@ begin
 					end else begin
 						rxd_reg <= { uart_rxd2, rxd_reg[7:1] };
 					end
-				end
-			end 
-		end
-	end
-end
+				end//5
+			end //4
+		end//---
+	end//--
+end//-
 
 //-----------------------------------------------------------------
 // UART TX Logic

@@ -91,7 +91,7 @@ initial         clk <= 0;
 always #(tck/2) clk <= ~clk;
 
 always begin
-	#300 spi_miso=~spi_miso;
+	#700 spi_miso=~spi_miso;
 	
 end
 

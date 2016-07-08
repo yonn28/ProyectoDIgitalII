@@ -15,7 +15,7 @@ module system
 ) (
 	input             clk,
 	// Debug 
-	output            led,
+	//output            led,
 	input             rst,
 
 	// UART
@@ -26,13 +26,13 @@ module system
 	output            spi_mosi,
 	output            spi_clk,
 	output 		  spi_CE,
-	// 12c
+	// I2C
 	inout             i2c_sda, 
-	inout             i2c_scl,
+	output             i2c_scl,
 	
 	// GPIO
 	
-	inout [7:0] gpio0_io
+	inout [15:0] gpio0_io
 	
 
 );
@@ -356,7 +356,6 @@ wire spi0_CE;
 wb_spi  spi0 (
 	.clk( clk ),
 	.reset( ~rst ),
-	//
 	.wb_adr_i( spi0_adr ),
 	.wb_dat_i( spi0_dat_w ),
 	.wb_dat_o( spi0_dat_r ),
@@ -378,16 +377,18 @@ wb_spi  spi0 (
 
 // TODO : interruption and asynchronous reset
  i2c_master_wb_top  i2c0 (
- 	.wb_clk_i( clk ),
-	.wb_rst_i( ~rst ),
-	//
+ 	.clk( clk ),
+	.reset( ~rst ),
+	// Wishbone
 	.wb_adr_i( i2c0_adr ),
 	.wb_dat_i( i2c0_dat_w ),
 	.wb_dat_o( i2c0_dat_r ),
 	.wb_stb_i( i2c0_stb ),
 	.wb_cyc_i( i2c0_cyc ),
 	.wb_we_i(  i2c0_we ),
+	.wb_sel_i( i2c0_sel ),
 	.wb_ack_o( i2c0_ack ), 
+	//outputs
 	.scl(i2c0_scl),
 	.sda( i2c0_sda )
 );
@@ -416,7 +417,7 @@ wb_timer #(
 // General Purpose IO
 //---------------------------------------------------------------------------
 
-wire [7:0] gpio0_io;
+wire [15:0] gpio0_io;
 wire        gpio0_irq;
 
 wb_gpio gpio0 (
