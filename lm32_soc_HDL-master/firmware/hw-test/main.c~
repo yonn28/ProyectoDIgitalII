@@ -261,9 +261,12 @@ int main()
  
 	
 	/*
+	// interruptions 
+	gpio_set_dir1(0xFF);
+	gpio_set_dir2(0xFF);
+	SetDpDisplay(0x04);
 	
-	// timer Interruption
-
+	
 	irq_enable();
 	irq_set_mask(0x02);
 	tic_init(); //works stay there
@@ -274,29 +277,68 @@ int main()
 		uart_putchar(c);
 		//msleep(100);
 		
+		
+		gpio_set_out2(c);//most significative Bit is V11 pin Give Coherence
+		SetDisplay(0x04,c%10);
+		SetDisplay(0x05,c/10);
+		SetDisplay(0x06,c/100);
+				
+		
 		char d=GetByteTwo();//less significative Bit
 		uart_putchar(d);
+		
+		
+		
+		gpio_set_out1(d);//most significative bit is u16	
+		SetDisplay(0x01,d%10);
+		SetDisplay(0x02,d/10);		
+		SetDisplay(0x03,d/100);
 
 	}//
 */	
 
 
-	//********************** display decoder Works ************************/
+/*
+
+
+
+
+// I2C general Works
+
+/*
 	gpio_set_dir1(0xFF);
 	gpio_set_dir2(0xFF);
 	SetDpDisplay(0x04);
-
 	while(1){
-		ReadChanel(0x00);	
-		char c=GetByteOne();//most significative
-		gpio_set_out2(c);//most significative Bit is V11 pin Give Coherence
-
+			
+		I2CstartCond();//Start
+		I2CWriteBytePointer(0x90);//Slave Address
+		I2CWriteByte(0x01);//Configuration Register
+		I2CWriteByte(0xC3);//configuration Byte One (chanel zero)
+		//I2CWriteByte(0xD3);//configuration Byte One (chanel one)
+		//I2CWriteByte(0xE3);//configuration Byte One (chanel Two)
+		//I2CWriteByte(0xF3);//configuration Byte One  (chanel Three)
+		I2CWriteByte(0x83);//configuration Byte Two
+		I2CStopCond();//Stop 
+		nsleep(500);//bus free
+		I2CstartCond();//Start
+		I2CWriteBytePointer(0x90);//Slave Address
+		I2CWriteByte(0x00);//convertion Register
+		I2CStopCond();//Stop
+		I2CstartCond();//Start	
+		I2CWriteByte(0x91);//Slave Address With r/w in one	
+		char c=I2CReadByte();//most Significative
+		char d=I2CReadByte();//less Signinificative
+		I2CStopCond();//Start
+		
 	
 
-		char d=GetByteTwo();//less significative Bit
-		gpio_set_out1(d);//most significative bit is u1
-		uint32_t value=d + ((uint32_t)c<<8);
-		uint32_t value2= value; 
+
+		gpio_set_out2(c);//most significative Bit is V11 pin Give Coherenc
+		gpio_set_out1(d);//less significative bit is u1
+
+		uint32_t value2=d + ((uint32_t)c<<8);
+		uint32_t value = value2; 
 
 		SetDisplay(0x01,value2%10);
 		value2 = value2/10;
@@ -309,8 +351,137 @@ int main()
 		SetDisplay(0x05,value2%10);
 		value2 = value2/10;
 		SetDisplay(0x06,value2%10);
-	}//	
+	}
+*/
+/*
+//SPI Temperature
 
+	gpio_set_dir1(0xFF);
+	gpio_set_dir2(0xFF);
+	SetDpDisplay(0x04);
+	SPI_begin();
+	spi_Writte(0x80,0xE6);
+	while(1){
+		char a=spi_read(0x02);// most significative bite 
+		gpio_set_out2(a);
+		char b=spi_read(0x01);
+		gpio_set_out1(b);//decimal part
+		d=((uint32_t)b>>5)*125;
+		
+		SetDisplay(0x01,d%10);
+		d = d/10;
+		SetDisplay(0x02,d%10);
+		d = d/10;
+		SetDisplay(0x03,d%10);
+		d = d/10;
+		SetDisplay(0x04,a%10);
+		a = a/10;
+		SetDisplay(0x05,a%10);
+		a = a/10;
+		SetDisplay(0x06,a%10);
+	}
+*/
+//test with UART web page ALL proyect less Xbee
+
+	gpio_set_dir1(0xFF);
+	gpio_set_dir2(0xFF);
+	SetDpDisplay(0x04);
+	SPI_begin();
+	spi_Writte(0x80,0xE6);
+
+	while(1){
+			
+		I2CstartCond();//Start
+		I2CWriteBytePointer(0x90);//Slave Address
+		I2CWriteByte(0x01);//Configuration Register
+		I2CWriteByte(0xC3);//configuration Byte One (chanel zero)
+		//I2CWriteByte(0xD3);//configuration Byte One (chanel one)
+		//I2CWriteByte(0xE3);//configuration Byte One (chanel Two)
+		//I2CWriteByte(0xF3);//configuration Byte One  (chanel Three)
+		I2CWriteByte(0x83);//configuration Byte Two
+		I2CStopCond();//Stop 
+		nsleep(500);//bus free
+		I2CstartCond();//Start
+		I2CWriteBytePointer(0x90);//Slave Address
+		I2CWriteByte(0x00);//convertion Register
+		I2CStopCond();//Stop
+		I2CstartCond();//Start	
+		I2CWriteByte(0x91);//Slave Address With r/w in one	
+		char c=I2CReadByte();//most Significative
+		char d=I2CReadByte();//less Signinificative
+		I2CStopCond();//Start
+		
+		uart_putchar(0x61);
+		uart_putchar(0x62);//Page Rigidez MOSTSIG
+		uart_putchar(c);
+
+		uart_putchar(0x61);
+		uart_putchar(0x63);//Page Rigidez LessSignificative
+		uart_putchar(d);
+
+
+		//gpio_set_out2(c);//most significative Bit is V11 pin Give Coherenc
+		//gpio_set_out1(d);//less significative bit is u1
+
+		uint32_t value=d + ((uint32_t)c<<8);
+		uint32_t value2 = value; 
+
+		SetDisplay(0x01,value2%10);
+		value2 = value2/10;
+		SetDisplay(0x02,value2%10);
+		value2 = value2/10;
+		SetDisplay(0x03,value2%10);
+		value2 = value2/10;
+		SetDisplay(0x04,value2%10);
+		value2 = value2/10;
+		SetDisplay(0x05,value2%10);
+		value2 = value2/10;
+		SetDisplay(0x06,value2%10);
+
+		I2CstartCond();//Start
+		I2CWriteBytePointer(0x90);//Slave Address
+		I2CWriteByte(0x01);//Configuration Register
+		//I2CWriteByte(0xC3);//configuration Byte One (chanel zero)
+		I2CWriteByte(0xD3);//configuration Byte One (chanel one)
+		//I2CWriteByte(0xE3);//configuration Byte One (chanel Two)
+		//I2CWriteByte(0xF3);//configuration Byte One  (chanel Three)
+		I2CWriteByte(0x83);//configuration Byte Two
+		I2CStopCond();//Stop 
+		nsleep(500);//bus free
+		I2CstartCond();//Start
+		I2CWriteBytePointer(0x90);//Slave Address
+		I2CWriteByte(0x00);//convertion Register
+		I2CStopCond();//Stop
+		I2CstartCond();//Start	
+		I2CWriteByte(0x91);//Slave Address With r/w in one	
+		char f=I2CReadByte();//most Significative
+		char g=I2CReadByte();//less Signinificative
+		I2CStopCond();//Start
+
+		gpio_set_out2(f);//most significative Bit is V11 pin Give Coherenc
+		gpio_set_out1(g);//less significative bit is u1
+
+		uart_putchar(0x61);
+		uart_putchar(0x64);//Page Pulso MOSTSIG
+		uart_putchar(f);
+
+		uart_putchar(0x61);
+		uart_putchar(0x65);//Page Pulso Less Significative
+		uart_putchar(g);
+
+
+		char a=spi_read(0x02);// most significative byte Temperature
+		char b=spi_read(0x01);//read the float part in ds1722
+	
+		uart_putchar(0x61);
+		uart_putchar(0x66);//Page integer Tempetarure
+		uart_putchar(a);
+
+		uart_putchar(0x61);
+		uart_putchar(0x67);//Page float Tempetarure
+		uart_putchar(b);
+
+	}
 
 }
 

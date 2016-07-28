@@ -33,7 +33,8 @@ localparam  END_HIGH_G=4'd7;
 
 reg[3:0] State=4'd0;
 reg[15:0] couterLow=16'd0;
-reg[2:0] WaiterSincronice=3'b0;
+reg[7:0] WaiterSincronice=8'd0;
+//reg[8:0] WaiterSincronice=9'd0;
 reg[15:0] counterHigh=16'd0;
 
 reg sclk=1'b1;
@@ -56,7 +57,8 @@ case(State)
 		if(couterLow==16'd19998)begin//-
 			State<=MID_LOW_G;
 		end else begin//-
-			if(couterLow==16'd39995)begin//--
+			if(couterLow==16'd39800)begin//--
+			//if(couterLow==16'd39490)begin//--
 				couterLow<=16'd0;
 				State<=END_LOW_G;
 			end else begin//--
@@ -72,8 +74,10 @@ case(State)
 	end
 	END_LOW_G:begin
 		
-		if(WaiterSincronice==3'd5)begin//-
-			WaiterSincronice<=3'd0;
+		if(WaiterSincronice==8'd200)begin//-
+			WaiterSincronice<=8'd0;
+		//if(WaiterSincronice==9'd200)begin//-
+			//WaiterSincronice<=9'd0;
 			State<=DECIDE_G;
 		end else begin//-
 			State<=END_LOW_G;

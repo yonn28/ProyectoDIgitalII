@@ -24,7 +24,7 @@ reg     [7:0]gpio0_io;
 //----------------------------------------------------------------------------
 // UART STUFF (testbench uart, simulating a comm. partner)
 //----------------------------------------------------------------------------
-wire        led;
+//wire        led;
 
 reg         uart_rxd;
 wire        uart_txd;
@@ -59,7 +59,7 @@ system #(
 ) dut  (
 	.clk(          clk    ),
 	// Debug
-	.led( 		led 	),
+	//.led( 		led 	),
 	.rst(         rst    ),
 	
 	// Uart
@@ -108,7 +108,7 @@ initial begin
 	// reset
 	#0  rst <= 0;
 	#100  rst <= 1;
-	#10 gpio_dir <= 8'hf0;
+	#10 gpio_dir <= 8'hf0;	
 	#10000 data[3:0] <= 4'hF;
 	#10000 data[3:0] <= 4'h8;
 	#10000 data[3:0] <= 4'h4;
@@ -118,7 +118,7 @@ initial begin
 	
 	 
 
-	#(tck*10000) $finish;
+	#(tck*1000000) $finish;
 end
 
 

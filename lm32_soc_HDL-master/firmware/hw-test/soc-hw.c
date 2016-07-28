@@ -208,39 +208,50 @@ void spi_setDiv(char f){
 }
 
 /*********************************************************
-I2C Conversor
+I2C 
 */
-
-void ReadChanel(char ch){
-	switch(ch){
-	   case 0x00:
-		i2c0->ByteConfigurationOne=0xC3;
-	   break;
-	   case 0x01:
-		i2c0->ByteConfigurationOne=0xD3;
-	   break;
-	   case 0x02:
-		i2c0->ByteConfigurationOne=0xE3;
-	   break;
-	   case 0x03:
-		i2c0->ByteConfigurationOne=0xF3;
-	   break;
-	   default:
-		i2c0->ByteConfigurationOne=0xC3;
-	   break;
-	}
-	i2c0->ByteConfigurationTwo=0X83;//FS 4.096 volts although this is more than electrical especifications,there never be more than 3.6
-	i2c0->Start=0x01;
-	while((i2c0->Busy)==0x01);
+/*
+StartCond"BOTH"
+Write"BOTH"
+Potiner"BOTH"
+Read"BOTH"
+Stop"BOTH"
+ByteReaded"READ"
+ByteToWrite"WRITE
+*/
+void I2CstartCond(){
+	i2c0->StartCond=0x01;
+	while((i2c0->StartCond)==0x01);
+	
+}
+void I2CStopCond(){
+	i2c0->Stop=0x01;
+	while((i2c0->Stop)==0x01);
+}
+void I2CWriteBytePointer(char Val){
+	//this funtion is for to leave ACK most longer and generate the peek in data sheet for ads1115
+	i2c0->ByteToWrite=Val;
+	i2c0->Potiner=0x01;
+	while((i2c0->Potiner)==0x01);
+	
+}
+void I2CWriteByte(char Value){
+	nsleep(500);//may be don't past through mid low and have to be a delay
+	i2c0->ByteToWrite=Value;
+	i2c0->Write=0x01;
+	while((i2c0->Write)==0x01);
+	
+}
+char I2CReadByte(){
+	nsleep(500);//may be don't past through mid low and have to be a delay
+	i2c0->Read=0x01;
+	while((i2c0->Read)==0x01);
+	return i2c0->ByteReaded;
+	
 }
 
-char GetByteOne(){
-	return i2c0->ByteReadedOne;
-}
-char GetByteTwo()
-{
-	return i2c0->ByteReadedTwo;
-}
+
+
 /****************************************************************************
 Display 
 */

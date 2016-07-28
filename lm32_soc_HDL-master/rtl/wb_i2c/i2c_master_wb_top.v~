@@ -26,80 +26,150 @@ module i2c_master_wb_top(
 
 //-----------------------------------------------------------------------
 //core i2c
-reg Busy;
-reg[7:0] ByteconfigurationOne=8'hD3;
-reg[7:0] ByteconfigurationTwo=8'h83;
 
-wire [0:7] byteOne;
-wire [0:7] bytetwo;
-wire ACKWriter;
-wire ProcessDone;
+reg WriteByte,Pointer,Read,StopCond,StartCond,Begin;
+reg [7:0] ByteToWrite;
 
-i2cModule I2C(
-	.clk(clk), 
-	.beginer(Busy),
-	.ByteconfigurationOne(ByteconfigurationOne),
-	.ByteconfigurationTwo(ByteconfigurationTwo),
- 	.byteOne(byteOne), 
-	.bytetwo(bytetwo), 
-	.I2C_SCLK(scl), 
-  	.I2C_SDA(sda),
-	.Error(ACKWriter),
-	.ProcessDone(ProcessDone)
+wire [7:0] ByteR;
+wire SclkEnable;
+wire WriteDone,Ack_w,ReadDone,StopDone,StartDone;
+
+wire EndHigh,Endlow,Midhigh,Midlow;
+
+WriterAndReader Core(
+		.clk(clk),
+		.ByteToWrite(ByteToWrite),
+		.WriteByte(WriteByte),
+		.Pointer(Pointer),
+		.Read(Read),
+		.StopCond(StopCond),
+		.StartCond(StartCond),
+		.Begin(Begin),
+		.EndHigh(EndHigh),
+		.Endlow(Endlow),
+		.Midhigh(Midhigh),
+		.Midlow(Midlow),
+		.SclkEnable(SclkEnable),
+		.ByteR(ByteR),
+		.WriteDone(WriteDone),
+		.Ack_w(Ack_w),
+		.ReadDone(ReadDone),
+		.StopDone(StopDone),
+		.StartDone(StartDone),
+		.I2C_SDA(sda)
 );
+Generator clock(
+		.clk(clk),
+		.SclkEnable(SclkEnable),
+		.StopCond(StopCond),
+		.EndHigh(EndHigh),
+		.Endlow(Endlow),
+		.Midhigh(Midhigh),
+		.Midlow(Midlow),
+		.I2C_SCLK(scl)
+);
+
+
+
 	
 //---------------------------------------------------------------------
 //memory map
 /*
-Busy
-ByteReadedOne
-ByteReadedTwo
-ByteConfigurationOne
-ByteConfigurationTwo
-Start
+//begin"write""not necesari"
+StartCond"BOTH"
+Write"BOTH"
+Potiner"BOTH"
+Read"BOTH"
+Stop"BOTH"
+ByteReaded"READ"
+ByteToWrite"WRITE"
+
+
 */
+
 
 always @(posedge clk) begin
 		if (reset == 1'b1) begin
 			ack <= 0;
-			
+			Pointer<=1'b0;
+			WriteByte<=1'b0;
+			Read<=1'b0;
+			StopCond<=1'b0;
+			StartCond<=1'b0;
 		end else begin
-
-			ack <= wb_stb_i & wb_cyc_i;
 			
-			if(ProcessDone)begin//--
-				Busy<=1'b0;
-			end else begin//--
+			ack <= wb_stb_i & wb_cyc_i;
+			Begin<=1'b1;
+			
+			
+			if(WriteDone)begin
+				//counterEnableWrite<=1'b1;
+				Pointer<=1'b0;
+				WriteByte<=1'b0;
+			end 
+			if(ReadDone)begin
+				//counterEnableRead<=1'b1;
+				Read<=1'b0;
+			end 
+			if(StopDone)begin
+				StopCond<=1'b0;
+			end
+			if(StartDone)begin							
+				StartCond<=1'b0;
+
+			end 
+				
+			//end else begin//--
 			
 				if (wb_rd) begin           // read cycle
 					case (wb_adr_i[5:2])
-						4'b0000:begin
-							wb_dat_o<={7'd0,Busy};
+						3'd0:begin
+							wb_dat_o<={7'd0,StartCond};
 						end
-						4'b0001:begin
-							wb_dat_o<=byteOne;
+						3'd1:begin
+							wb_dat_o<={7'd0,WriteByte};
 						end
-						4'b0010:begin
-							wb_dat_o<=bytetwo;
+						3'd2:begin
+							wb_dat_o<={7'd0,WriteByte};
 						end
+						3'd3:begin
+							wb_dat_o<={7'd0,Read};
+						end
+						3'd4:begin
+							wb_dat_o<={7'd0,StopCond};
+						end
+						3'd5:begin
+							wb_dat_o<=ByteR;
+						end
+
 					endcase
 				end
 			
 			
 				if (wb_wr) begin // write cycle
 					case (wb_adr_i[5:2])
-						4'b0011:begin
-							ByteconfigurationOne<=wb_dat_i[7:0];	
+						3'd0:begin
+							StartCond<=wb_dat_i[0];	
 						end
-						4'b0100:begin
-							ByteconfigurationTwo<=wb_dat_i[7:0];
+						3'd1:begin
+							WriteByte<=wb_dat_i[0];
 						end
-						4'b0101:begin
-							Busy<=wb_dat_i[0];
+						3'd2:begin
+							WriteByte<=wb_dat_i[0];
+							Pointer<=1'b1;
+						end
+						3'd3:begin
+							Read<=wb_dat_i[0];
+						end
+						3'd4:begin
+							StopCond<=wb_dat_i[0];
+						end
+						3'd6:begin
+							ByteToWrite<=wb_dat_i[7:0];
 						end
 					endcase
 				end		
-			end//--
+			//end//--
 	end
 end
 endmodule

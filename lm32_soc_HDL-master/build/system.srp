@@ -131,14 +131,10 @@ Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-maste
 Parsing module <wb_spi>.
 Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_spi/spi.v" into library work
 Parsing module <spi>.
-Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/Controller.v" into library work
-Parsing module <Controller>.
 Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/Generator.v" into library work
 Parsing module <Generator>.
 Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/i2c_master_wb_top.v" into library work
 Parsing module <i2c_master_wb_top>.
-Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/i2cModule.v" into library work
-Parsing module <i2cModule>.
 Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/WriterAndReader.v" into library work
 Parsing module <WriterAndReader>.
 Analyzing Verilog file "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_display/FSMselect.v" into library work
@@ -218,14 +214,10 @@ Elaborating module <spi>.
 
 Elaborating module <i2c_master_wb_top>.
 
-Elaborating module <i2cModule>.
-
-Elaborating module <Controller>.
-
 Elaborating module <WriterAndReader>.
+WARNING:HDLCompiler:1127 - "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/i2c_master_wb_top.v" Line 55: Assignment to Ack_w ignored, since the identifier is never used
 
 Elaborating module <Generator>.
-WARNING:HDLCompiler:1127 - "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/i2c_master_wb_top.v" Line 47: Assignment to ACKWriter ignored, since the identifier is never used
 
 Elaborating module <wb_display>.
 
@@ -643,30 +635,30 @@ WARNING:Xst:647 - Input <wb_dat_i<31:8>> is never used. This port will be preser
     Found 1-bit register for signal <tx_wr>.
     Found 1-bit register for signal <rx_ack>.
     Found 1-bit register for signal <ack>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<29><2:2>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<27><29:29>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<22><27:27>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<12><22:22>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<11><12:12>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<28><11:11>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<13><28:28>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<9><13:13>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<16><9:9>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<31><16:16>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<27><2:2>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<26><27:27>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<11><26:26>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<8><11:11>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<12><8:8>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<9><12:12>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<29><9:9>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<28><29:29>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<24><28:28>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<23><24:24>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<21><23:23>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<20><21:21>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<19><20:20>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<17><19:19>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<14><17:17>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<31><14:14>> (without init value) have a constant value of 0 in block <wb_uart>.
     WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<30><31:31>> (without init value) have a constant value of 0 in block <wb_uart>.
     WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<25><30:30>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<23><25:25>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<20><23:23>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<19><20:20>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<10><19:19>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<8><10:10>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<26><8:8>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<24><26:26>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<21><24:24>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<18><21:21>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<17><18:18>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<15><17:17>> (without init value) have a constant value of 0 in block <wb_uart>.
-    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<14><15:15>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<22><25:25>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<18><22:22>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<16><18:18>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<15><16:16>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<13><15:15>> (without init value) have a constant value of 0 in block <wb_uart>.
+    WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<10><13:13>> (without init value) have a constant value of 0 in block <wb_uart>.
     Summary:
 	inferred  11 D-type flip-flop(s).
 	inferred   1 Multiplexer(s).
@@ -722,7 +714,7 @@ WARNING:Xst:647 - Input <wb_sel_i> is never used. This port will be preserved an
     Found 1-bit register for signal <Begin>.
     Found 1-bit register for signal <ack>.
     Found 5-bit adder for signal <waiter[0]_GND_25_o_add_9_OUT> created at line 143.
-    Found 8x3-bit Read Only RAM for signal <_n0339>
+    Found 8x3-bit Read Only RAM for signal <_n0338>
     Found 3-bit 7-to-1 multiplexer for signal <StateWControler[2]_GND_25_o_wide_mux_17_OUT> created at line 110.
     HDL ADVISOR - Describing an operational reset or an explicit power-up state for register <StateWControler> would allow inference of a finite state machine and as consequence better performance and smaller area.
     Summary:
@@ -784,41 +776,19 @@ WARNING:Xst:647 - Input <wb_adr_i<1:0>> is never used. This port will be preserv
 WARNING:Xst:647 - Input <wb_adr_i<31:6>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <wb_dat_i<31:8>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
 WARNING:Xst:647 - Input <wb_sel_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-INFO:Xst:3210 - "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/i2c_master_wb_top.v" line 38: Output port <Error> of the instance <I2C> is unconnected or connected to loadless signal.
-    Found 1-bit register for signal <Busy>.
+INFO:Xst:3210 - "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/i2c_master_wb_top.v" line 39: Output port <Ack_w> of the instance <Core> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <Pointer>.
+    Found 1-bit register for signal <WriteByte>.
+    Found 1-bit register for signal <Read>.
+    Found 1-bit register for signal <StopCond>.
+    Found 1-bit register for signal <StartCond>.
     Found 32-bit register for signal <wb_dat_o>.
-    Found 8-bit register for signal <ByteconfigurationOne>.
-    Found 8-bit register for signal <ByteconfigurationTwo>.
+    Found 8-bit register for signal <ByteToWrite>.
     Found 1-bit register for signal <ack>.
     Summary:
-	inferred  50 D-type flip-flop(s).
-	inferred   2 Multiplexer(s).
+	inferred  46 D-type flip-flop(s).
+	inferred  13 Multiplexer(s).
 Unit <i2c_master_wb_top> synthesized.
-
-Synthesizing Unit <i2cModule>.
-    Related source file is "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/i2cModule.v".
-    Summary:
-	no macro.
-Unit <i2cModule> synthesized.
-
-Synthesizing Unit <Controller>.
-    Related source file is "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/Controller.v".
-    Found 4-bit register for signal <WaiterForSincronice>.
-    Found 8-bit register for signal <bytetwo>.
-    Found 8-bit register for signal <byteOne>.
-    Found 16-bit register for signal <waiterFree>.
-    Found 5-bit register for signal <stateC>.
-    Found 16-bit adder for signal <waiterFree[15]_GND_29_o_add_9_OUT> created at line 113.
-    Found 4-bit adder for signal <WaiterForSincronice[3]_GND_29_o_add_24_OUT> created at line 188.
-    Found 32x7-bit Read Only RAM for signal <_n0153>
-    Found 5-bit 22-to-1 multiplexer for signal <stateC[4]_GND_29_o_wide_mux_27_OUT> created at line 55.
-    HDL ADVISOR - Describing an operational reset or an explicit power-up state for register <stateC> would allow inference of a finite state machine and as consequence better performance and smaller area.
-    Summary:
-	inferred   1 RAM(s).
-	inferred   2 Adder/Subtractor(s).
-	inferred  41 D-type flip-flop(s).
-	inferred   6 Multiplexer(s).
-Unit <Controller> synthesized.
 
 Synthesizing Unit <WriterAndReader>.
     Related source file is "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/WriterAndReader.v".
@@ -838,25 +808,25 @@ Synthesizing Unit <WriterAndReader>.
     Found 4-bit register for signal <couterBitsReading>.
     Found 1-bit register for signal <ReadDone>.
     Found 1-bit register for signal <Sda>.
-    Found finite state machine <FSM_11> for signal <state>.
+    Found finite state machine <FSM_9> for signal <state>.
     -----------------------------------------------------------------------
     | States             | 23                                             |
     | Transitions        | 40                                             |
     | Inputs             | 15                                             |
     | Outputs            | 28                                             |
     | Clock              | clk (falling_edge)                             |
-    | Reset              | _n0257 (positive)                              |
+    | Reset              | _n0262 (positive)                              |
     | Reset type         | synchronous                                    |
     | Reset State        | 00000000                                       |
     | Power Up State     | 00000000                                       |
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 3-bit adder for signal <sincronicer[2]_GND_30_o_add_3_OUT> created at line 88.
-    Found 17-bit adder for signal <counterStart[16]_GND_30_o_add_15_OUT> created at line 124.
-    Found 19-bit adder for signal <counterBusFree[18]_GND_30_o_add_23_OUT> created at line 154.
-    Found 4-bit adder for signal <counterBitsWriting[3]_GND_30_o_add_27_OUT> created at line 179.
-    Found 4-bit adder for signal <couterBitsReading[3]_GND_30_o_add_39_OUT> created at line 250.
+    Found 3-bit adder for signal <sincronicer[2]_GND_28_o_add_3_OUT> created at line 88.
+    Found 17-bit adder for signal <counterStart[16]_GND_28_o_add_15_OUT> created at line 124.
+    Found 19-bit adder for signal <counterBusFree[18]_GND_28_o_add_23_OUT> created at line 154.
+    Found 4-bit adder for signal <counterBitsWriting[3]_GND_28_o_add_27_OUT> created at line 179.
+    Found 4-bit adder for signal <couterBitsReading[3]_GND_28_o_add_39_OUT> created at line 250.
     Found 1-bit tristate buffer for signal <I2C_SDA> created at line 67
     Summary:
 	inferred   5 Adder/Subtractor(s).
@@ -869,10 +839,10 @@ Unit <WriterAndReader> synthesized.
 Synthesizing Unit <Generator>.
     Related source file is "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_i2c/Generator.v".
     Found 16-bit register for signal <couterLow>.
-    Found 3-bit register for signal <WaiterSincronice>.
+    Found 8-bit register for signal <WaiterSincronice>.
     Found 16-bit register for signal <counterHigh>.
     Found 4-bit register for signal <State>.
-    Found finite state machine <FSM_12> for signal <State>.
+    Found finite state machine <FSM_10> for signal <State>.
     -----------------------------------------------------------------------
     | States             | 8                                              |
     | Transitions        | 17                                             |
@@ -883,13 +853,13 @@ Synthesizing Unit <Generator>.
     | Encoding           | auto                                           |
     | Implementation     | LUT                                            |
     -----------------------------------------------------------------------
-    Found 16-bit adder for signal <couterLow[15]_GND_32_o_add_4_OUT> created at line 63.
-    Found 3-bit adder for signal <WaiterSincronice[2]_GND_32_o_add_13_OUT> created at line 80.
-    Found 16-bit adder for signal <counterHigh[15]_GND_32_o_add_20_OUT> created at line 108.
-    Found 1-bit tristate buffer for signal <I2C_SCLK> created at line 41
+    Found 16-bit adder for signal <couterLow[15]_GND_30_o_add_4_OUT> created at line 65.
+    Found 8-bit adder for signal <WaiterSincronice[7]_GND_30_o_add_13_OUT> created at line 84.
+    Found 16-bit adder for signal <counterHigh[15]_GND_30_o_add_20_OUT> created at line 112.
+    Found 1-bit tristate buffer for signal <I2C_SCLK> created at line 42
     Summary:
 	inferred   3 Adder/Subtractor(s).
-	inferred  35 D-type flip-flop(s).
+	inferred  40 D-type flip-flop(s).
 	inferred   4 Multiplexer(s).
 	inferred   1 Tristate(s).
 	inferred   1 Finite State Machine(s).
@@ -921,9 +891,9 @@ Synthesizing Unit <FSMselect>.
     Related source file is "/home/yonny/Desktop/ProyectoDIgitalII/lm32_soc_HDL-master/rtl/wb_display/FSMselect.v".
     Found 3-bit register for signal <state>.
     Found 13-bit register for signal <select>.
-    Found 13-bit adder for signal <select[0]_GND_35_o_add_30_OUT> created at line 142.
+    Found 13-bit adder for signal <select[0]_GND_33_o_add_30_OUT> created at line 142.
     Found 8x8-bit Read Only RAM for signal <anodo>
-    Found 3-bit 8-to-1 multiplexer for signal <state[0]_PWR_30_o_wide_mux_34_OUT> created at line 48.
+    Found 3-bit 8-to-1 multiplexer for signal <state[0]_PWR_28_o_wide_mux_34_OUT> created at line 48.
     Found 4-bit 8-to-1 multiplexer for signal <bcd> created at line 157.
     Found 1-bit 8-to-1 multiplexer for signal <dp> created at line 157.
     HDL ADVISOR - Describing an operational reset or an explicit power-up state for register <state> would allow inference of a finite state machine and as consequence better performance and smaller area.
@@ -960,8 +930,8 @@ WARNING:Xst:647 - Input <wb_sel_i> is never used. This port will be preserved an
     Found 1-bit register for signal <irqen0>.
     Found 1-bit register for signal <irqen1>.
     Found 1-bit register for signal <ack>.
-    Found 32-bit adder for signal <counter0[31]_GND_37_o_add_6_OUT> created at line 92.
-    Found 32-bit adder for signal <counter1[31]_GND_37_o_add_9_OUT> created at line 98.
+    Found 32-bit adder for signal <counter0[31]_GND_35_o_add_6_OUT> created at line 92.
+    Found 32-bit adder for signal <counter1[31]_GND_35_o_add_9_OUT> created at line 98.
     Found 32-bit 7-to-1 multiplexer for signal <_n0180> created at line 109.
     Found 32-bit comparator equal for signal <match0> created at line 64
     Found 32-bit comparator equal for signal <match1> created at line 65
@@ -1011,55 +981,54 @@ Unit <wb_gpio> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 8
+# RAMs                                                 : 7
  1024x32-bit single-port RAM                           : 1
  16x7-bit single-port Read Only RAM                    : 1
  32x32-bit dual-port RAM                               : 2
- 32x7-bit single-port Read Only RAM                    : 1
  4x2-bit single-port Read Only RAM                     : 1
  8x3-bit single-port Read Only RAM                     : 1
  8x8-bit single-port Read Only RAM                     : 1
 # Multipliers                                          : 1
  32x32-bit multiplier                                  : 1
-# Adders/Subtractors                                   : 31
+# Adders/Subtractors                                   : 29
  13-bit adder                                          : 1
- 16-bit adder                                          : 3
+ 16-bit adder                                          : 2
  16-bit subtractor                                     : 1
  17-bit adder                                          : 1
  19-bit adder                                          : 1
- 3-bit adder                                           : 2
+ 3-bit adder                                           : 1
  30-bit adder                                          : 2
  32-bit adder                                          : 2
  33-bit adder                                          : 2
  33-bit subtractor                                     : 3
- 4-bit adder                                           : 9
+ 4-bit adder                                           : 8
  5-bit adder                                           : 1
  6-bit adder                                           : 1
  6-bit subtractor                                      : 1
- 8-bit adder                                           : 1
-# Registers                                            : 213
- 1-bit register                                        : 103
+ 8-bit adder                                           : 2
+# Registers                                            : 211
+ 1-bit register                                        : 107
  13-bit register                                       : 1
- 16-bit register                                       : 6
+ 16-bit register                                       : 5
  17-bit register                                       : 1
  19-bit register                                       : 1
  2-bit register                                        : 4
  24-bit register                                       : 1
- 3-bit register                                        : 7
+ 3-bit register                                        : 6
  30-bit register                                       : 7
  32-bit register                                       : 34
- 4-bit register                                        : 21
- 5-bit register                                        : 5
+ 4-bit register                                        : 20
+ 5-bit register                                        : 4
  6-bit register                                        : 2
- 8-bit register                                        : 18
+ 8-bit register                                        : 16
  9-bit register                                        : 2
 # Comparators                                          : 11
  1-bit comparator equal                                : 1
  32-bit comparator equal                               : 3
  5-bit comparator equal                                : 6
  8-bit comparator equal                                : 1
-# Multiplexers                                         : 195
- 1-bit 2-to-1 multiplexer                              : 55
+# Multiplexers                                         : 200
+ 1-bit 2-to-1 multiplexer                              : 63
  1-bit 4-to-1 multiplexer                              : 32
  1-bit 8-to-1 multiplexer                              : 2
  16-bit 2-to-1 multiplexer                             : 5
@@ -1068,15 +1037,14 @@ Macro Statistics
  3-bit 7-to-1 multiplexer                              : 1
  3-bit 8-to-1 multiplexer                              : 1
  30-bit 2-to-1 multiplexer                             : 3
- 32-bit 2-to-1 multiplexer                             : 60
+ 32-bit 2-to-1 multiplexer                             : 63
  32-bit 3-to-1 multiplexer                             : 3
  32-bit 7-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 5
  4-bit 8-to-1 multiplexer                              : 1
  5-bit 2-to-1 multiplexer                              : 3
- 5-bit 22-to-1 multiplexer                             : 1
  6-bit 2-to-1 multiplexer                              : 1
- 8-bit 2-to-1 multiplexer                              : 10
+ 8-bit 2-to-1 multiplexer                              : 5
  9-bit 2-to-1 multiplexer                              : 6
 # Logic shifters                                       : 1
  64-bit shifter logical right                          : 1
@@ -1130,26 +1098,6 @@ WARNING:Xst:2677 - Node <d_adr_o_27> of sequential type is unconnected in block 
 WARNING:Xst:2677 - Node <d_adr_o_31> of sequential type is unconnected in block <load_store_unit>.
 WARNING:Xst:2404 -  FFs/Latches <wb_dat_o<31:8>> (without init value) have a constant value of 0 in block <wb_gpio>.
 
-Synthesizing (advanced) Unit <Controller>.
-The following registers are absorbed into counter <WaiterForSincronice>: 1 register on signal <WaiterForSincronice>.
-The following registers are absorbed into counter <waiterFree>: 1 register on signal <waiterFree>.
-INFO:Xst:3226 - The RAM <Mram__n0153> will be implemented as a BLOCK RAM, absorbing the following register(s): <stateC>
-    -----------------------------------------------------------------------
-    | ram_type           | Block                               |          |
-    -----------------------------------------------------------------------
-    | Port A                                                              |
-    |     aspect ratio   | 32-word x 7-bit                     |          |
-    |     mode           | write-first                         |          |
-    |     clkA           | connected to signal <clk>           | rise     |
-    |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <stateC[4]_GND_29_o_wide_mux_27_OUT> |          |
-    |     diA            | connected to signal <GND>           |          |
-    |     doA            | connected to internal node          |          |
-    -----------------------------------------------------------------------
-    | optimization       | area                                |          |
-    -----------------------------------------------------------------------
-Unit <Controller> synthesized (advanced).
-
 Synthesizing (advanced) Unit <FSMselect>.
 The following registers are absorbed into counter <select>: 1 register on signal <select>.
 INFO:Xst:3226 - The RAM <Mram_anodo> will be implemented as a BLOCK RAM, absorbing the following register(s): <state>
@@ -1161,7 +1109,7 @@ INFO:Xst:3226 - The RAM <Mram_anodo> will be implemented as a BLOCK RAM, absorbi
     |     mode           | write-first                         |          |
     |     clkA           | connected to signal <clk>           | rise     |
     |     weA            | connected to signal <GND>           | high     |
-    |     addrA          | connected to signal <state[0]_PWR_30_o_wide_mux_34_OUT> |          |
+    |     addrA          | connected to signal <state[0]_PWR_28_o_wide_mux_34_OUT> |          |
     |     diA            | connected to signal <GND>           |          |
     |     doA            | connected to signal <anodo>         |          |
     -----------------------------------------------------------------------
@@ -1284,7 +1232,7 @@ Unit <wb_bram> synthesized (advanced).
 
 Synthesizing (advanced) Unit <wb_spi>.
 The following registers are absorbed into counter <waiter>: 1 register on signal <waiter>.
-INFO:Xst:3226 - The RAM <Mram__n0339> will be implemented as a BLOCK RAM, absorbing the following register(s): <StateWControler>
+INFO:Xst:3226 - The RAM <Mram__n0338> will be implemented as a BLOCK RAM, absorbing the following register(s): <StateWControler>
     -----------------------------------------------------------------------
     | ram_type           | Block                               |          |
     -----------------------------------------------------------------------
@@ -1307,11 +1255,10 @@ WARNING:Xst:2677 - Node <detect_1> of sequential type is unconnected in block <s
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# RAMs                                                 : 8
+# RAMs                                                 : 7
  1024x32-bit single-port block RAM                     : 1
  16x7-bit single-port distributed Read Only RAM        : 1
  32x32-bit dual-port distributed RAM                   : 2
- 32x7-bit single-port block Read Only RAM              : 1
  4x2-bit single-port block Read Only RAM               : 1
  8x3-bit single-port block Read Only RAM               : 1
  8x8-bit single-port block Read Only RAM               : 1
@@ -1325,27 +1272,26 @@ Macro Statistics
  33-bit subtractor                                     : 1
  33-bit subtractor borrow in                           : 1
  4-bit adder                                           : 1
-# Counters                                             : 19
+# Counters                                             : 17
  13-bit up counter                                     : 1
  16-bit down counter                                   : 1
- 16-bit up counter                                     : 1
  17-bit up counter                                     : 1
  19-bit up counter                                     : 1
- 3-bit up counter                                      : 2
- 4-bit up counter                                      : 8
+ 3-bit up counter                                      : 1
+ 4-bit up counter                                      : 7
  5-bit up counter                                      : 1
  6-bit down counter                                    : 1
  6-bit up counter                                      : 1
- 8-bit up counter                                      : 1
-# Registers                                            : 1681
- Flip-Flops                                            : 1681
+ 8-bit up counter                                      : 2
+# Registers                                            : 1656
+ Flip-Flops                                            : 1656
 # Comparators                                          : 11
  1-bit comparator equal                                : 1
  32-bit comparator equal                               : 3
  5-bit comparator equal                                : 6
  8-bit comparator equal                                : 1
-# Multiplexers                                         : 316
- 1-bit 2-to-1 multiplexer                              : 182
+# Multiplexers                                         : 321
+ 1-bit 2-to-1 multiplexer                              : 190
  1-bit 4-to-1 multiplexer                              : 32
  1-bit 8-to-1 multiplexer                              : 2
  16-bit 2-to-1 multiplexer                             : 4
@@ -1354,14 +1300,13 @@ Macro Statistics
  3-bit 7-to-1 multiplexer                              : 1
  3-bit 8-to-1 multiplexer                              : 1
  30-bit 2-to-1 multiplexer                             : 3
- 32-bit 2-to-1 multiplexer                             : 56
+ 32-bit 2-to-1 multiplexer                             : 59
  32-bit 3-to-1 multiplexer                             : 3
  32-bit 7-to-1 multiplexer                             : 1
  4-bit 2-to-1 multiplexer                              : 5
  4-bit 8-to-1 multiplexer                              : 1
  5-bit 2-to-1 multiplexer                              : 3
- 5-bit 22-to-1 multiplexer                             : 1
- 8-bit 2-to-1 multiplexer                              : 10
+ 8-bit 2-to-1 multiplexer                              : 5
  9-bit 2-to-1 multiplexer                              : 6
 # Logic shifters                                       : 1
  64-bit shifter logical right                          : 1
@@ -1405,7 +1350,7 @@ Optimizing FSM <spi0/spi0/FSM_6> on signal <stateSclk[1:2]> with sequential enco
  0010  | 10
 -------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <i2c0/I2C/Core/FSM_11> on signal <state[1:23]> with one-hot encoding.
+Optimizing FSM <i2c0/Core/FSM_9> on signal <state[1:23]> with one-hot encoding.
 -------------------------------------
  State    | Encoding
 -------------------------------------
@@ -1434,7 +1379,7 @@ Optimizing FSM <i2c0/I2C/Core/FSM_11> on signal <state[1:23]> with one-hot encod
  00010101 | 10000000000000000000000
 -------------------------------------
 Analyzing FSM <MFsm> for best encoding.
-Optimizing FSM <i2c0/I2C/clock/FSM_12> on signal <State[1:3]> with sequential encoding.
+Optimizing FSM <i2c0/clock/FSM_10> on signal <State[1:3]> with sequential encoding.
 -------------------
  State | Encoding
 -------------------
@@ -1500,6 +1445,8 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_11> (witho
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_10> (without init value) has a constant value of 0 in block <i2c_master_wb_top>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_9> (without init value) has a constant value of 0 in block <i2c_master_wb_top>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_8> (without init value) has a constant value of 0 in block <i2c_master_wb_top>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1426 - The value init of the FF/Latch state_FSM_FFd23 hinder the constant cleaning in the block WriterAndReader.
+   You should achieve better results by setting this init to 0.
 WARNING:Xst:1710 - FF/Latch <wb_dat_o_31> (without init value) has a constant value of 0 in block <wb_display>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_30> (without init value) has a constant value of 0 in block <wb_display>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_29> (without init value) has a constant value of 0 in block <wb_display>. This FF/Latch will be trimmed during the optimization process.
@@ -1524,6 +1471,7 @@ WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_11> (witho
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_10> (without init value) has a constant value of 0 in block <wb_display>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_9> (without init value) has a constant value of 0 in block <wb_display>. This FF/Latch will be trimmed during the optimization process.
 WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <wb_dat_o_8> (without init value) has a constant value of 0 in block <wb_display>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2677 - Node <i2c0/Core/Ack_w> of sequential type is unconnected in block <system>.
 
 Optimizing unit <system> ...
 
@@ -1616,15 +1564,12 @@ Optimizing unit <spi> ...
 INFO:Xst:2261 - The FF/Latch <stateRead_1> in Unit <spi> is equivalent to the following FF/Latch, which will be removed : <stateRead_2> 
 INFO:Xst:2261 - The FF/Latch <stateRead_1> in Unit <spi> is equivalent to the following FF/Latch, which will be removed : <stateRead_2> 
 
-Optimizing unit <Controller> ...
-
 Optimizing unit <wb_display> ...
 
 Optimizing unit <FSMselect> ...
 
 Optimizing unit <wb_timer> ...
 WARNING:Xst:1710 - FF/Latch <lm0/bus_error_x> (without init value) has a constant value of 0 in block <system>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:2677 - Node <i2c0/I2C/Core/Ack_w> of sequential type is unconnected in block <system>.
 WARNING:Xst:2677 - Node <lm0/instruction_unit/pc_w_31> of sequential type is unconnected in block <system>.
 WARNING:Xst:2677 - Node <lm0/instruction_unit/pc_w_30> of sequential type is unconnected in block <system>.
 WARNING:Xst:2677 - Node <lm0/instruction_unit/pc_w_29> of sequential type is unconnected in block <system>.
@@ -1779,7 +1724,7 @@ INFO:Xst:2261 - The FF/Latch <lm0/multiplier/multiplier_29> in Unit <system> is 
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 0) on block system, actual ratio is 5.
+Found area constraint ratio of 100 (+ 0) on block system, actual ratio is 4.
 Forward register balancing over carry chain lm0/Mcompar_cmp_zero_cy<0>
 INFO:Xst:2261 - The FF/Latch <spi0/spi0/MOSI> in Unit <system> is equivalent to the following FF/Latch, which will be removed : <spi0/spi0/ToWrite_8_BRB5> 
 INFO:Xst:2261 - The FF/Latch <lm0/load_store_unit/size_m_1> in Unit <system> is equivalent to the following 16 FFs/Latches, which will be removed : <lm0/load_store_unit/store_data_m_15_BRB0> <lm0/load_store_unit/store_data_m_14_BRB0> <lm0/load_store_unit/store_data_m_13_BRB0> <lm0/load_store_unit/store_data_m_12_BRB0> <lm0/load_store_unit/store_data_m_11_BRB0> <lm0/load_store_unit/store_data_m_10_BRB0> <lm0/load_store_unit/store_data_m_9_BRB0> <lm0/load_store_unit/store_data_m_8_BRB0> <lm0/load_store_unit/store_data_m_31_BRB0> <lm0/load_store_unit/store_data_m_30_BRB0> <lm0/load_store_unit/store_data_m_29_BRB0> <lm0/load_store_unit/store_data_m_28_BRB0> <lm0/load_store_unit/store_data_m_27_BRB0> <lm0/load_store_unit/store_data_m_26_BRB0> <lm0/load_store_unit/store_data_m_25_BRB0> <lm0/load_store_unit/store_data_m_24_BRB0> 
@@ -1799,11 +1744,6 @@ INFO:Xst:2261 - The FF/Latch <lm0/size_x_1> in Unit <system> is equivalent to th
 Pipelining and Register Balancing Report ...
 
 Processing Unit <system> :
-	Register(s) i2c0/I2C/Core/SclkEnable has(ve) been backward balanced into : i2c0/I2C/Core/SclkEnable_BRB3 i2c0/I2C/Core/SclkEnable_BRB4 i2c0/I2C/Core/SclkEnable_BRB5.
-	Register(s) i2c0/I2C/Core/state_FSM_FFd20 has(ve) been backward balanced into : i2c0/I2C/Core/state_FSM_FFd20_BRB0 i2c0/I2C/Core/state_FSM_FFd20_BRB1 i2c0/I2C/Core/state_FSM_FFd20_BRB2 i2c0/I2C/Core/state_FSM_FFd20_BRB3 i2c0/I2C/Core/state_FSM_FFd20_BRB4 i2c0/I2C/Core/state_FSM_FFd20_BRB5.
-	Register(s) i2c0/I2C/Core/state_FSM_FFd21 has(ve) been backward balanced into : i2c0/I2C/Core/state_FSM_FFd21_BRB0 i2c0/I2C/Core/state_FSM_FFd21_BRB1 i2c0/I2C/Core/state_FSM_FFd21_BRB2 i2c0/I2C/Core/state_FSM_FFd21_BRB3 i2c0/I2C/Core/state_FSM_FFd21_BRB4.
-	Register(s) i2c0/I2C/Core/state_FSM_FFd22 has(ve) been backward balanced into : i2c0/I2C/Core/state_FSM_FFd22_BRB0 i2c0/I2C/Core/state_FSM_FFd22_BRB1 i2c0/I2C/Core/state_FSM_FFd22_BRB2 .
-	Register(s) i2c0/I2C/Core/state_FSM_FFd8 has(ve) been backward balanced into : i2c0/I2C/Core/state_FSM_FFd8_BRB0 i2c0/I2C/Core/state_FSM_FFd8_BRB1.
 	Register(s) lm0/branch_x has(ve) been backward balanced into : lm0/branch_x_BRB0 lm0/branch_x_BRB1 lm0/branch_x_BRB2 lm0/branch_x_BRB3 lm0/branch_x_BRB4 lm0/branch_x_BRB5.
 	Register(s) lm0/load_store_unit/store_data_m_10 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_10_BRB2.
 	Register(s) lm0/load_store_unit/store_data_m_11 has(ve) been backward balanced into : lm0/load_store_unit/store_data_m_11_BRB2.
@@ -1865,7 +1805,7 @@ FlipFlop gpio0/gpio_o_0 has been replicated 1 time(s) to handle iob=true attribu
 FlipFlop uart0/uart0/uart_txd has been replicated 1 time(s) to handle iob=true attribute.
 FlipFlop spi0/spi0/MOSI has been replicated 1 time(s) to handle iob=true attribute.
 FlipFlop spi0/spi0/sck has been replicated 1 time(s) to handle iob=true attribute.
-FlipFlop i2c0/I2C/Core/Sda has been replicated 1 time(s) to handle iob=true attribute.
+FlipFlop i2c0/Core/Sda has been replicated 1 time(s) to handle iob=true attribute.
 
 Final Macro Processing ...
 
@@ -1873,8 +1813,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 1661
- Flip-Flops                                            : 1661
+# Registers                                            : 1607
+ Flip-Flops                                            : 1607
 
 =========================================================================
 
@@ -1897,37 +1837,37 @@ Top Level Output File Name         : system.ngc
 
 Primitive and Black Box Usage:
 ------------------------------
-# BELS                             : 2781
+# BELS                             : 2718
 #      GND                         : 1
-#      INV                         : 45
-#      LUT1                        : 190
-#      LUT2                        : 200
-#      LUT3                        : 285
-#      LUT4                        : 117
-#      LUT5                        : 495
-#      LUT6                        : 748
-#      MUXCY                       : 352
+#      INV                         : 42
+#      LUT1                        : 182
+#      LUT2                        : 197
+#      LUT3                        : 283
+#      LUT4                        : 119
+#      LUT5                        : 487
+#      LUT6                        : 723
+#      MUXCY                       : 344
 #      MUXF7                       : 14
 #      VCC                         : 1
-#      XORCY                       : 333
-# FlipFlops/Latches                : 1661
-#      FD                          : 27
-#      FD_1                        : 69
+#      XORCY                       : 325
+# FlipFlops/Latches                : 1607
+#      FD                          : 21
+#      FD_1                        : 58
 #      FDC                         : 121
 #      FDCE                        : 746
-#      FDE                         : 232
+#      FDE                         : 208
 #      FDE_1                       : 33
 #      FDPE                        : 34
-#      FDR                         : 35
-#      FDR_1                       : 22
-#      FDRE                        : 259
+#      FDR                         : 40
+#      FDR_1                       : 20
+#      FDRE                        : 244
 #      FDRE_1                      : 8
 #      FDS                         : 4
-#      FDS_1                       : 4
+#      FDS_1                       : 3
 #      FDSE                        : 67
-# RAMS                             : 69
+# RAMS                             : 68
 #      RAM32X1D                    : 64
-#      RAMB18E1                    : 4
+#      RAMB18E1                    : 3
 #      RAMB36E1                    : 1
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
@@ -1946,18 +1886,18 @@ Selected Device : 7a100tcsg324-3
 
 
 Slice Logic Utilization: 
- Number of Slice Registers:            1638  out of  126800     1%  
- Number of Slice LUTs:                 2208  out of  63400     3%  
-    Number used as Logic:              2080  out of  63400     3%  
+ Number of Slice Registers:            1584  out of  126800     1%  
+ Number of Slice LUTs:                 2161  out of  63400     3%  
+    Number used as Logic:              2033  out of  63400     3%  
     Number used as Memory:              128  out of  19000     0%  
        Number used as RAM:              128
 
 Slice Logic Distribution: 
- Number of LUT Flip Flop pairs used:   2502
-   Number with an unused Flip Flop:     864  out of   2502    34%  
-   Number with an unused LUT:           294  out of   2502    11%  
-   Number of fully used LUT-FF pairs:  1344  out of   2502    53%  
-   Number of unique control sets:        82
+ Number of LUT Flip Flop pairs used:   2441
+   Number with an unused Flip Flop:     857  out of   2441    35%  
+   Number with an unused LUT:           280  out of   2441    11%  
+   Number of fully used LUT-FF pairs:  1304  out of   2441    53%  
+   Number of unique control sets:        77
 
 IO Utilization: 
  Number of IOs:                          42
@@ -1991,23 +1931,23 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-clk                                | BUFGP                  | 1730  |
+clk                                | BUFGP                  | 1675  |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
 ----------------------------------------
--------------------------------------------+-----------------------------------+-------+
-Control Signal                             | Buffer(FF name)                   | Load  |
--------------------------------------------+-----------------------------------+-------+
-uart0/uart0/enable16_counter<10>(XST_GND:G)| NONE(Display0/selector/Mram_anodo)| 8     |
--------------------------------------------+-----------------------------------+-------+
+-------------------------------------------+----------------------------+-------+
+Control Signal                             | Buffer(FF name)            | Load  |
+-------------------------------------------+----------------------------+-------+
+uart0/uart0/enable16_counter<10>(XST_GND:G)| NONE(spi0/spi0/Mram__n0220)| 6     |
+-------------------------------------------+----------------------------+-------+
 
 Timing Summary:
 ---------------
 Speed Grade: -3
 
    Minimum period: 6.658ns (Maximum Frequency: 150.200MHz)
-   Minimum input arrival time before clock: 2.207ns
+   Minimum input arrival time before clock: 2.127ns
    Maximum output required time after clock: 2.441ns
    Maximum combinational path delay: No path found
 
@@ -2018,7 +1958,7 @@ All values displayed in nanoseconds (ns)
 =========================================================================
 Timing constraint: Default period analysis for Clock 'clk'
   Clock period: 6.658ns (frequency: 150.200MHz)
-  Total number of paths / destination ports: 1346726 / 4019
+  Total number of paths / destination ports: 1345149 / 3905
 -------------------------------------------------------------------------
 Delay:               3.329ns (Levels of Logic = 2)
   Source:            spi0/spi0/Mram__n0220 (RAM)
@@ -2040,24 +1980,23 @@ Delay:               3.329ns (Levels of Logic = 2)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'clk'
-  Total number of paths / destination ports: 1404 / 1392
+  Total number of paths / destination ports: 1399 / 1388
 -------------------------------------------------------------------------
-Offset:              2.207ns (Levels of Logic = 4)
+Offset:              2.127ns (Levels of Logic = 3)
   Source:            rst (PAD)
-  Destination:       i2c0/Busy (FF)
+  Destination:       Display0/wb_dat_o_7 (FF)
   Destination Clock: clk rising
 
-  Data Path: rst to i2c0/Busy
+  Data Path: rst to Display0/wb_dat_o_7
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            36   0.001   0.791  rst_IBUF (rst_IBUF)
-     LUT6:I1->O            2   0.097   0.560  i2c0/_n0116_inv11 (i2c0/_n0116_inv1)
-     LUT4:I0->O            1   0.097   0.556  i2c0/_n0123_inv1 (i2c0/_n0123_inv)
-     LUT6:I2->O            1   0.097   0.000  i2c0/Busy_rstpot1 (i2c0/Busy_rstpot1)
-     FD:D                      0.008          i2c0/Busy
+     IBUF:I->O            35   0.001   0.791  rst_IBUF (rst_IBUF)
+     LUT6:I1->O           10   0.097   0.735  Display0/_n0185_inv11 (Display0/_n0185_inv1)
+     LUT6:I0->O            8   0.097   0.311  Display0/_n0178_inv1 (Display0/_n0178_inv)
+     FDE:CE                    0.095          Display0/wb_dat_o_0
     ----------------------------------------
-    Total                      2.207ns (0.300ns logic, 1.907ns route)
+    Total                      2.127ns (0.290ns logic, 1.837ns route)
                                        (13.6% logic, 86.4% route)
 
 =========================================================================
@@ -2092,21 +2031,21 @@ Clock to Setup on destination clock clk
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-clk            |    6.370|    2.625|    3.329|         |
+clk            |    6.370|    2.565|    3.329|         |
 ---------------+---------+---------+---------+---------+
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 19.00 secs
-Total CPU time to Xst completion: 18.95 secs
+Total REAL time to Xst completion: 23.00 secs
+Total CPU time to Xst completion: 19.46 secs
  
 --> 
 
 
-Total memory usage is 521304 kilobytes
+Total memory usage is 520332 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :  351 (   0 filtered)
-Number of infos    :  114 (   0 filtered)
+Number of warnings :  352 (   0 filtered)
+Number of infos    :  113 (   0 filtered)
 

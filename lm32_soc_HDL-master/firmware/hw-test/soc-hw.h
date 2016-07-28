@@ -144,26 +144,31 @@ void spi_setDiv(char f);
  */
 
 /*
-Busy
-ByteReadedOne
-ByteReadedTwo
-ByteConfigurationOne
-ByteConfigurationTwo
-Start
+StartCond"BOTH"
+Write"BOTH"
+Potiner"BOTH"
+Read"BOTH"
+Stop"BOTH"
+ByteReaded"READ"
+ByteToWrite"WRITE"
 */
 
 typedef struct {
-   volatile uint32_t Busy;
-   volatile uint32_t ByteReadedOne;
-   volatile uint32_t ByteReadedTwo;
-   volatile uint32_t ByteConfigurationOne;
-   volatile uint32_t ByteConfigurationTwo;
-   volatile uint32_t Start;
+   volatile uint32_t StartCond;
+   volatile uint32_t Write;
+   volatile uint32_t Potiner;
+   volatile uint32_t Read;
+   volatile uint32_t Stop;
+   volatile uint32_t ByteReaded;
+   volatile uint32_t ByteToWrite;	
 } i2c_t;
 
-void ReadChanel(char ch);
-char GetByteOne();
-char GetByteTwo();
+void I2CstartCond();
+void I2CStopCond();
+void I2CWriteBytePointer(char Val);
+void I2CWriteByte(char Value);
+char I2CReadByte();
+
 
 /*********************************************************************
 display
